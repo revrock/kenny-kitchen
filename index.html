@@ -1,0 +1,1001 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Chef Kenny's Kitchen</title>
+<meta name="theme-color" content="#E8623C">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-512.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Kenny's Kitchen">
+<style>body{margin:0;padding:0;-webkit-text-size-adjust:100%;}</style>
+<script>
+if(!window.storage){window.storage={get:async function(k){try{var v=localStorage.getItem(k);return v==null?null:{value:v};}catch(e){return null;}},set:async function(k,v){try{localStorage.setItem(k,v);}catch(e){}}};}
+</script>
+</head><body>
+
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap');
+  :root{--sky:#9BD9EC;--sky2:#BDE9F2;--grass:#A9D96C;--card:#FFFDF6;--bbq:#E8623C;--bbq-deep:#C94A28;--char:#3E2E26;--sun:#FBC23C;--pink:#F58AA0;--leaf:#59A23A;--line:#EFE2C8;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{font-family:'Nunito',system-ui,sans-serif;color:var(--char);background:linear-gradient(180deg,var(--sky) 0%,var(--sky2) 42%,#CDE8A0 70%,var(--grass) 100%);background-attachment:fixed;min-height:100vh;padding-bottom:40px;overflow-x:hidden;}
+  .sun{position:fixed;top:14px;right:18px;width:56px;height:56px;border-radius:50%;background:radial-gradient(circle,#FFE07A,var(--sun));box-shadow:0 0 34px rgba(251,194,60,.7);z-index:0;animation:spin 40s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .wrap{position:relative;z-index:2;max-width:600px;margin:0 auto;padding:16px 14px 0;}
+  h1{font-family:'Fredoka',sans-serif;font-weight:700;text-align:center;color:#fff;font-size:25px;line-height:1.05;margin:8px 0 8px;text-shadow:0 3px 0 var(--bbq-deep),0 5px 8px rgba(0,0,0,.2);}
+  .picker{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;margin-bottom:6px;-webkit-overflow-scrolling:touch;}
+  .chip{flex:none;font-family:'Fredoka',sans-serif;font-weight:600;font-size:13px;background:var(--card);border:2px solid var(--char);border-radius:14px;padding:8px 12px;cursor:pointer;box-shadow:0 3px 0 rgba(62,46,38,.18);white-space:nowrap;}
+  .chip.active{background:var(--bbq);color:#fff;}
+  .paws{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin-bottom:12px;}
+  .paw{width:17px;height:17px;opacity:.4;transition:all .25s ease;filter:grayscale(.5);}
+  .paw.on{opacity:1;filter:none;transform:scale(1.15);}
+  .scene{background:linear-gradient(180deg,#FFFDF6,#FBF1DE);border:3px solid var(--char);border-radius:18px;box-shadow:0 5px 0 rgba(62,46,38,.16);margin-bottom:12px;overflow:hidden;cursor:pointer;}
+  .scene svg{display:block;width:100%;height:auto;}
+  .scene svg *{transform-box:fill-box;transform-origin:center;}
+  .scene.boop{animation:sboop .5s ease;}
+  @keyframes sboop{0%,100%{transform:rotate(0);}30%{transform:rotate(-1.2deg) scale(1.01);}70%{transform:rotate(1.2deg) scale(1.01);}}
+  .arm{transform-box:fill-box;transform-origin:80% 8%;}
+  .arm-l{transform-box:fill-box;transform-origin:20% 8%;}
+  .scene svg .arm{transform-origin:80% 8%;}
+  .scene svg .arm-l{transform-origin:20% 8%;}
+  .scene svg .flick,.scene svg .flick2{transform-origin:bottom center;}
+  .scene svg .needle{transform-origin:50% 90%;}
+  .kbody{animation:kbreathe 3s ease-in-out infinite;}
+  @keyframes kbreathe{0%,100%{transform:translateY(0);}50%{transform:translateY(-2px);}}
+  .act-whisk{animation:awhisk .32s ease-in-out infinite;}
+  @keyframes awhisk{0%,100%{transform:rotate(-9deg);}50%{transform:rotate(9deg);}}
+  .act-stir{animation:astir 1.1s ease-in-out infinite;}
+  @keyframes astir{0%,100%{transform:rotate(-11deg);}50%{transform:rotate(11deg);}}
+  .act-chop{animation:achop .8s ease-in-out infinite;}
+  @keyframes achop{0%,100%{transform:translateY(-11px) rotate(-3deg);}45%,55%{transform:translateY(2px) rotate(5deg);}}
+  .act-slice{animation:aslice 1.5s ease-in-out infinite;}
+  @keyframes aslice{0%,100%{transform:translateX(8px) rotate(3deg);}50%{transform:translateX(-14px) rotate(-4deg);}}
+  .act-place{animation:aplace 2.2s ease-in-out infinite;}
+  @keyframes aplace{0%,100%{transform:translateY(-7px) rotate(-3deg);}50%{transform:translateY(4px) rotate(3deg);}}
+  .act-cheer{animation:acheer 1s ease-in-out infinite;}
+  @keyframes acheer{0%,100%{transform:rotate(3deg) translateY(0);}50%{transform:rotate(-12deg) translateY(-5px);}}
+  .act-cheerL{animation:acheerL 1s ease-in-out infinite;}
+  @keyframes acheerL{0%,100%{transform:rotate(-3deg) translateY(0);}50%{transform:rotate(12deg) translateY(-5px);}}
+  .flick{animation:flick .6s ease-in-out infinite;transform-origin:bottom center;}
+  .flick2{animation:flick .32s ease-in-out infinite;transform-origin:bottom center;}
+  @keyframes flick{0%,100%{transform:scaleY(.88) scaleX(1);opacity:.85;}50%{transform:scaleY(1.16) scaleX(.94);opacity:1;}}
+  .rise{animation:srise 2.6s ease-in infinite;}
+  @keyframes srise{0%{transform:translateY(6px) scale(.8);opacity:0;}25%{opacity:.75;}100%{transform:translateY(-38px) scale(1.3);opacity:0;}}
+  .sbob{animation:sbob 2s ease-in-out infinite;}
+  @keyframes sbob{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
+  .slosh{animation:slosh 1.6s ease-in-out infinite;}
+  @keyframes slosh{0%,100%{transform:scaleX(1) rotate(0);}50%{transform:scaleX(1.05) rotate(3deg);}}
+  .spark{animation:sspark .9s ease-out infinite;}
+  @keyframes sspark{0%{transform:translateY(2px) scale(.5);opacity:0;}30%{opacity:1;transform:translateY(-8px) scale(1);}100%{transform:translateY(-18px) scale(.4);opacity:0;}}
+  .bub{animation:sbub 2.3s ease-in infinite;}
+  @keyframes sbub{0%{transform:translateY(0) scale(.6);opacity:0;}30%{opacity:.8;}100%{transform:translateY(-22px) scale(1);opacity:0;}}
+  .needle{animation:sneedle 2.6s ease-out infinite;transform-origin:50% 90%;}
+  @keyframes sneedle{0%{transform:rotate(-58deg);}70%{transform:rotate(30deg);}100%{transform:rotate(26deg);}}
+  .glow{animation:sglow 1.2s ease-in-out infinite;}
+  @keyframes sglow{0%,100%{opacity:.4;}50%{opacity:.9;}}
+  .mark{opacity:0;animation:smark .5s ease forwards;}
+  @keyframes smark{to{opacity:.85;}}
+  .drop{animation:sdrop 2s ease-in infinite;}
+  @keyframes sdrop{0%{transform:translateY(-16px);opacity:0;}20%{opacity:1;}80%{transform:translateY(14px);opacity:1;}100%{opacity:0;}}
+  .slidein{opacity:0;animation:sslide .6s ease-out forwards;}
+  @keyframes sslide{0%{transform:translateX(-24px) rotate(0);opacity:0;}100%{transform:translateX(0) rotate(var(--r,0deg));opacity:1;}}
+  .bubble-row{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+  .bubble{position:relative;background:#fff;border:3px solid var(--char);border-radius:16px;padding:10px 13px;font-family:'Fredoka',sans-serif;font-weight:500;font-size:14.5px;line-height:1.3;flex:1;box-shadow:0 4px 0 rgba(62,46,38,.15);}
+  .boop{flex:none;font-family:'Fredoka',sans-serif;font-size:14px;color:#fff;background:var(--leaf);border:none;border-radius:20px;padding:8px 12px;cursor:pointer;font-weight:500;box-shadow:0 3px 0 #3f7a28;}
+  .card{background:var(--card);border:3px solid var(--char);border-radius:20px;padding:16px;box-shadow:0 6px 0 rgba(62,46,38,.18);margin-bottom:14px;}
+  .stage-tag{font-family:'Fredoka',sans-serif;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--bbq);}
+  .stage-title{font-family:'Fredoka',sans-serif;font-weight:700;font-size:21px;line-height:1.08;margin:2px 0 10px;}
+  .real{background:#FFF3DC;border-radius:12px;padding:12px 13px;font-size:15px;line-height:1.5;border:2px dashed #E7C778;}
+  .real b{color:var(--bbq-deep);}
+  .dur{display:inline-block;margin-top:10px;font-family:'Fredoka',sans-serif;font-weight:500;font-size:13px;color:#7a6a5c;background:#F1E7D2;border-radius:20px;padding:4px 12px;}
+  .meter-wrap{margin:12px 0 2px;}
+  .meter-lbl{font-family:'Fredoka',sans-serif;font-weight:600;font-size:12px;color:var(--char);display:flex;justify-content:space-between;margin-bottom:4px;}
+  .meter{height:15px;background:#F3D9C0;border:2px solid var(--char);border-radius:20px;overflow:hidden;}
+  .meter-fill{height:100%;width:0%;border-radius:20px;background:linear-gradient(90deg,#E27A5A,#B54127);transition:width .5s ease;}
+  .timer{display:inline-flex;align-items:center;gap:8px;margin-top:11px;font-family:'Fredoka',sans-serif;font-weight:600;font-size:15px;background:#fff;border:2px solid var(--bbq);color:var(--bbq-deep);border-radius:12px;padding:7px 14px;cursor:pointer;}
+  .timer.running{background:var(--bbq);color:#fff;}
+  .timer.done{background:var(--leaf);border-color:var(--leaf);color:#fff;animation:blink 1s infinite;}
+  @keyframes blink{50%{opacity:.6;}}
+  .sizzle-btn{margin-top:11px;margin-left:8px;font-family:'Fredoka',sans-serif;font-weight:600;font-size:14px;background:var(--sun);border:2px solid var(--char);border-radius:12px;padding:7px 14px;cursor:pointer;box-shadow:0 3px 0 #d89e1e;}
+  .nav{display:flex;gap:10px;margin-bottom:10px;}
+  .btn{flex:1;font-family:'Fredoka',sans-serif;font-weight:600;font-size:17px;border:3px solid var(--char);border-radius:16px;padding:13px;cursor:pointer;box-shadow:0 4px 0 rgba(62,46,38,.25);transition:transform .08s ease;}
+  .btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(62,46,38,.25);}
+  .btn.back{background:#fff;color:var(--char);flex:0 0 76px;}
+  .btn.next{background:var(--bbq);color:#fff;}
+  .btn:disabled{opacity:.4;cursor:default;}
+  .confetti{position:fixed;top:-30px;font-size:26px;z-index:50;pointer-events:none;animation:fall linear forwards;}
+  @keyframes fall{to{transform:translateY(105vh) rotate(540deg);opacity:.9;}}
+  .celebrate{animation:celebshake .5s ease 2;}
+  @keyframes celebshake{0%,100%{transform:translateX(0);}20%{transform:translateX(-6px) rotate(-.6deg);}60%{transform:translateX(6px) rotate(.6deg);}}
+  .footer{text-align:center;font-family:'Fredoka',sans-serif;font-size:12px;color:#5f7a3a;padding:2px 10px 24px;font-weight:500;}
+
+  .pickbar{display:flex;align-items:center;gap:10px;width:100%;background:var(--card);border:3px solid var(--char);border-radius:18px;padding:10px 12px 10px 14px;margin-bottom:10px;cursor:pointer;box-shadow:0 4px 0 rgba(62,46,38,.18);font:inherit;color:var(--char);text-align:left;}
+  .pickbar:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(62,46,38,.18);}
+  .pb-emoji{font-size:30px;line-height:1;flex:none;}
+  .pb-txt{flex:1;min-width:0;}
+  .pb-lbl{display:block;font-family:'Fredoka',sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bbq);}
+  .pb-name{display:block;font-family:'Fredoka',sans-serif;font-weight:700;font-size:19px;line-height:1.15;}
+  .pb-go{flex:none;font-family:'Fredoka',sans-serif;font-weight:600;font-size:14px;color:#fff;background:var(--bbq);border-radius:12px;padding:8px 12px;}
+  .menu{position:fixed;inset:0;z-index:60;display:none;}
+  .menu.open{display:block;}
+  .menu-bg{position:absolute;inset:0;background:rgba(62,46,38,.45);}
+  .menu-sheet{position:absolute;left:0;right:0;bottom:0;top:max(28px,env(safe-area-inset-top));max-width:600px;margin:0 auto;background:#FFFBF2;border:3px solid var(--char);border-bottom:0;border-radius:24px 24px 0 0;display:flex;flex-direction:column;animation:sheetup .25s ease-out;}
+  @keyframes sheetup{from{transform:translateY(40px);opacity:0;}to{transform:none;opacity:1;}}
+  .menu-head{display:flex;align-items:center;gap:10px;padding:16px 16px 10px;}
+  .menu-head h2{flex:1;margin:0;font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;}
+  .menu-x{flex:none;width:40px;height:40px;border-radius:50%;border:2px solid var(--char);background:#fff;font-size:18px;cursor:pointer;color:var(--char);}
+  .menu-search{margin:0 16px 8px;padding:12px 14px;border:2px solid var(--line);border-radius:14px;font:inherit;font-size:16px;background:#fff;color:var(--char);}
+  .menu-search:focus{outline:none;border-color:var(--bbq);}
+  .menu-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:4px 16px calc(24px + env(safe-area-inset-bottom));}
+  .grp{font-family:'Fredoka',sans-serif;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8a7a6a;margin:14px 2px 8px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .rc{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-height:92px;background:#fff;border:2px solid var(--char);border-radius:16px;padding:12px;cursor:pointer;font:inherit;color:var(--char);text-align:left;box-shadow:0 3px 0 rgba(62,46,38,.15);}
+  .rc:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(62,46,38,.15);}
+  .rc.on{background:var(--bbq);color:#fff;border-color:var(--bbq-deep);}
+  .rc-e{font-size:28px;line-height:1;}
+  .rc-n{font-family:'Fredoka',sans-serif;font-weight:600;font-size:15px;line-height:1.15;}
+  .rc-s{font-size:12px;opacity:.7;margin-top:auto;}
+  .empty{text-align:center;color:#8a7a6a;padding:30px 10px;font-family:'Fredoka',sans-serif;}
+  body.locked{overflow:hidden;}
+
+  /* ---------- motion system ---------- */
+  .scene svg .kmove,.scene svg .kimg,.scene svg .kin{transform-box:fill-box;transform-origin:50% 100%;}
+  .scene svg .react,.scene svg .jar,.scene svg .lidbob,.scene svg .trg{transform-box:fill-box;transform-origin:50% 100%;}
+  .scene svg .spin,.scene svg .swirl{transform-box:fill-box;transform-origin:50% 50%;}
+  .sc{--P:3s;--E:cubic-bezier(.45,0,.55,1);}
+  .p-stir{--P:1.25s}.p-whisk{--P:.38s}.p-season{--P:.62s}.p-chop{--P:.82s}.p-slice{--P:1.4s}.p-tongs{--P:1.7s}.p-dial{--P:1.5s}.p-blend{--P:.5s}.p-lid{--P:2.2s}.p-peek{--P:2.6s}.p-wait{--P:3.4s}.p-serve{--P:.95s}.p-cheer{--P:.62s}.p-idle{--P:3s}
+  /* entrance: Kenny settles in, props pop on in a stagger */
+  .scene svg .kin{animation:kin .55s cubic-bezier(.2,1.25,.35,1) both;}
+  @keyframes kin{0%{opacity:0;transform:translateY(10px) scale(.95,.97);}55%{opacity:1;transform:translateY(-3px) scale(1.01,1.02);}80%{transform:translateY(1px) scale(1.005,.99);}100%{transform:none;}}
+  .scene svg .pin{animation:pin .5s cubic-bezier(.2,1.3,.4,1) both;transform-box:fill-box;transform-origin:50% 100%;}
+  @keyframes pin{0%{opacity:0;transform:translateY(8px) scale(.9);}70%{opacity:1;transform:translateY(-1.5px) scale(1.02);}100%{transform:none;}}
+  /* breathing with squash and stretch */
+  .scene svg .kimg{animation:kb 3.2s var(--E) infinite;}
+  @keyframes kb{0%,100%{transform:scale(1,1);}50%{transform:scale(.996,1.012);}}
+  /* actions, with wind-up and follow-through */
+  .scene svg .m-stir{animation:m-stir var(--P) var(--E) infinite;}
+  @keyframes m-stir{0%,100%{transform:rotate(-1.8deg) translateX(-1.2px);}50%{transform:rotate(1.8deg) translateX(1.2px);}}
+  .scene svg .m-whisk{animation:m-whisk var(--P) var(--E) infinite;}
+  @keyframes m-whisk{0%,100%{transform:rotate(-1deg) translateY(0);}50%{transform:rotate(1deg) translateY(-.8px);}}
+  .scene svg .m-season{animation:m-season var(--P) infinite;}
+  @keyframes m-season{0%{transform:rotate(0);animation-timing-function:cubic-bezier(.3,0,.7,1);}30%{transform:rotate(-1.6deg) translateY(-1.5px);animation-timing-function:cubic-bezier(.6,0,1,1);}45%{transform:rotate(1deg) translateY(1px);}70%,100%{transform:rotate(0);}}
+  .scene svg .m-chop{animation:m-chop var(--P) infinite;}
+  @keyframes m-chop{0%{transform:translateY(0);animation-timing-function:cubic-bezier(.3,0,.6,1);}38%{transform:translateY(-3.5px) rotate(-.7deg);animation-timing-function:cubic-bezier(.7,0,1,1);}50%{transform:translateY(3px) rotate(.5deg);animation-timing-function:ease-out;}62%{transform:translateY(1.2px);}100%{transform:translateY(0);}}
+  .scene svg .m-slice{animation:m-slice var(--P) var(--E) infinite;}
+  @keyframes m-slice{0%,100%{transform:translateX(-3px) rotate(.6deg);}50%{transform:translateX(3px) rotate(-.6deg);}}
+  .scene svg .m-tongs{animation:m-tongs var(--P) infinite;}
+  @keyframes m-tongs{0%{transform:translateY(0);animation-timing-function:var(--E);}40%{transform:translateY(-2.5px) rotate(-1deg);animation-timing-function:cubic-bezier(.7,0,1,1);}55%{transform:translateY(1.5px) rotate(.8deg);animation-timing-function:ease-out;}70%{transform:translateY(0) rotate(0);}100%{transform:translateY(0);}}
+  .scene svg .m-dial{animation:m-dial var(--P) var(--E) infinite;}
+  @keyframes m-dial{0%,100%{transform:rotate(-1.4deg);}50%{transform:rotate(1.2deg) translateY(-1px);}}
+  .scene svg .m-blend{animation:m-blend var(--P) var(--E) infinite;}
+  @keyframes m-blend{0%,100%{transform:translateY(0);}50%{transform:translateY(1.8px);}}
+  .scene svg .m-lid{animation:m-lid var(--P) var(--E) infinite;}
+  @keyframes m-lid{0%,100%{transform:rotate(0) translateY(0);}40%{transform:rotate(-1.5deg) translateY(-2.5px);}60%{transform:rotate(-1.2deg) translateY(-2px);}}
+  .scene svg .m-peek{animation:m-peek var(--P) var(--E) infinite;}
+  @keyframes m-peek{0%,100%{transform:rotate(0);}35%,65%{transform:rotate(-2.8deg) translateX(-1px);}}
+  .scene svg .m-wait{animation:m-wait var(--P) var(--E) infinite;}
+  @keyframes m-wait{0%,100%{transform:rotate(-.6deg);}50%{transform:rotate(.6deg);}}
+  .scene svg .m-serve{animation:m-hop var(--P) infinite;}
+  .scene svg .m-cheer{animation:m-hop2 var(--P) infinite;}
+  @keyframes m-hop{0%{transform:translateY(0) scale(1.02,.98);animation-timing-function:cubic-bezier(.2,.6,.4,1);}40%{transform:translateY(-5px) scale(.99,1.02);animation-timing-function:cubic-bezier(.6,0,.8,.4);}80%{transform:translateY(0) scale(1.025,.975);}100%{transform:translateY(0) scale(1.02,.98);}}
+  @keyframes m-hop2{0%{transform:translateY(0) scale(1.03,.96);animation-timing-function:cubic-bezier(.2,.6,.4,1);}45%{transform:translateY(-10px) scale(.98,1.03);animation-timing-function:cubic-bezier(.6,0,.8,.4);}85%{transform:translateY(0) scale(1.04,.95);}100%{transform:translateY(0) scale(1.03,.96);}}
+  /* props reacting in time with Kenny */
+  .p-stir .react{animation:r-stir var(--P) var(--E) infinite;}
+  @keyframes r-stir{0%,100%{transform:skewX(-2deg);}50%{transform:skewX(2deg);}}
+  .p-stir .swirl{animation:r-swirl calc(var(--P)*2) linear infinite;}
+  @keyframes r-swirl{0%{transform:translateX(-1.5px);}25%{transform:translateY(-.6px);}50%{transform:translateX(1.5px);}75%{transform:translateY(.6px);}100%{transform:translateX(-1.5px);}}
+  .p-whisk .react{animation:r-jig var(--P) var(--E) infinite;}
+  @keyframes r-jig{0%,100%{transform:translateX(-.6px);}50%{transform:translateX(.6px);}}
+  .p-chop .react{animation:r-thud var(--P) infinite;}
+  @keyframes r-thud{0%,48%{transform:scale(1,1);}52%{transform:scale(1.02,.94);}62%{transform:scale(.99,1.03);}75%,100%{transform:scale(1,1);}}
+  .rbit{opacity:0;}
+  .p-chop .rbit{animation:r-bit var(--P) infinite;}
+  @keyframes r-bit{0%,48%{opacity:0;transform:translate(0,0);}52%{opacity:1;}70%{opacity:1;transform:translate(var(--bx,3px),-9px);}90%,100%{opacity:0;transform:translate(calc(var(--bx,3px)*1.6),0);}}
+  .rbit:nth-child(odd){--bx:-4px;}
+  .p-tongs .react{animation:r-flip var(--P) infinite;}
+  @keyframes r-flip{0%,50%{transform:scale(1,1) translateY(0);}56%{transform:scale(1.04,.55) translateY(0);}64%{transform:scale(.97,1.12) translateY(-2px);}74%,100%{transform:scale(1,1) translateY(0);}}
+  .rspark{opacity:0;}
+  .p-tongs .rspark{animation:r-spark var(--P) infinite;}
+  @keyframes r-spark{0%,52%{opacity:0;transform:translate(0,0) scale(.4);}58%{opacity:1;transform:translate(0,-6px) scale(1);}80%{opacity:0;transform:translate(var(--bx,4px),-16px) scale(.3);}100%{opacity:0;}}
+  .rspark:nth-child(odd){--bx:-5px;}
+  .rdrop{opacity:0;}
+  .p-season .rdrop{animation:r-drop var(--P) infinite;}
+  @keyframes r-drop{0%,40%{opacity:0;transform:translateY(0);}48%{opacity:1;}85%{opacity:1;transform:translateY(62px);}100%{opacity:0;transform:translateY(68px);}}
+  .p-season .react{animation:r-thud calc(var(--P)*2) infinite;}
+  .p-blend .jar{animation:r-shake .12s linear infinite;}
+  @keyframes r-shake{0%,100%{transform:translateX(-.7px) rotate(-.4deg);}50%{transform:translateX(.7px) rotate(.4deg);}}
+  .p-blend .spin{animation:r-spin .5s linear infinite;}
+  @keyframes r-spin{0%{transform:skewX(0) scaleY(1);}25%{transform:skewX(6deg) scaleY(1.04);}75%{transform:skewX(-6deg) scaleY(.97);}100%{transform:skewX(0) scaleY(1);}}
+  .p-dial .needle{animation:r-needle calc(var(--P)*2) var(--E) infinite;transform-box:view-box;}
+  @keyframes r-needle{0%,100%{transform:rotate(0deg);}50%{transform:rotate(0deg);}}
+  .p-dial .trg{animation:r-hum 1.6s var(--E) infinite;}
+  @keyframes r-hum{0%,100%{transform:translateY(0);}50%{transform:translateY(-.5px);}}
+  .p-lid .react{animation:r-bubble var(--P) var(--E) infinite;}
+  @keyframes r-bubble{0%,100%{transform:scale(1,1);}50%{transform:scale(1.01,1.04);}}
+  .p-peek .react,.p-wait .react{animation:r-bubble var(--P) var(--E) infinite;}
+  .p-serve .react{animation:m-hop var(--P) infinite;transform-box:fill-box;transform-origin:50% 100%;}
+  /* steam and smoke that drift and sway */
+  .scene svg .sway{animation:sway 2.8s var(--E) infinite;transform-box:fill-box;transform-origin:50% 100%;}
+  @keyframes sway{0%,100%{transform:translateX(-2px);}50%{transform:translateX(2.5px);}}
+  .scene svg .rise{animation:srise2 2.8s cubic-bezier(.3,.1,.5,1) infinite;}
+  @keyframes srise2{0%{transform:translateY(6px) scale(.7);opacity:0;}20%{opacity:.85;}100%{transform:translateY(-34px) scale(1.4);opacity:0;}}
+  /* ---------- two-drawing frame animation ---------- */
+  .scene svg .fb{opacity:0;}
+  .p-stir .fb{animation:fb-stir var(--P) linear infinite;} .p-stir .fa{animation:fa-stir var(--P) linear infinite;}
+  @keyframes fb-stir{0%,19%{opacity:0}25%,75%{opacity:1}81%,100%{opacity:0}} @keyframes fa-stir{0%,25%{opacity:1}25.1%,74.9%{opacity:0}75%,100%{opacity:1}}
+  .p-whisk .fb{animation:fb-whisk var(--P) linear infinite;} .p-whisk .fa{animation:fa-whisk var(--P) linear infinite;}
+  @keyframes fb-whisk{0%,19%{opacity:0}25%,75%{opacity:1}81%,100%{opacity:0}} @keyframes fa-whisk{0%,25%{opacity:1}25.1%,74.9%{opacity:0}75%,100%{opacity:1}}
+  .p-season .fb{animation:fb-season var(--P) linear infinite;} .p-season .fa{animation:fa-season var(--P) linear infinite;}
+  @keyframes fb-season{0%,22%{opacity:0}28%,58%{opacity:1}64%,100%{opacity:0}} @keyframes fa-season{0%,28%{opacity:1}28.1%,57.9%{opacity:0}58%,100%{opacity:1}}
+  .p-chop .fb{animation:fb-chop var(--P) linear infinite;} .p-chop .fa{animation:fa-chop var(--P) linear infinite;}
+  @keyframes fb-chop{0%,39%{opacity:0}45%,66%{opacity:1}72%,100%{opacity:0}} @keyframes fa-chop{0%,45%{opacity:1}45.1%,65.9%{opacity:0}66%,100%{opacity:1}}
+  .p-slice .fb{animation:fb-slice var(--P) linear infinite;} .p-slice .fa{animation:fa-slice var(--P) linear infinite;}
+  @keyframes fb-slice{0%,19%{opacity:0}25%,75%{opacity:1}81%,100%{opacity:0}} @keyframes fa-slice{0%,25%{opacity:1}25.1%,74.9%{opacity:0}75%,100%{opacity:1}}
+  .p-tongs .fb{animation:fb-tongs var(--P) linear infinite;} .p-tongs .fa{animation:fa-tongs var(--P) linear infinite;}
+  @keyframes fb-tongs{0%,38%{opacity:0}44%,76%{opacity:1}82%,100%{opacity:0}} @keyframes fa-tongs{0%,44%{opacity:1}44.1%,75.9%{opacity:0}76%,100%{opacity:1}}
+  .p-lid .fb{animation:fb-lid var(--P) linear infinite;} .p-lid .fa{animation:fa-lid var(--P) linear infinite;}
+  @keyframes fb-lid{0%,24%{opacity:0}30%,70%{opacity:1}76%,100%{opacity:0}} @keyframes fa-lid{0%,30%{opacity:1}30.1%,69.9%{opacity:0}70%,100%{opacity:1}}
+  .p-blend .fb{animation:fb-blend var(--P) linear infinite;} .p-blend .fa{animation:fa-blend var(--P) linear infinite;}
+  @keyframes fb-blend{0%,24%{opacity:0}30%,70%{opacity:1}76%,100%{opacity:0}} @keyframes fa-blend{0%,30%{opacity:1}30.1%,69.9%{opacity:0}70%,100%{opacity:1}}
+  .p-serve .fb{animation:fb-serve var(--P) linear infinite;} .p-serve .fa{animation:fa-serve var(--P) linear infinite;}
+  @keyframes fb-serve{0%,19%{opacity:0}25%,60%{opacity:1}66%,100%{opacity:0}} @keyframes fa-serve{0%,25%{opacity:1}25.1%,59.9%{opacity:0}60%,100%{opacity:1}}
+  .p-cheer .fb{animation:fb-cheer var(--P) linear infinite;} .p-cheer .fa{animation:fa-cheer var(--P) linear infinite;}
+  @keyframes fb-cheer{0%,62%{opacity:0}68%,96%{opacity:1}102%,100%{opacity:0}} @keyframes fa-cheer{0%,68%{opacity:1}68.1%,95.9%{opacity:0}96%,100%{opacity:1}}
+  .p-peek .fb{animation:fb-peek var(--P) linear infinite;} .p-peek .fa{animation:fa-peek var(--P) linear infinite;}
+  @keyframes fb-peek{0%,24%{opacity:0}30%,70%{opacity:1}76%,100%{opacity:0}} @keyframes fa-peek{0%,30%{opacity:1}30.1%,69.9%{opacity:0}70%,100%{opacity:1}}
+  .p-dial .fb{animation:fb-dial var(--P) linear infinite;} .p-dial .fa{animation:fa-dial var(--P) linear infinite;}
+  @keyframes fb-dial{0%,24%{opacity:0}30%,70%{opacity:1}76%,100%{opacity:0}} @keyframes fa-dial{0%,30%{opacity:1}30.1%,69.9%{opacity:0}70%,100%{opacity:1}}
+  @media (prefers-reduced-motion: reduce){.scene svg *{animation:none!important;}}
+</style>
+<div class="sun"></div>
+<div class="wrap">
+  <h1>🐕‍🦺 Chef Kenny's Kitchen</h1>
+  <button class="pickbar" id="picker" aria-haspopup="dialog"></button>
+  <div class="paws" id="paws"></div>
+  <div class="scene" id="scene"></div>
+  <div class="bubble-row">
+    <div class="bubble" id="bubble"></div>
+    <button class="boop" id="boop">👋</button>
+  </div>
+  <div class="card">
+    <span class="stage-tag" id="stageTag"></span>
+    <div class="stage-title" id="stageTitle"></div>
+    <div class="real" id="realBox"></div>
+    <div id="extras"></div>
+    <div class="meter-wrap">
+      <div class="meter-lbl"><span id="meterName">🍳 Cook Meter</span><span id="meterPct">Raw</span></div>
+      <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="btn back" id="back">◀</button>
+    <button class="btn next" id="next">Next ▶</button>
+  </div>
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Pick a recipe"><div class="menu-bg" id="menuBg"></div><div class="menu-sheet"><div class="menu-head"><h2>What are we cooking?</h2><button class="menu-x" id="menuX" aria-label="Close">✕</button></div><input class="menu-search" id="menuQ" type="search" placeholder="Search recipes..." autocomplete="off"><div class="menu-body" id="menuBody"></div></div></div>
+  <p class="footer">Tap the recipe up top to switch. Kenny cooks it with you, step by step. 🐾</p>
+</div>
+
+<script>
+var S="<svg viewBox='0 0 300 210'>",E="</svg>";
+var KH="<path d='M132 46 L120 20 L150 40 Z' fill='#2B2622' stroke='#1A1512' stroke-width='2' stroke-linejoin='round'/><path d='M168 46 L180 20 L150 40 Z' fill='#2B2622' stroke='#1A1512' stroke-width='2' stroke-linejoin='round'/><path d='M136 44 L128 26 L150 40 Z' fill='#5B4A3F'/><path d='M164 44 L172 26 L150 40 Z' fill='#5B4A3F'/><ellipse cx='150' cy='58' rx='36' ry='34' fill='#1A1512'/><ellipse cx='150' cy='58' rx='34' ry='32' fill='#2B2622'/><ellipse cx='133' cy='70' rx='12' ry='13' fill='#C8823C'/><ellipse cx='167' cy='70' rx='12' ry='13' fill='#C8823C'/><circle cx='126' cy='79' r='4.5' fill='#F4A9A0' opacity='.65'/><circle cx='174' cy='79' r='4.5' fill='#F4A9A0' opacity='.65'/><path d='M150 28 C145 28 143 54 145 74 L155 74 C157 54 155 28 150 28 Z' fill='#FDFBF6'/><ellipse cx='150' cy='76' rx='20' ry='17' fill='#FDFBF6' stroke='#E4DCCB' stroke-width='1'/><ellipse cx='138' cy='48' rx='4' ry='4.5' fill='#C8823C'/><ellipse cx='162' cy='48' rx='4' ry='4.5' fill='#C8823C'/><circle cx='138' cy='59' r='5.5' fill='#161210'/><circle cx='162' cy='59' r='5.5' fill='#161210'/><circle cx='139.8' cy='57' r='1.9' fill='#fff'/><circle cx='163.8' cy='57' r='1.9' fill='#fff'/><ellipse cx='150' cy='70' rx='5.5' ry='4' fill='#161210'/><ellipse cx='148' cy='69' rx='1.6' ry='1' fill='#4a4038'/><path d='M150 74 Q150 81 143 82' fill='none' stroke='#2B2622' stroke-width='2.2' stroke-linecap='round'/><path d='M150 74 Q150 81 157 82' fill='none' stroke='#2B2622' stroke-width='2.2' stroke-linecap='round'/><path d='M144 80 q6 9 12 0 q0 6 -6 7 q-6 -1 -6 -7 Z' fill='#F58AA0'/><ellipse cx='150' cy='26' rx='27' ry='15' fill='#fff' stroke='#D6CFC2' stroke-width='1.5'/><circle cx='131' cy='28' r='11' fill='#fff' stroke='#D6CFC2' stroke-width='1.5'/><circle cx='169' cy='28' r='11' fill='#fff' stroke='#D6CFC2' stroke-width='1.5'/><rect x='127' y='36' width='46' height='12' rx='5' fill='#F1EDE0' stroke='#D6CFC2' stroke-width='1.5'/><ellipse cx='140' cy='22' rx='6' ry='3' fill='#fff' opacity='.9'/>";
+var KT="<ellipse cx='150' cy='128' rx='33' ry='46' fill='#FDFBF6' stroke='#6B5A4E' stroke-width='2.5'/><path d='M138 100 Q150 112 162 100 L150 118 Z' fill='#E8623C' stroke='#B84A2A' stroke-width='1.5' stroke-linejoin='round'/><line x1='138' y1='118' x2='142' y2='105' stroke='#6B5A4E' stroke-width='2'/><line x1='162' y1='118' x2='158' y2='105' stroke='#6B5A4E' stroke-width='2'/><path d='M136 118 L136 166 Q150 172 164 166 L164 118 Z' fill='#F7F2E7' stroke='#6B5A4E' stroke-width='2' stroke-linejoin='round'/><rect x='139' y='122' width='22' height='9' rx='2' fill='#E8623C'/><text x='150' y='129' text-anchor='middle' font-family='Fredoka,sans-serif' font-weight='700' font-size='6.5' fill='#fff'>KENNY</text><rect x='141' y='140' width='18' height='13' rx='2' fill='#F0E8D8' stroke='#6B5A4E' stroke-width='1.5'/>";
+var BACKDROP="<defs><pattern id='tile' width='28' height='22' patternUnits='userSpaceOnUse'><rect x='1' y='1' width='26' height='20' rx='3' fill='#F3E4C6' stroke='#E8D5B0'/></pattern></defs><rect x='0' y='0' width='300' height='210' fill='#FBF1DA'/><rect x='0' y='134' width='300' height='48' fill='url(#tile)'/><line x1='0' y1='133' x2='300' y2='133' stroke='#E4CFA6' stroke-width='3'/><rect x='212' y='16' width='72' height='62' rx='6' fill='#BDE9F2' stroke='#8B6B4A' stroke-width='4'/><circle cx='262' cy='34' r='9' fill='#FBC23C'/><ellipse cx='232' cy='60' rx='12' ry='6' fill='#fff'/><ellipse cx='244' cy='56' rx='9' ry='5' fill='#fff'/><line x1='248' y1='16' x2='248' y2='78' stroke='#8B6B4A' stroke-width='3'/><line x1='212' y1='47' x2='284' y2='47' stroke='#8B6B4A' stroke-width='3'/><rect x='14' y='60' width='84' height='6' rx='2' fill='#B98A5A' stroke='#8B6B4A' stroke-width='1.5'/><rect x='22' y='40' width='16' height='20' rx='3' fill='#F2C14E' stroke='#8B6B4A' stroke-width='1.5'/><rect x='20' y='36' width='20' height='6' rx='2' fill='#8B6B4A'/><rect x='46' y='44' width='14' height='16' rx='3' fill='#C0392B' stroke='#8B6B4A' stroke-width='1.5'/><rect x='44' y='40' width='18' height='6' rx='2' fill='#8B6B4A'/><rect x='68' y='42' width='16' height='18' rx='3' fill='#8FA84A' stroke='#8B6B4A' stroke-width='1.5'/><rect x='66' y='38' width='20' height='6' rx='2' fill='#8B6B4A'/><line x1='104' y1='28' x2='104' y2='50' stroke='#B98A5A' stroke-width='3' stroke-linecap='round'/><ellipse cx='104' cy='54' rx='5' ry='4' fill='#B98A5A'/><rect x='0' y='180' width='300' height='30' fill='#B98A5A'/><rect x='0' y='178' width='300' height='6' fill='#D9B382'/><rect x='108' y='188' width='84' height='14' rx='3' fill='#A67B4C' stroke='#8B6B4A' stroke-width='1.5'/><rect x='142' y='193' width='16' height='4' rx='2' fill='#F1EDE0'/>";
+
+function paw(x,y){return "<ellipse cx='"+x+"' cy='"+y+"' rx='8.5' ry='7' fill='#FDFBF6' stroke='#E2D9C7' stroke-width='1'/><circle cx='"+(x-4.5)+"' cy='"+(y+4)+"' r='2.4' fill='#FDFBF6' stroke='#E2D9C7' stroke-width='.7'/><circle cx='"+x+"' cy='"+(y+5.2)+"' r='2.7' fill='#FDFBF6' stroke='#E2D9C7' stroke-width='.7'/><circle cx='"+(x+4.5)+"' cy='"+(y+4)+"' r='2.4' fill='#FDFBF6' stroke='#E2D9C7' stroke-width='.7'/><ellipse cx='"+x+"' cy='"+(y+1)+"' rx='3' ry='2.4' fill='#F3C3CB'/>";}
+function armR(cls,d,px,py,tool){return "<g class='arm "+cls+"'><path d='"+d+"' fill='none' stroke='#FDFBF6' stroke-width='12' stroke-linecap='round'/>"+paw(px,py)+(tool||"")+"</g>";}
+function armLr(d,px,py){return "<g class='arm-l'><path d='"+d+"' fill='none' stroke='#FDFBF6' stroke-width='12' stroke-linecap='round'/>"+paw(px,py)+"</g>";}
+function armLc(cls,d,px,py,tool){return "<g class='arm-l "+cls+"'><path d='"+d+"' fill='none' stroke='#FDFBF6' stroke-width='12' stroke-linecap='round'/>"+paw(px,py)+(tool||"")+"</g>";}
+function scn(inner,back){return S+BACKDROP+(back||"")+"<g class='kbody'>"+KT+KH+"</g>"+inner+E;}
+
+var BOARD="<rect x='72' y='160' width='156' height='13' rx='5' fill='#D9B382' stroke='#B8935F' stroke-width='2'/>";
+var GRATE="<rect x='96' y='164' width='118' height='7' rx='3' fill='#4A4A4A'/><line x1='114' y1='158' x2='114' y2='172' stroke='#5A5A5A' stroke-width='3'/><line x1='150' y1='158' x2='150' y2='172' stroke='#5A5A5A' stroke-width='3'/><line x1='186' y1='158' x2='186' y2='172' stroke='#5A5A5A' stroke-width='3'/>";
+function pot(c){return "<path d='M114 150 L186 150 L182 178 Q150 184 118 178 Z' fill='#4A4A4A'/><ellipse cx='150' cy='150' rx='36' ry='8' fill='#3a3a3a'/><ellipse cx='150' cy='149' rx='30' ry='6' fill='"+c+"'/><rect x='98' y='148' width='18' height='5' rx='2' fill='#333'/><rect x='184' y='148' width='18' height='5' rx='2' fill='#333'/>";}
+function bowl(c){return "<ellipse cx='150' cy='166' rx='42' ry='11' fill='#E7ECEE'/><path d='M110 166 Q112 186 150 190 Q188 186 190 166 Z' fill='#E3E8EA' stroke='#B9C3C7' stroke-width='2'/><ellipse cx='150' cy='165' rx='37' ry='8' fill='"+c+"'/>";}
+var TONGS="<path d='M160 154 L140 156 M160 158 L140 161' stroke='#888' stroke-width='2'/>";
+function knife(){return "<rect x='160' y='130' width='8' height='16' rx='2' fill='#3A2C25'/><path d='M150 150 L176 150 L150 138 Z' fill='#C9CDD2' stroke='#9AA' stroke-width='1'/>";}
+var SPOON="<line x1='166' y1='158' x2='150' y2='150' stroke='#B98A5A' stroke-width='3' stroke-linecap='round'/><ellipse cx='149' cy='150' rx='5' ry='3.5' fill='#B98A5A'/>";
+function whiskT(px,py){return "<line x1='"+px+"' y1='"+(py+2)+"' x2='"+(px-2)+"' y2='"+(py+18)+"' stroke='#9AA' stroke-width='2'/><path d='M"+(px-7)+" "+(py+18)+" q5 7 10 0' fill='none' stroke='#9AA' stroke-width='1.5'/>";}
+var SHAKER="<rect x='159' y='140' width='12' height='16' rx='2' fill='#D8D2C4' stroke='#a99' stroke-width='1'/><rect x='159' y='138' width='12' height='4' rx='2' fill='#999'/>";
+function smoke3(){return "<path class='rise' d='M126 160 q-7 -9 0 -18' fill='none' stroke='#ffffff70' stroke-width='4' stroke-linecap='round'/><path class='rise' d='M150 160 q-7 -9 0 -18' fill='none' stroke='#ffffff70' stroke-width='4' stroke-linecap='round' style='animation-delay:.9s'/><path class='rise' d='M174 160 q-7 -9 0 -18' fill='none' stroke='#ffffff70' stroke-width='4' stroke-linecap='round' style='animation-delay:1.7s'/>";}
+
+var KP="";
+var POSES=["idle","blink","stir","serve","season","wait","tongs","dial","chop","slice","lid","peek","whisk","blend","cheer"];
+POSES.forEach(function(p){var i=new Image();i.src=KP+p+".webp";});
+var BD_I=BACKDROP.indexOf("<rect x='0' y='180'");
+var WALL=BACKDROP.slice(0,BD_I), COUNTER=BACKDROP.slice(BD_I);
+function kimg(pose,mv){return "<g class='kmove m-"+(mv||pose)+"'><image class='kimg' data-pose='"+pose+"' href='"+KP+pose+".webp' x='50' y='4' width='200' height='200'/></g>";}
+function scn2(pose,front,back,mv){return S+WALL+(back||"")+kimg(pose,mv)+COUNTER+(front||"")+E;}
+function steam(x,y){return "<path class='rise' d='M"+(x-10)+" "+y+" q-6 -8 0 -15' fill='none' stroke='#ffffffb0' stroke-width='4' stroke-linecap='round'/><path class='rise' d='M"+(x+8)+" "+y+" q-6 -8 0 -15' fill='none' stroke='#ffffffb0' stroke-width='4' stroke-linecap='round' style='animation-delay:1s'/>";}
+function potAt(x,c){return "<path d='M"+(x-32)+" 150 L"+(x+32)+" 150 L"+(x+28)+" 179 Q"+x+" 184 "+(x-28)+" 179 Z' fill='#4A4A4A' stroke='#2b2b2b' stroke-width='1.5'/><ellipse cx='"+x+"' cy='150' rx='33' ry='7' fill='#3a3a3a'/><ellipse class='slosh' cx='"+x+"' cy='149.5' rx='27' ry='5' fill='"+c+"'/><rect x='"+(x-46)+"' y='148' width='15' height='5' rx='2' fill='#333'/><rect x='"+(x+31)+"' y='148' width='15' height='5' rx='2' fill='#333'/>";}
+function bowlAt(x,c){return "<path d='M"+(x-36)+" 156 Q"+(x-34)+" 180 "+x+" 182 Q"+(x+34)+" 180 "+(x+36)+" 156 Z' fill='#E3E8EA' stroke='#9FAAB0' stroke-width='2'/><ellipse cx='"+x+"' cy='156' rx='36' ry='7' fill='#EEF2F3' stroke='#9FAAB0' stroke-width='1.5'/><ellipse class='slosh' cx='"+x+"' cy='156.5' rx='30' ry='5' fill='"+c+"'/>";}
+function boardAt(x){return "<rect x='"+(x-48)+"' y='168' width='96' height='12' rx='5' fill='#D9B382' stroke='#A97E4C' stroke-width='2'/><circle cx='"+(x+40)+"' cy='174' r='2.2' fill='#A97E4C'/>";}
+function grateAt(x){return "<rect x='"+(x-46)+"' y='166' width='92' height='14' rx='4' fill='#3C3C3C' stroke='#222' stroke-width='1.5'/><line x1='"+(x-40)+"' y1='166' x2='"+(x+40)+"' y2='166' stroke='#666' stroke-width='3'/><path class='flick' d='M"+(x-30)+" 166 q-4 -10 2 -15 q-1 8 4 3 q3 8 -3 12 z' fill='#F0662B'/><path class='flick2' d='M"+(x+26)+" 166 q-4 -10 2 -15 q-1 8 4 3 q3 8 -3 12 z' fill='#F7A93B'/>";}
+var MEATON=function(x,c,cls){return "<rect class='"+(cls||'')+"' x='"+(x-22)+"' y='157' width='44' height='10' rx='5' fill='"+c+"' stroke='#00000033' stroke-width='1'/>";};
+function smokeAt(x){return "<path class='rise' d='M"+(x-18)+" 156 q-7 -9 0 -18' fill='none' stroke='#ffffff99' stroke-width='4' stroke-linecap='round'/><path class='rise' d='M"+x+" 156 q-7 -9 0 -18' fill='none' stroke='#ffffff99' stroke-width='4' stroke-linecap='round' style='animation-delay:.9s'/><path class='rise' d='M"+(x+18)+" 156 q-7 -9 0 -18' fill='none' stroke='#ffffff99' stroke-width='4' stroke-linecap='round' style='animation-delay:1.7s'/>";}
+var ACT={
+ whisk:function(c){return scn2("whisk",bowlAt(92,c)+"<circle class='spark' cx='80' cy='150' r='2' fill='"+c+"'/><circle class='spark' cx='104' cy='148' r='1.8' fill='"+c+"' style='animation-delay:.4s'/>");},
+ stir:function(c){return scn2("stir",potAt(118,c)+steam(118,140));},
+ season:function(c){return scn2("season",boardAt(96)+MEATON(96,c)+"<circle class='drop' cx='88' cy='112' r='1.8' fill='#ffffff'/><circle class='drop' cx='96' cy='108' r='1.6' fill='#ffffff' style='animation-delay:.5s'/><circle class='drop' cx='92' cy='116' r='1.8' fill='#ffffff' style='animation-delay:1s'/>");},
+ chop:function(c){return scn2("chop",boardAt(108)+"<g class='sbob'><circle cx='108' cy='160' r='10' fill='"+c+"' stroke='#00000033'/></g><circle class='spark' cx='94' cy='156' r='2.2' fill='"+c+"'/><circle class='spark' cx='122' cy='155' r='2' fill='"+c+"' style='animation-delay:.45s'/>");},
+ blend:function(c){return scn2("blend","<rect x='44' y='164' width='50' height='15' rx='3' fill='#444'/><circle class='glow' cx='76' cy='171' r='3.5' fill='#F0662B'/><path d='M48 102 L90 102 L86 164 L52 164 Z' fill='#CFE0E6' opacity='.6' stroke='#8FAAB2' stroke-width='2'/><rect class='slosh' x='54' y='130' width='30' height='32' rx='3' fill='"+c+"'/><rect x='45' y='96' width='48' height='8' rx='3' fill='#666'/>");},
+ boil:function(c){return scn2("peek",potAt(130,c)+"<circle class='bub' cx='120' cy='147' r='3' fill='#ffffffcc'/><circle class='bub' cx='140' cy='148' r='2.5' fill='#ffffffcc' style='animation-delay:.7s'/><circle class='bub' cx='131' cy='145' r='2' fill='#ffffffcc' style='animation-delay:1.4s'/>"+steam(130,140));},
+ fireup:function(){return scn2("dial","<rect x='40' y='92' width='58' height='86' rx='6' fill='#3C3C3C' stroke='#222' stroke-width='2'/><rect x='48' y='100' width='42' height='22' rx='4' fill='#2A2A2A'/><circle cx='80' cy='111' r='8' fill='#EDE7D8' stroke='#111' stroke-width='2'/><line class='needle' x1='80' y1='111' x2='80' y2='104' stroke='#C0392B' stroke-width='2'/><text x='60' y='115' font-family='Fredoka,sans-serif' font-size='8' font-weight='700' fill='#F7A93B'>500</text><ellipse class='glow' cx='69' cy='170' rx='22' ry='5' fill='#F7A93B'/><path class='flick' d='M62 172 q-4 -12 3 -18 q-1 9 5 4 q4 9 -3 14 z' fill='#F0662B'/><path class='rise' d='M69 90 q-6 -8 0 -14' fill='none' stroke='#ffffff99' stroke-width='3' stroke-linecap='round'/>");},
+ grillplace:function(c){return scn2("tongs",grateAt(80)+MEATON(80,c,'sbob')+smokeAt(80));},
+ flip:function(c){return scn2("tongs",grateAt(80)+MEATON(80,c)+"<line class='mark' x1='66' y1='158' x2='72' y2='166' stroke='#00000066' stroke-width='3'/><line class='mark' x1='80' y1='158' x2='86' y2='166' stroke='#00000066' stroke-width='3' style='animation-delay:.3s'/><line class='mark' x1='94' y1='158' x2='100' y2='166' stroke='#00000066' stroke-width='3' style='animation-delay:.6s'/><circle class='spark' cx='70' cy='154' r='2.4' fill='#FBD24B'/><circle class='spark' cx='96' cy='152' r='2' fill='#FBD24B' style='animation-delay:.4s'/>");},
+ smokewait:function(c){return scn2("wait",grateAt(108)+MEATON(108,c,'sbob')+smokeAt(108));},
+ braise:function(c){return scn2("lid",potAt(98,c)+steam(98,142)+"<path class='rise' d='M110 140 q-6 -8 0 -15' fill='none' stroke='#ffffffb0' stroke-width='4' stroke-linecap='round' style='animation-delay:.5s'/>");},
+ slice:function(c){return scn2("slice",boardAt(110)+"<rect x='64' y='156' width='34' height='13' rx='5' fill='"+c+"'/><rect class='slidein' x='118' y='157' width='9' height='12' rx='3' fill='"+c+"' style='--r:-6deg;animation-delay:.3s'/><rect class='slidein' x='131' y='157' width='9' height='12' rx='3' fill='"+c+"' style='--r:3deg;animation-delay:.8s'/><rect class='slidein' x='144' y='157' width='9' height='12' rx='3' fill='"+c+"' style='--r:9deg;animation-delay:1.3s'/>");},
+ serve:function(item,c){var col=c||'#C99A5B',f="";function food(x){if(item==='taco')return "<path d='M"+(x-15)+" 74 Q"+x+" 54 "+(x+15)+" 74 Z' fill='#F0C463' stroke='#C9932F' stroke-width='2'/><rect x='"+(x-8)+"' y='64' width='5' height='9' rx='2' fill='#7A3A2C'/><rect x='"+(x-1)+"' y='62' width='5' height='11' rx='2' fill='#8A4636'/><circle cx='"+(x+6)+"' cy='67' r='2' fill='#4E9A40'/>";if(item==='bowl')return "<path d='M"+(x-15)+" 66 Q"+(x-14)+" 76 "+x+" 77 Q"+(x+14)+" 76 "+(x+15)+" 66 Z' fill='#E3E8EA' stroke='#9FAAB0' stroke-width='1.5'/><ellipse cx='"+x+"' cy='66' rx='15' ry='4' fill='"+col+"'/>";return "<ellipse cx='"+(x-4)+"' cy='70' rx='11' ry='5' fill='"+col+"' stroke='#00000033'/><ellipse cx='"+(x+9)+"' cy='71' rx='7' ry='4' fill='#F3ECDA'/>";}
+  f=food(96)+food(206)+steam(96,58)+steam(206,58);return S+WALL+kimg("serve")+f+COUNTER+E;}
+};
+function cheerScene(){return "<svg viewBox='0 0 300 210' class='sc p-cheer'>"+WALL+kGroup("cheer")+COUNTER+"<circle class='spark' cx='60' cy='60' r='3' fill='#FBC23C'/><circle class='spark' cx='240' cy='50' r='3' fill='#F58AA0' style='animation-delay:.3s'/><circle class='spark' cx='70' cy='120' r='2.5' fill='#59A23A' style='animation-delay:.6s'/><circle class='spark' cx='235' cy='110' r='2.5' fill='#E8623C' style='animation-delay:.9s'/>"+E;}
+function idleScene(){return "<svg viewBox='0 0 300 210' class='sc p-idle'>"+WALL+kGroup("idle")+COUNTER+"</svg>";}
+var blinkT=null;
+function startBlink(){clearInterval(blinkT);blinkT=setInterval(function(){var im=document.querySelector(".scene image[data-pose='idle']");if(!im)return;im.setAttribute("href",KP+"blink.webp");setTimeout(function(){im.setAttribute("href",KP+"idle.webp");},170);},2600);}
+startBlink();
+
+var MEAT="#7A3A2C",CHILI="#7C2E24",GUAC="#8FA84A",CHEESE="#F2C14E",POTATO="#F3ECDA",CHK="#C99A5B",PORK="#C67B5A",ONION="#F0E6E8",RICE="#F0E8D2",BEANS="#6B4A2E",TOMATO="#C0392B";
+
+function st(title,kenny,real,cook,scene,opts){opts=opts||{};return {title:title,kenny:kenny,real:real,cook:cook,scene:scene,dur:opts.dur,timer:opts.timer,timerLbl:opts.timerLbl,sizzle:opts.sizzle};}
+
+var RECIPES=[
+ {id:"asada",name:"🌮 Carne Asada",meter:"🥩 Asada Meter",steps:[
+  st("Bubble, Bubble, Lime!","Splish splash, this steak is getting a lime bath!","Whisk <b>3 limes + 1 orange</b>, <b>4 garlic</b>, <b>&#8531; cup cilantro</b>, <b>1 jalape&#241;o</b>, <b>3 tbsp oil</b>, <b>1 tsp cumin</b>, <b>1 tsp chili powder</b>, salt &amp; pepper. Coat <b>1.25 lb skirt steak</b>, chill <b>2&#8211;8 hr</b>. Much past 8 and the lime turns the outside mushy.",0,ACT.whisk(MEAT),{dur:"2–8 hr soak"}),
+  st("Pat Those Paws Dry","Wet steak steams. Dry steak SIZZLES. Big difference, trust me.","Pull the steak out and <b>pat it very dry</b>, both sides. Lay it on a sheet pan and leave it on the counter <b>30&#8211;45 min</b>. A dry surface is the whole sear.",8,ACT.season(MEAT),{dur:"30–45 min",timer:1800,timerLbl:"Temper"}),
+  st("Wake Up, Grill!","Psst, grill. It's bowl night. Time to get toasty!","Traeger to <b>225&#176;F</b> with cherry pellets. Give it a full <b>15 min</b>. It runs cooler than the dial says.",15,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
+  st("Just a Smoke Kiss","A quick smooch of cherry smoke. Mwah! Optional, but so good.","<b>Optional.</b> Steak on at 225&#176;F, lid closed, <b>10&#8211;15 min</b>. Don't bother probing, skirt is too thin to read. Pull it to a plate after. <b>Short on time? Skip this and go straight to the sear.</b>",35,ACT.smokewait(MEAT),{dur:"10–15 min",timer:900,timerLbl:"Smoke kiss"}),
+  st("Snack Squad, Assemble","Onion, cilantro, lime... the flavor friends are here!","Dice <b>white onion</b>, chop <b>cilantro</b>, cut <b>lime wedges</b>. Warm <b>tortillas</b>, or line up rice, beans, pico and guac for bowls.",45,ACT.chop(ONION),{dur:"~10 min"}),
+  st("Crank It Way Up","Five hundred degrees! Ears back, here we go!","Lid down, dial to <b>500&#176;F</b>, and wait the full <b>12&#8211;15 min</b>. A cool grate gives you grey steak instead of crust.",60,ACT.fireup(),{dur:"12–15 min",timer:780,timerLbl:"Heat climb"}),
+  st("The Big Sizzle","Ssss-SSSS! Two or three minutes a side. No peeking, no poking!","Steak on. <b>2&#8211;3 min per side</b> by the clock, not by probe. <b>Flip when</b> the top goes from wet-looking to matte and the edges start to curl. Tap the timer once per side. Take <b>30 sec off each side</b> if you did the smoke kiss, and pull it when it feels like it wants 30 more seconds.",82,ACT.flip(MEAT),{dur:"~5 min total",timer:150,timerLbl:"Sear side",sizzle:true}),
+  st("Slice Like a Ninja","Rest five. Then thin slices, against the grain. Hi-YA!","Rest <b>5 min</b> on a board. Find the long grain lines, turn the steak so the knife cuts <b>across</b> them, and slice <b>thin</b> on a slight angle. Cutting with the grain makes it chewy.",92,ACT.slice(MEAT),{dur:"rest + slice",timer:300,timerLbl:"Rest"}),
+  st("Bowls Up, Tacos Up!","Dinner's served! I called dibs on the first bite. It's the law.","Build it: <b>cilantro lime rice</b>, then <b>beans</b>, then <b>asada</b>, then <b>pico</b> and <b>guac</b>. Or pile it into warm tortillas. ¡Buen provecho!",100,ACT.serve('taco'),{dur:"¡FIESTA!"})
+ ]},
+ {id:"barbacoa",name:"🌮 Beef Barbacoa",meter:"🥩 Barbacoa Meter",steps:[
+  st("Give It a Good Rub","A little massage for Mr. Beef. He deserves it.","Rub <b>3.5 lb chuck</b> with salt, pepper, cumin, oregano.",0,ACT.season(MEAT),{dur:"2 min"}),
+  st("The Long Smoky Nap","The beef naps in the smoke. I'll nap too. For quality.","Smoke at <b>250&#176;F</b> ~3 hr to bark, ~160&#176;F.",30,ACT.smokewait(MEAT),{dur:"~3 hr",timer:2700,timerLbl:"Smoke"}),
+  st("Whirl the Chilis","Into the blender! Zoom zoom, spicy soup!","Blend <b>chipotles, garlic, lime, vinegar, broth</b> smooth.",45,ACT.blend(CHILI),{dur:"3 min"}),
+  st("Cozy Under the Lid","Tuck it in, lid on. Low and slow makes it soooo tender.","Braise covered at <b>300&#176;F</b> ~3&#8211;4 hr until shreddable.",70,ACT.braise(CHILI),{dur:"~3\u20134 hr",timer:2700,timerLbl:"Braise"}),
+  st("Floof That Beef","Two forks, big pulls. It falls apart like magic!","Shred the beef, fold in the juices.",88,ACT.slice(MEAT),{dur:"10 min"}),
+  st("Taco Victory!","We waited, we won. Pile 'em high!","Warm tortillas, add onion, cilantro, lime.",100,ACT.serve('taco'),{dur:"Feast!"})
+ ]},
+ {id:"guac",name:"🥑 Guacamole",meter:"🥑 Guac Meter",steps:[
+  st("Tiny Chop Party","Little dice, little dice. Careful paws!","Finely dice <b>&#189; onion</b>, <b>2 jalape&#241;os</b>, <b>&#189; cup cilantro</b>.",10,ACT.chop(ONION),{dur:"5 min"}),
+  st("Holy Guacamole!","Squish those avocados! Squish squish squish!","Mash <b>4 ripe avocados</b> to your texture.",45,ACT.stir(GUAC),{dur:"3 min"}),
+  st("The Green Team","Everybody in the bowl! Give it a gentle fold.","Fold in onion, jalape&#241;o, cilantro, <b>2 limes</b>, <b>2 tbsp olive oil</b>, salt.",80,ACT.stir(GUAC),{dur:"2 min"}),
+  st("Dip Alert!","Grab the chips! Fresh guac waits for nobody.","Taste, adjust salt &amp; lime, serve right away.",100,ACT.serve('bowl',GUAC),{dur:"\u00A1Listo!"})
+ ]},
+ {id:"quesabirria",name:"🌮 Quesabirria",meter:"🧀 Birria Meter",steps:[
+  st("Snazzy Seasoning","A sprinkle here, a sprinkle there. Fancy beef!","Season <b>3.5 lb chuck</b> with salt, pepper, cumin.",0,ACT.season(MEAT),{dur:"2 min"}),
+  st("Smoky Snooze","Off to the smoke it goes. Sweet dreams, beefy.","Smoke at <b>250&#176;F</b> ~3 hr, ~160&#176;F.",25,ACT.smokewait(MEAT),{dur:"~3 hr",timer:2700,timerLbl:"Smoke"}),
+  st("Chili Whirlpool","Toast, soak, BLEND! Red magic, coming up.","Toast &amp; soak chiles, blend with tomato, onion, garlic, spices.",40,ACT.blend(CHILI),{dur:"20 min"}),
+  st("Bath Time, Beef","A warm chili bath under the lid. So cozy.","Braise <b>300&#176;F</b> 3&#8211;4 hr with cinnamon, bay, cloves.",65,ACT.braise(CHILI),{dur:"~3\u20134 hr",timer:2700,timerLbl:"Braise"}),
+  st("Treasure Hunt","The orange fat on top? That's dipping GOLD. Save it!","Shred beef, skim the fat off the broth (that's your dip).",80,ACT.slice(MEAT),{dur:"10 min"}),
+  st("Cheese Crisp-a-roo","Cheese on the griddle... my favorite crunchy sound!","Dip tortilla in fat, griddle with cheese + beef, fold, crisp.",92,ACT.flip(CHEESE),{dur:"per taco",sizzle:true}),
+  st("Dunk It!","Dip the taco in the cup. Splash! Best bite ever.","Serve with cups of consomm&#233; for dipping.",100,ACT.serve('taco'),{dur:"Feast!"})
+ ]},
+ {id:"carnitas",name:"🌮 Carnitas",meter:"🐷 Carnitas Meter",steps:[
+  st("Piggy Gets Fancy","Rub it all over. Mr. Pork is getting dressed up.","Rub <b>4 lb pork shoulder</b> with salt, cumin, chili powder, oregano.",0,ACT.season(PORK),{dur:"2 min"}),
+  st("Slow Piggy Nap","Low and slow. The pork is dreaming of tacos.","Smoke <b>250&#176;F</b> ~4 hr to ~165&#176;F.",30,ACT.smokewait(PORK),{dur:"~4 hr",timer:2700,timerLbl:"Smoke"}),
+  st("Orange You Glad","Splash of orange, lid on. Ooh, smells sunny!","Braise covered with <b>orange, onion, bay</b> at 300&#176;F till 203&#176;F.",65,ACT.braise(PORK),{dur:"~2\u20133 hr",timer:2700,timerLbl:"Braise"}),
+  st("Crispy Bits!","Shred it, then crisp it. Crunchy edges are the best!","Shred, then broil a few min for crispy bits.",85,ACT.flip(PORK),{dur:"~5 min",sizzle:true}),
+  st("Piggy Party","Tacos ready! Oink oink, dig in!","Warm tortillas, onion, cilantro, lime.",100,ACT.serve('taco'),{dur:"Feast!"})
+ ]},
+ {id:"chicken",name:"🍗 Pulled Chicken",meter:"🍗 Chicken Meter",steps:[
+  st("Two-Flavor Chicken","One sweet, one spicy. Can't decide? Do BOTH!","Split <b>2 lb breast</b>: <b>Peach</b> on one, <b>Holy Voodoo</b> on the other.",0,ACT.season(CHK),{dur:"5 min"}),
+  st("Cluck & Smoke","Cherry smoke, work your magic. Bawk bawk!","Smoke <b>275&#176;F</b> with cherry until <b>165&#176;F</b>, ~1&#8211;1.5 hr.",45,ACT.smokewait(CHK),{dur:"~1\u20131.5 hr",timer:2700,timerLbl:"Smoke"}),
+  st("Fluffy Shreds","Two forks, pull it apart. So fluffy!","Rest 10 min, shred each pile warm.",75,ACT.slice(CHK),{dur:"10 min"}),
+  st("The Juicy Trick","A splash of broth keeps it juicy. Sneaky good.","Fold in <b>broth + juices</b>; sauce the Peach pile with BBQ.",88,ACT.stir(CHK),{dur:"5 min"}),
+  st("Sandwich or Bowl?","Big sandwich? Comfy bowl? You win either way!","Sandwiches with slaw, or over rice + broccoli for lunches.",100,ACT.serve('bowl',CHK),{dur:"Dig in!"})
+ ]},
+ {id:"mac",name:"🧀 Smoked Mac",meter:"🧀 Mac Meter",steps:[
+  st("Noodle Splash","Bubble bubble, noodle party in the pot!","Boil <b>1 lb elbows</b> to 2 min shy of al dente. Drain.",10,ACT.boil(CHEESE),{dur:"~8 min",timer:420,timerLbl:"Boil"}),
+  st("Cheese Waterfall","Stir stir stir... hello, cheesy river!","Butter + flour roux, whisk in <b>4 cups milk</b>, then melt in <b>cheddar, jack, cream cheese</b>.",40,ACT.stir(CHEESE),{dur:"~10 min"}),
+  st("Crunchy Hat","A buttery crumb hat for the mac. Very stylish.","Toss <b>1 cup panko</b> with melted butter; scatter on top.",55,ACT.season(CHEESE),{dur:"2 min"}),
+  st("Golden Tan Time","Into the smoke! It's getting a golden tan.","Smoke uncovered at <b>225&#176;F</b> ~1 hr till bubbly &amp; golden.",85,ACT.smokewait(CHEESE),{dur:"~1 hr",timer:3600,timerLbl:"Smoke"}),
+  st("Cheese Pull!","Scoop it up and watch that cheeeeese stretch!","Rest 10 min, then serve.",100,ACT.serve('bowl',CHEESE),{dur:"Serve!"})
+ ]},
+ {id:"shortribs",name:"🍷 Short Ribs",meter:"🍷 Braise Meter",steps:[
+  st("Fancy Seasoning","*puts on tiny chef hat* Salt and pepper, oui oui.","Season <b>6 English-cut ribs</b> with salt &amp; pepper. Rest.",0,ACT.season(MEAT),{dur:"1 hr / overnight"}),
+  st("The Big Brown","Ssss! A deep dark crust. Very fancy, very tasty.","Sear all sides deeply in the Dutch oven, in batches.",20,ACT.flip(MEAT),{dur:"~15 min",sizzle:true}),
+  st("Simmer the Sauce","Veggies in, wine in, bubble it down. Ooh la la!","Cook mirepoix + tomato paste, add <b>1 bottle red wine</b>, reduce by half.",40,ACT.stir(CHILI),{dur:"~20 min"}),
+  st("The Long Cozy","Lid on, low heat, big patience. Worth every minute.","Add stock two-thirds up + herbs. Braise <b>325&#176;F</b> ~3.5 hr till fork-tender.",70,ACT.braise(CHILI),{dur:"~3.5 hr",timer:2700,timerLbl:"Braise"}),
+  st("Cloud Potatoes","Whip 'em fluffy! Little potato clouds. Boop!","Boil <b>russets</b>, rice, fold in warm butter + milk. Keep loose.",82,ACT.boil(POTATO),{dur:"~25 min",timer:1080,timerLbl:"Boil"}),
+  st("Shiny Sauce","Simmer until it's glossy. Sparkle sparkle!","Strain, defat, simmer to a glossy nappe. Season.",92,ACT.stir(CHILI),{dur:"~15 min"}),
+  st("Bone Appetit!","Rib on the cloud, sauce on top. Fancy feast time!","Rib over pur&#233;e, sauce spooned over, gremolata on top.",100,ACT.serve('plate',MEAT),{dur:"Impress!"})
+ ]},
+ {id:"potatoes",name:"🥔 Baked Potatoes",meter:"🥔 Spud Meter",steps:[
+  st("Spud Spa Day","Oil rub and a salty coat. Treat yourself, potato.","Scrub &amp; dry <b>russets</b>, poke holes, rub with <b>oil</b> and lots of <b>salt</b>.",5,ACT.season(POTATO),{dur:"5 min"}),
+  st("Rise and Shine, Grill","Wakey wakey, grill! We've got spuds to bake.","Traeger to <b>400&#176;F</b>.",15,ACT.fireup(),{dur:"~10 min"}),
+  st("Crispy Skin Bake","No foil! Let that skin get crispy and happy.","Straight on the grate ~1 hr until a probe slides in easy (~205&#176;F).",80,ACT.smokewait(POTATO),{dur:"~1 hr",timer:3600,timerLbl:"Bake"}),
+  st("Load the Spud","Butter, cheese, all the things! Go wild.","Rest 5 min, cut a cross, fluff, and load your toppings.",100,ACT.serve('plate',POTATO),{dur:"Dig in!"})
+ ]},
+ {id:"rice",name:"🍚 Cilantro Lime Rice",meter:"🍚 Rice Meter",steps:[
+  st("Rinse-a-Roo","Rinse till it's clear. Splish, splash, sparkle!","Rinse <b>1 cup rice</b> under cold water until it runs mostly clear.",10,ACT.stir(RICE),{dur:"2 min"}),
+  st("No Peeking!","Lid on, no peeking! The rice is shy while it cooks.","Boil with <b>1.5 cups water or broth</b>, oil, salt. Cover on low 15 min, then rest 5.",60,ACT.boil(RICE),{dur:"~20 min",timer:900,timerLbl:"Simmer"}),
+  st("Fluff & Zip","Fluff it up, then zippy lime and cilantro. Yum!","Fluff with a fork, stir in <b>juice of 1 lime</b> and <b>&#8531; cup cilantro</b>. Salt to taste.",90,ACT.stir(RICE),{dur:"2 min"}),
+  st("Comfy Base","The perfect fluffy bed for your asada. Tuck it in!","Spoon it into bowls as the bed for your asada.",100,ACT.serve('bowl',RICE),{dur:"Serve!"})
+ ]},
+ {id:"beans",name:"🫘 Refried Beans",meter:"🫘 Bean Meter",steps:[
+  st("Bean There","Into the warm pot! Hi, beans. Missed you.","Melt butter, add <b>1 can refried beans</b>, <b>&#189; tsp cumin</b>, <b>&#188; tsp garlic powder</b>.",20,ACT.stir(BEANS),{dur:"3 min"}),
+  st("Smooth Move","A splash to loosen 'em up. Creamy, not cakey!","Stir in a splash of milk or water until creamy and loose.",55,ACT.stir(BEANS),{dur:"3 min"}),
+  st("Cheese, Please","Melt in the cheese. Stir stir... gooey!","Stir in <b>&#189; cup shredded cheese</b> until melted. Salt to taste.",85,ACT.stir(CHEESE),{dur:"2 min"}),
+  st("Cozy & Ready","Extra cheese on top, keep 'em toasty. Perfect.","Top with a little extra cheese and keep warm.",100,ACT.serve('bowl',BEANS),{dur:"Ready!"})
+ ]},
+ {id:"pico",name:"🍅 Pico de Gallo",meter:"🍅 Pico Meter",steps:[
+  st("Confetti Chop","Chop everything tiny. It's like veggie confetti!","Dice <b>4 romas</b> (seeded), <b>&#189; onion</b>, <b>1 jalape&#241;o</b>, <b>&#8531; cup cilantro</b>.",25,ACT.chop(TOMATO),{dur:"10 min"}),
+  st("Squeeze Party","Squeeze the limes! Sprinkle the salt! Wheee!","Toss with <b>juice of 1&#8211;2 limes</b> and salt to taste.",65,ACT.stir(TOMATO),{dur:"2 min"}),
+  st("The Waiting Game","Now we wait 20 minutes. *taps paw* ...worth it.","Let it sit at least 20 min so the flavors meld.",90,ACT.stir(TOMATO),{dur:"20 min rest"}),
+  st("Fresh & Zippy","Bright, crunchy, zippy. On EVERYTHING, please.","Taste, adjust lime and salt, and serve.",100,ACT.serve('bowl',TOMATO),{dur:"\u00A1Listo!"})
+ ]}
+ ,{id:"salad",name:"🥗 Chopped Salad",meter:"🥗 Salad Meter",steps:[
+  st("Chill Out, Chicken","Brrr! Fridge-cold chicken is sad chicken. A little counter time fixes it.","Pull about <b>3 cups</b> of rotisserie chicken (about 1 lb) and let it sit on the counter to lose the fridge chill.",0,ACT.season(CHK),{dur:"20 min",timer:1200,timerLbl:"Warm up"}),
+  st("Honey Mustard Magic","Whisk whisk whisk! Sweet, tangy, and totally dog approved.","In your widest bowl, whisk <b>2 tbsp apple cider vinegar</b>, <b>1 tbsp dijon</b>, <b>2 tsp honey</b>, <b>&#188; tsp salt</b> and <b>&#189; tsp pepper</b> until the salt dissolves. Then drizzle in <b>6 tbsp olive oil</b> while you keep whisking.",15,ACT.whisk(CHEESE),{dur:"3 min"}),
+  st("Chop Chop Chicken","No long stringy bits! Chickpea size, like tiny treats.","Run your knife through the chicken until the pieces are <b>chickpea size</b>. Toss it with a spoonful of the dressing in its own bowl and let it sit.",30,ACT.chop(CHK),{dur:"3 min"}),
+  st("The Chickpea Ruler","Everything the size of a chickpea. That's the rule. I made the rule.","<b>3 romaine hearts</b>: stack, slice lengthwise, then across. <b>4 or 5 celery stalks</b> thin on a bias. Most of <b>1 red onion</b>, thin, half-moons cut in half. <b>&#190; cup cashews</b> rough chopped. <b>&#8532; cup feta</b> crumbled. Rinse <b>1 can chickpeas</b> and dry them on a towel.",55,ACT.chop(GUAC),{dur:"~8 min"}),
+  st("Heavy Stuff First","Lift and fold, lift and fold. No stirring! Stirring is for soup.","Celery, chickpeas, chicken and onion into the dressing. <b>Lift and fold</b> from the bottom, don't stir.",72,ACT.stir(CHK),{dur:"1 min"}),
+  st("Greens Go In","Fifteen folds! I'm counting on my paws. I ran out of paws.","Add the romaine and fold <b>15 to 20 turns</b>, turning the bowl as you go. Start with half the dressing and add more only if it needs it.",88,ACT.stir(GUAC),{dur:"2 min"}),
+  st("Crunch Time!","Cashews on top so they stay crunchy. Dinner for two, crumbs for Kenny?","Feta and cashews go on <b>dead last</b> with one gentle fold. Eat right away.",100,ACT.serve('bowl',GUAC),{dur:"Dig in!"})
+ ]}
+ ,{id:"burgers",name:"🍔 Smoked Burgers",meter:"🍔 Burger Meter",steps:[
+  st("Gentle Paws, Patty","Easy does it! Squeeze too hard and you get hockey pucks.","Divide <b>1 lb 80/20 ground beef</b> into 4. Press each gently, <b>wider than your bun</b>, and thumb a shallow dimple in the middle. Salt and pepper the <b>outside only</b>. Straight from the fridge, <b>no freezer</b>, that's what left the last batch raw.",0,ACT.season(MEAT),{dur:"5 min"}),
+  st("Low and Smoky","Lowest setting, little grill. Just whisper at them.","Traeger to <b>180&#176;F</b>, as low as yours goes. Cherry pellets. Give it 15 min to settle.",15,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
+  st("A Quick Sniff","Fifteen minutes of smoke. Short and sweet, like my legs.","Patties on. <b>15 min at 180&#176;F</b>, lid closed, no flipping. Don't oil them, a dry surface grabs smoke. They'll look grey and that's normal.",40,ACT.smokewait(MEAT),{dur:"15 min",timer:900,timerLbl:"Smoke"}),
+  st("Crank It, Leave Them","Nobody move! The burgers stay right there. That's the whole trick.","<b>Dial to 500&#176;F and leave the patties on the grate.</b> Do not pull them off to a plate. The 15 to 20 min the grill takes to climb is what actually cooks them. Pulling them is what ruined the last batch.",65,ACT.fireup(),{dur:"15–20 min",timer:1080,timerLbl:"Heat climb"}),
+  st("The Big Sizzle","Ssss-SSSS! Cheese on, lid down. Almost dinner!","Once it's at 500, <b>flip once</b> and finish by eye: <b>2 to 3 min a side</b>, not 60 seconds. Cheese right after the flip, lid down to melt. Ground beef wants <b>160&#176;F</b>, and you can check it by sliding the probe in <b>from the side</b>, not down through the top. Don't press them.",88,ACT.flip(MEAT),{dur:"~5 min",timer:150,timerLbl:"Sear side",sizzle:true}),
+  st("Toast & Stack","Buns toasted, burgers stacked. I'm gonna sit right here and stare at you.","Buns cut side down on the grate for the <b>last 45 sec</b>. Rest the patties <b>2 min</b>, then build. Smoking renders out more fat than grilling, which is why 80/20 was not optional.",100,ACT.serve('plate',MEAT),{dur:"Chow time!"})
+ ]},
+ {id:"chili",name:"🌶️ Smoked Texas Chili",meter:"🌶️ Chili Meter",steps:[
+  st("Toast the Chile Squad","Toast, soak, BLEND. Don't burn 'em or we start over!","Stem &amp; seed <b>6 ancho, 4 guajillo, 3 &#225;rbol, 2 chipotle morita</b>. Toast 30 sec a side, soak 30 min in <b>3 cups hot beef stock</b>, blend smooth.",10,ACT.blend(CHILI),{dur:"~45 min",timer:1800,timerLbl:"Soak"}),
+  st("Dress the Chuck","Big cubes, big salt. Mr. Beef is getting ready.","Cube <b>4 lb chuck</b> (&#190; in). Toss with oil, heavy <b>kosher salt</b>, coarse <b>pepper</b>. Dice <b>1 lb bacon</b>; break up <b>1 lb ground meat</b>.",18,ACT.season(MEAT),{dur:"10 min"}),
+  st("The Smoke Bath","Two hours of smoke. Pecan or oak. I'll guard the door.","Smoker <b>250&#176;F</b>, pecan or oak. Chuck on a rack, ground meat &amp; bacon in foil pans. Smoke <b>2 hrs</b>. Save every drop of drippings.",35,ACT.smokewait(MEAT),{dur:"2 hr",timer:7200,timerLbl:"Smoke"}),
+  st("Sizzle Town","Render the bacon, sear the chuck. Don't crowd the pan!","Render bacon till crisp, scoop out. Sear chuck in batches in the bacon fat, hard, 2&#8211;3 min a side.",48,ACT.flip(MEAT),{dur:"~20 min",sizzle:true}),
+  st("Build the Pot","Onions, jalape&#241;os, garlic, spices bloom... then BEER. Scrape that pot!","Cook <b>2 onions + 6 jalape&#241;os</b> 8 min, <b>10 garlic</b> 1 min. Bloom <b>cumin, oregano, smoked paprika, coriander, pepper, cayenne</b> 60 sec. Tomato paste 2&#8211;3 min. <b>1 bottle beer</b>, reduce by half. Add puree, tomatoes, stock, bay, all the meat + drippings.",60,ACT.stir(CHILI),{dur:"~30 min"}),
+  st("Back Into the Smoke","Lid OFF, habaneros IN. Taste at 90 minutes... carefully.","Smoker <b>275&#176;F</b>. Add <b>3&#8211;5 slit habaneros</b>. Pot on, <b>uncovered</b>, 2&#8211;2.5 hrs, stir every 45 min. Taste heat at 90 min, fish the peppers out when it's right.",80,ACT.stir(CHILI),{dur:"2–2.5 hr",timer:5400,timerLbl:"Smoke"}),
+  st("The Big Finish","Fork-tender chuck, masa slurry, splash of vinegar. Taste, taste, taste!","Stove, low, lid cracked ~45 min till chuck is fork-tender. Whisk <b>&#188; cup masa</b> into &#190; cup warm water, stir in, 15 min. Bay out. <b>2 tbsp cider vinegar</b>. Salt first, then adjust.",94,ACT.stir(CHILI),{dur:"~1 hr",timer:2700,timerLbl:"Simmer"}),
+  st("Bowl of Red!","Cornbread, cheddar, onions. Better on day two, but who can wait?","Rest 20 min off heat. Serve with cornbread or Fritos, cheddar, onion, sour cream, lime.",100,ACT.serve('bowl',CHILI),{dur:"Feast!"})
+ ]},
+ {id:"cornbreadchili",name:"🍞 Chili Cornbread Skillet",meter:"🍞 Skillet Meter",steps:[
+  st("Chili in the Skillet","Homemade or quick, the skillet doesn't judge.","Use ~6 cups of your <b>Smoked Texas Chili</b>, or the quick version: brown <b>1.5 lb ground beef</b> + salt in a <b>12-in cast-iron skillet</b>, add <b>2 poblanos, 1 onion, 1 jalape&#241;o, 2 garlic</b>, then <b>2 tsp chili powder, 2 tsp cumin</b>, a <b>15 oz can chili beans</b>, <b>15 oz tomato sauce</b>, <b>14.5 oz diced tomatoes</b>, &#188; cup water. Simmer 10 min.",15,ACT.stir(CHILI),{dur:"~25 min"}),
+  st("Low &amp; Smoky Snooze","Just 180 degrees. The chili sips smoke like tea.","Traeger to <b>180&#176;F</b>. Skillet on the bottom grate, smoke <b>1 hr</b>, stir once halfway.",35,ACT.smokewait(CHILI),{dur:"1 hr",timer:3600,timerLbl:"Smoke"}),
+  st("Whisk the Corny Hat","Jiffy, buttermilk, egg, corn, cheese. Stir stir stir!","Whisk <b>1 box (8 oz) Jiffy corn muffin mix</b>, <b>&#189; cup buttermilk</b>, <b>1 egg</b>. Stir in <b>&#189; cup corn</b>, <b>&#188; cup sharp cheddar</b>, <b>&#188; cup sliced scallions</b>. Chill till the chili's done.",45,ACT.whisk(CHEESE),{dur:"5 min"}),
+  st("Crank It Up","Skillet out, dial UP. Hot hot hot!","Pull the skillet to a heatproof spot. Close the lid and raise the Traeger to <b>400&#176;F</b>.",55,ACT.fireup(),{dur:"~10 min"}),
+  st("Put the Hat On","Dollop, spread, leave a little edge. Like tucking it in.","Dollop the batter over the chili and spread it evenly, leaving about a <b>1-inch border</b> around the edge.",65,ACT.stir(CHEESE),{dur:"3 min"}),
+  st("Golden Top Bake","Toothpick test, then victory.","Back on the grill at 400&#176;F for <b>30&#8211;45 min</b>, until the cornbread is golden and a toothpick in the center comes out clean.",90,ACT.smokewait(CHEESE),{dur:"30–45 min",timer:1800,timerLbl:"Bake"}),
+  st("Scoop &amp; Serve","Chili on the bottom, cornbread on top, corgi very pleased.","Spoon into bowls, cornbread and all. Sprinkle with <b>cilantro</b>. Butter on the cornbread never hurt anybody.",100,ACT.serve('bowl',CHILI),{dur:"Feast!"})
+ ]},
+ {id:"filet",name:"🥩 Reverse Sear Filet",meter:"🥩 Filet Meter",steps:[
+  st("Salt the Fancy Steak","Salt on every side. Even the edges. I checked.","Salt <b>one 7&#8211;8 oz filet</b> (at least 1.5 in thick) all over, sides too. Uncovered on a plate in the fridge, about <b>2.5 hr</b>. Dry surface, fast crust.",5,ACT.season(MEAT),{dur:"~2.5 hr"}),
+  st("Wake Up, Grill!","Low and gentle tonight, grill. Indoor voice.","Traeger to <b>225&#176;F</b>. Steak out on the counter. Cut the top off <b>1 head garlic</b>, drizzle oil, wrap in foil. Set a stick of <b>butter</b> out to soften.",15,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
+  st("Smoky Snooze","Probe in, alarm set, paws up. The grill's got this.","Steak and garlic packet on at 225. Probe alarm at <b>112&#176;F</b>. About 50 min, but go by the probe.",40,ACT.smokewait(MEAT),{dur:"~50 min",timer:3000,timerLbl:"Smoke"}),
+  st("Off at 112, Crank It","Beep beep! Steak takes a little break. Grill goes BIG.","At <b>112&#176;F</b> pull the steak to a plate, garlic off. Dial to <b>500&#176;F</b>. A thick filet waits happily on the counter while it climbs.",55,ACT.fireup(),{dur:"12–15 min",timer:780,timerLbl:"Heat climb"}),
+  st("Butter & Beans","Smoky garlic squish! Half for butter, half for beans. Fair is fair.","Squeeze the smoked garlic out. Half into the butter with chopped <b>thyme</b> and a pinch of salt. Half into a pan with <b>1 can cannellini</b>, olive oil and a splash of can liquid. Warm, mash about half, add <b>lemon</b> and salt.",70,ACT.stir(ONION),{dur:"~10 min"}),
+  st("The Big Sear","Ssss! Both sides AND the edges. Restaurant style, baby.","At 500: <b>90 sec a side</b>, then stand it on its edges <b>30 sec each</b>. <b>Green beans</b>, oiled and salted, go on beside it for 4&#8211;5 min. Steak <b>off at 125&#176;F</b>.",88,ACT.flip(MEAT),{dur:"~5 min",timer:90,timerLbl:"Sear side",sizzle:true}),
+  st("Butter Blanket","Garlic butter on top. Now we wait 8 minutes. *stares*","Spoon of garlic butter on the steak right away. Rest <b>8 min</b>. It settles around 132&#176;F, medium rare.",95,ACT.season(MEAT),{dur:"8 min",timer:480,timerLbl:"Rest"}),
+  st("Fancy Plate Time","Beans, steak, beans on the side. Very fancy. Very me.","Beans down first, steak on top, green beans alongside. Any butter left goes over everything.",100,ACT.serve('plate',MEAT),{dur:"Impress!"})
+ ]},
+ {id:"harissa",name:"🌶️ Harissa Chicken",meter:"🍗 Harissa Meter",steps:[
+  st("Dry Brine Dance","Pat pat pat, salt salt salt. Crispy skin starts NOW.","Pat <b>4 bone-in, skin-on thighs</b> (about 2 lb) bone dry. Salt both sides. Skin up, <b>uncovered</b>, in the fridge at least 1 hr.",5,ACT.season(CHK),{dur:"1 hr+"}),
+  st("Yogurt Swirl","Cool, creamy, lemony. Do I get a lick? No? Okay.","Stir <b>Greek yogurt</b> with 1 grated garlic clove, juice of &#189; lemon, a pinch of salt and a splash of water. Chop a handful of <b>parsley</b>. Both back in the fridge.",20,ACT.whisk(POTATO),{dur:"5 min"}),
+  st("Chickpea Bed","Dry chickpeas get crispy. Wet ones get mushy. Towel time!","Oven to <b>425&#176;F</b>. Drain <b>2 cans chickpeas</b> and dry them on a towel. Toss on a sheet pan with <b>1 red onion</b> in thick wedges, a real glug of olive oil, <b>1 tsp each cumin, coriander, smoked paprika</b>, salt. One layer.",40,ACT.chop(ONION),{dur:"~10 min"}),
+  st("Spicy Jackets","Harissa under the skin. Sneaky flavor! I love sneaky.","Mix <b>2 tbsp harissa</b> with 1 tbsp olive oil. Rub over the thighs and <b>under the skin</b>. No more salt. Skin up, right on the chickpeas.",55,ACT.season(TOMATO),{dur:"3 min"}),
+  st("Walk Away","Fifty minutes. I'll guard the oven. Very serious job.","Middle rack, <b>50 min</b>, until the skin is deep brown and the thighs hit <b>180&#176;F</b>. Not 165, the extra heat makes them tender.",88,ACT.smokewait(CHK),{dur:"50 min",timer:3000,timerLbl:"Roast"}),
+  st("Crispy Finish","Lemon squeeze, big yogurt spoon. Dinner! Is there a corgi portion?","Skin went soft? <b>2&#8211;3 min under the broiler</b>. Squeeze the other lemon half over the pan. Chickpeas down, chicken on top, yogurt, parsley, <b>feta</b> if you have it.",100,ACT.serve('plate',CHK),{dur:"Dig in!"})
+ ]},
+ {id:"walkingtacos",name:"🌮 Walking Tacos",meter:"🌮 Taco Meter",steps:[
+  st("Beef Crumble","Break it up, brown it good. Little beefy pebbles!","Brown <b>1 lb 80/20 ground beef</b> in a skillet, breaking it up. Drain the fat.",25,ACT.stir(MEAT),{dur:"~8 min",sizzle:true}),
+  st("Taco Magic","Sprinkle, splash, simmer. The kitchen smells like Tuesday!","Stir in <b>1 packet taco seasoning</b> and about <b>&#8532; cup water</b>. Simmer <b>5 min</b> until it tightens up.",55,ACT.stir(MEAT),{dur:"5 min",timer:300,timerLbl:"Simmer"}),
+  st("Topping Station","Everybody picks their own. Onion stays OFF the meat!","Dice <b>1 small red onion</b> raw, topping only. Slice <b>2 jalape&#241;os</b> thin, seeds out for less heat. Set out <b>shredded Mexican cheese</b>, <b>salsa</b>, <b>sour cream</b>.",80,ACT.chop(ONION),{dur:"5 min"}),
+  st("Crunch & Stack!","Chips, meat, cheese, toppings. In that order. Corgi rules.","Crush <b>corn chips</b> (Fritos Scoops or Doritos) a little in each bowl. Hot meat, then cheese so it melts (a slice of <b>American</b> over the meat is great), then the cold stuff last.",100,ACT.serve('taco'),{dur:"Crunch time!"})
+ ]},
+ {id:"ribeye",name:"🥩 Ribeye Cookout",meter:"🥩 Steak-o-Meter",steps:[
+  st("Rub-a-Dub Steak","Gospel on the steak, Honey Hog on the corn. Everybody gets dressed!","Salt a thick <b>ribeye</b> and hit it with <b>Meat Church Gospel</b> (or Holy Cow). Brush husked <b>corn</b> with a little oil and dust with <b>Honey Hog</b>.",5,ACT.season(MEAT),{dur:"5 min"}),
+  st("Wake Up, Grill!","Low and smoky tonight. Shhh, the cherry wood is thinking.","Traeger to <b>225&#176;F</b>, cherry pellets. Give it a full 15 min. It runs cooler than the dial.",12,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
+  st("Smoke Nap","Steak and corn, side by side. Best nap buddies.","Steak and corn on at 225. Probe the steak. <b>Pull at 120&#176;F</b> for medium rare, <b>130&#176;F</b> for medium. About 45&#8211;60 min, but go by the probe.",40,ACT.smokewait(MEAT),{dur:"45–60 min",timer:3000,timerLbl:"Smoke"}),
+  st("Cloud Potatoes","Fluffy little clouds. Not too much butter this time. I'm watching.","While it smokes: boil peeled <b>russets</b> for two, rice them, fold in warm milk and <b>half the butter</b> you think. Keep it loose. Hold warm over a pot of simmering water.",60,ACT.boil(POTATO),{dur:"~25 min",timer:1080,timerLbl:"Boil"}),
+  st("Crank It Way Up","Steak takes a break. Grill goes BIG. Ears back!","Steak off to a plate at your pull temp. Corn stays on. Dial to <b>500&#176;F</b> and wait for it.",72,ACT.fireup(),{dur:"12–15 min",timer:780,timerLbl:"Heat climb"}),
+  st("The Big Sizzle","Ssss! Crust on the steak, char on the corn. Fancy!","At 500: steak <b>1&#8211;2 min a side</b>. Turn the corn for a little char at the same time. It'll climb about 10&#176;F while it rests.",88,ACT.flip(MEAT),{dur:"~4 min",timer:90,timerLbl:"Sear side",sizzle:true}),
+  st("Slice It Right","Rest, then slice across the lines. Hi-YA!","Rest <b>5&#8211;10 min</b>. Find the grain and slice <b>across</b> it to split the steak.",95,ACT.slice(MEAT),{dur:"rest + slice",timer:420,timerLbl:"Rest"}),
+  st("Cookout Feast!","Steak, corn, potato clouds. I'll take the corn cob. Kidding. Mostly.","Potatoes down, sliced steak on top, corn on the side.",100,ACT.serve('plate',MEAT),{dur:"Feast!"})
+ ]},
+ {id:"pulledpork",name:"🐷 Pulled Pork",meter:"🐷 Pork Meter",steps:[
+  st("Rub Down Day","Mustard glue, then the rub. Piggy is getting a spa day.","Night before or morning of: pat dry a <b>7&#8211;8 lb bone-in pork butt</b>. Thin coat of <b>yellow mustard</b>, then a heavy coat of <b>Meat Church Honey Hog</b>.",5,ACT.season(PORK),{dur:"10 min"}),
+  st("Fire It Up","Early start! Coffee for you, cherry pellets for the grill.","Traeger to <b>250&#176;F</b>, cherry pellets. Plan about <b>1.5 hr per pound</b> total, plus rest. Start early, your grill runs cool.",12,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
+  st("The Long Smoke","Fat side up, probe in, walk away. I'll guard it. All day.","Pork on, fat side up. Probe in the thickest part, away from the bone. Smoke until the bark is set and dark, around <b>165&#176;F</b>. Usually 5&#8211;6 hr.",40,ACT.smokewait(PORK),{dur:"5–6 hr",timer:3600,timerLbl:"Smoke check"}),
+  st("Beat the Stall","Stuck at 165? Totally normal. Wrap it up like a burrito!","When it stalls around 160&#8211;165&#176;F, wrap tight in <b>foil or butcher paper</b> with a splash of <b>apple juice</b>. Back on.",55,ACT.braise(PORK),{dur:"5 min"}),
+  st("Probe Like Butter","203 degrees! The probe should slide in like warm butter.","Cook to about <b>203&#176;F</b>, until the probe slides in with no fight. Another 2&#8211;3 hr.",78,ACT.smokewait(PORK),{dur:"2–3 hr",timer:3600,timerLbl:"Finish check"}),
+  st("Cozy Rest","Wrapped in towels, napping in a cooler. Don't peek!","Keep it wrapped. Into a dry cooler with towels for at least <b>1 hr</b>. It holds hot for up to 3.",88,ACT.braise(PORK),{dur:"1 hr+",timer:3600,timerLbl:"Rest"}),
+  st("Pull Party","The bone slides right out! Shred shred shred!","Unwrap, pull the bone, shred with forks or gloved hands. Toss in the juices from the wrap and a little more rub.",95,ACT.slice(PORK),{dur:"10 min"}),
+  st("Sandwich Time!","Bun, pork, slaw. Repeat all week. Best week ever.","Pile on buns with slaw and your favorite sauce. Leftovers go into tacos, bowls and mac.",100,ACT.serve('plate',PORK),{dur:"Feast!"})
+ ]},
+ {id:"meatloaf",name:"🍞 Smoked Meatloaf",meter:"🍞 Loaf Meter",steps:[
+  st("Soggy Crumbs (On Purpose)","Breadcrumbs take a milk bath. It keeps the loaf juicy!","Stir <b>&#190; cup panko</b> into <b>&#189; cup milk</b>. Let it sit 5 min.",8,ACT.stir(RICE),{dur:"5 min"}),
+  st("Squish It Together","Gentle paws! Mix just until it holds. No squeezing!","Add <b>2 lb 80/20 ground beef</b>, <b>2 eggs</b>, <b>1 small onion</b> grated, <b>2 garlic</b>, <b>1 tbsp Worcestershire</b>, <b>1.5 tsp kosher salt</b>, <b>&#189; tsp pepper</b>. Mix just until combined.",22,ACT.stir(MEAT),{dur:"5 min"}),
+  st("Shape the Loaf","A free-form loaf. More outside means more smoky bark!","Shape a loaf about 4 in wide on a rack or foil pan with holes poked in it. Dust the outside with <b>Meat Church Gospel</b>.",32,ACT.season(MEAT),{dur:"3 min"}),
+  st("Smoke Bath","An hour of smoke. Low and slow, then we turn it up.","Traeger to <b>225&#176;F</b>, cherry pellets. Loaf on, probe in the center. Smoke <b>1 hr</b>.",55,ACT.smokewait(MEAT),{dur:"1 hr",timer:3600,timerLbl:"Smoke"}),
+  st("Turn It Up","Up to 350! The loaf is getting serious now.","Raise the grill to <b>350&#176;F</b>. Cook until the center hits about <b>150&#176;F</b>, usually 30&#8211;45 min.",75,ACT.fireup(),{dur:"30–45 min",timer:2400,timerLbl:"Cook"}),
+  st("Sticky Glaze","Shiny sweet glaze. Brush brush brush!","Stir <b>&#189; cup BBQ sauce</b> with <b>2 tbsp honey</b>. Brush it on and cook until the center hits <b>160&#176;F</b>, about 15&#8211;20 min.",90,ACT.stir(TOMATO),{dur:"15–20 min",timer:1080,timerLbl:"Glaze"}),
+  st("Slice & Serve","Rest ten, then thick slices. Cold sandwiches tomorrow? Yes please.","Rest <b>10 min</b> so it slices clean. Thick slices with the cloud potatoes or green beans.",100,ACT.serve('plate',MEAT),{dur:"Dig in!"})
+ ]},
+ {id:"turkey",name:"🦃 Spatchcock Turkey",meter:"🦃 Turkey Meter",steps:[
+  st("Flat Bird Magic","Snip out the backbone and squish it flat. Flat birds cook even!","Cut out the backbone of a <b>12&#8211;14 lb turkey</b> with poultry shears. Flip it and press hard on the breastbone until it lies flat. Save the backbone for gravy.",5,ACT.chop(CHK),{dur:"15 min"}),
+  st("Dry Brine Nap","Salt, then fridge, uncovered. Dry skin is crispy skin!","Salt all over, about <b>1 tsp kosher salt per lb</b>, some under the skin. Uncovered on a rack in the fridge <b>24&#8211;48 hr</b>.",15,ACT.season(CHK),{dur:"1–2 days"}),
+  st("Butter Under the Skin","Sneaky butter pockets. My favorite kind of sneaky!","Mash <b>1 stick softened butter</b> with <b>Meat Church Honey Hog</b> or chopped herbs. Rub it under the breast and thigh skin. No more salt.",25,ACT.season(CHEESE),{dur:"10 min"}),
+  st("Hot & Smoky","Hotter than usual today. Crispy skin needs heat!","Traeger to <b>325&#176;F</b>, cherry pellets. Plan extra time, your grill runs cool.",32,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
+  st("Gobble Gobble Cook","Two probes, one in the breast. I'm on bird watch.","Bird on, skin up, legs toward the hot side. Probe the thickest part of the breast. Pull when the <b>breast hits 160&#176;F</b> and thighs read <b>175&#176;F+</b>. About <b>2&#8211;2.5 hr</b>.",75,ACT.smokewait(CHK),{dur:"2–2.5 hr",timer:3600,timerLbl:"Check temps"}),
+  st("The Big Rest","Thirty minutes, loosely tented. It keeps cooking while it naps!","Rest <b>30 min</b>, loosely tented with foil. The breast climbs to 165.",88,ACT.braise(CHK),{dur:"30 min",timer:1800,timerLbl:"Rest"}),
+  st("Carve the Bird","Breasts off whole, then slice across. Legs and thighs too!","Take each breast off whole, then slice across into thick pieces. Separate legs and thighs.",95,ACT.slice(CHK),{dur:"15 min"}),
+  st("Thanksgiving!","Big platter, big family, big corgi appetite. Gobble gobble!","Platter it up. Pour any resting juices over the top.",100,ACT.serve('plate',CHK),{dur:"Feast!"})
+ ]},
+ {id:"breakfasttacos",name:"🍳 Breakfast Tacos",meter:"🍳 Breakfast Meter",steps:[
+  st("Bean Warm-Up","Good morning, beans! Wakey wakey, little guys.","Drain and rinse <b>1 can black beans</b>. Warm them in a small pot over low with a splash of water and a pinch of salt.",15,ACT.stir(BEANS),{dur:"5 min"}),
+  st("Tiny Spicy Dice","Little green jalape&#241;o cubes. Those are for the grown-ups!","Dice <b>1&#8211;2 jalape&#241;os</b>, seeds out for less heat. Crumble the <b>feta</b>. Set out the <b>hot sauce</b>.",30,ACT.chop(GUAC),{dur:"3 min"}),
+  st("Soft & Fluffy Eggs","Low heat, slow stir. Fluffy clouds of egg!","Whisk <b>6 eggs</b> with a pinch of salt. Butter in a nonstick pan on <b>medium-low</b>. Stir slowly and pull them while they still look a little wet. They finish on the plate.",65,ACT.whisk(CHEESE),{dur:"~4 min"}),
+  st("Warm the Shells","Quick flip in a hot pan. Soft and toasty!","Warm the <b>small soft taco shells</b> in a dry skillet, about 20 sec a side, or wrapped in a damp towel in the microwave for 30 sec.",82,ACT.flip(POTATO),{dur:"2 min"}),
+  st("Build-a-Taco","Beans, eggs, feta, then the spicy stuff. Taco morning!","Beans first, then eggs, then <b>feta</b>. Jalape&#241;os and hot sauce on top for whoever wants the kick.",100,ACT.serve('taco'),{dur:"Good morning!"})
+ ]},
+ {id:"crazybread",name:"💛 Grandma's Crazy Bread",meter:"💛 Crazy Bread Meter",steps:[
+  st("Grandma's Secret Box","The box that started it all. This one's a family treasure!","Stir the <b>Pillsbury Hot Roll Mix</b> and its yeast packet together. Add <b>1 cup hot water</b> (120&#8211;130&#176;F, hot tap water), <b>2 tbsp soft butter</b> and <b>1 egg</b>. Stir until it pulls into a dough. Check the box for any changes.",8,ACT.stir(POTATO),{dur:"5 min"}),
+  st("Rise in the Bowl","Cover it up and let it puff. Shhh, the dough is growing!","Cover the bowl with a towel and set it somewhere warm. Let it rise right in the bowl until about <b>doubled</b>, 30&#8211;40 min.",35,ACT.stir(POTATO),{dur:"30–40 min",timer:2100,timerLbl:"Rise"}),
+  st("Oil at 350","Not too cool, not too hot. Just right, like Goldilocks!","Heat about <b>1 inch of avocado oil</b> (or canola) in a heavy pot to <b>350&#176;F</b>. Use a thermometer. Hot oil seals the outside fast, so the bread soaks up <b>less oil</b>. Set a rack over paper towels next to the stove.",50,ACT.boil(CHEESE),{dur:"~10 min"}),
+  st("Float & Puff","Watch it puff up and FLOAT! That's the magic part!","Pull pieces of dough right out of the bowl and drop them in the oil, a few at a time. Don't crowd them. Leave them until they puff up big and float, and the bottom is golden. Then <b>flip</b> and brown the other side a few minutes.",68,ACT.flip(CHEESE),{dur:"~4 min a batch",sizzle:true}),
+  st("Parm Snow","Out of the oil, straight into a cheesy snowstorm!","Lift them onto the rack and <b>right away</b> cover with grated <b>parmesan</b> so it sticks. Let the oil come back to 350 before the next batch.",85,ACT.season(CHEESE),{dur:"each batch"}),
+  st("Dip Time","Warm pizza sauce for dunking. Just like Grandma made it!","Microwave a jar of <b>pizza sauce</b> until warm, about a minute, stirring halfway.",94,ACT.stir(TOMATO),{dur:"1 min"}),
+  st("Pass It On!","Crispy outside, soft inside, made with love. For Ivy, someday!","Serve warm with the sauce for dipping. Best eaten right away, standing around the kitchen.",100,ACT.serve('bowl',CHEESE),{dur:"Family time!"})
+ ]},
+ {id:"potroast",name:"🍲 Sunday Pot Roast",meter:"🍲 Roast Meter",steps:[
+  st("Salt the Night Before","Salt tonight, tender tomorrow. Patience, says the corgi.","Saturday night (or at least 1 hr before): salt a <b>3&#8211;3.5 lb chuck roast</b> all over, about 2 tsp kosher salt. Uncovered in the fridge.",5,ACT.season(MEAT),{dur:"Overnight"}),
+  st("The Big Brown","Ssss! A deep dark crust. That's where the flavor lives!","Oven to <b>300&#176;F</b>. Pat the roast dry, pepper it. Sear hard in the Dutch oven with a little oil, <b>4&#8211;5 min a side</b>, until deep brown. Pull it out.",18,ACT.flip(MEAT),{dur:"~15 min",sizzle:true}),
+  st("Onions & Broth","Onions in, scrape up the brown bits. Those bits are treasure!","Lower the heat. Cook <b>1 big onion</b>, sliced, 5 min. Add <b>4 garlic</b> 1 min. Pour in <b>2 cups beef broth</b> and <b>1 tbsp Worcestershire</b>, scraping the bottom. Add <b>thyme, rosemary, 2 bay leaves</b>.",30,ACT.stir(BEANS),{dur:"~10 min"}),
+  st("The Long Sunday Nap","Lid on, into the oven. Now we all nap. Even me.","Roast back in, lid on, into the oven. <b>2.5 hr</b> at 300&#176;F.",55,ACT.braise(MEAT),{dur:"2.5 hr",timer:9000,timerLbl:"Braise"}),
+  st("Veggie Party","Potatoes and carrots jump in the pool! Cannonball!","Add <b>1.5 lb Yukon golds</b>, halved, and <b>4 carrots</b> in big chunks around the roast. Lid on, back in <b>1&#8211;1.5 hr</b> until the meat falls apart with a fork and the potatoes are tender.",80,ACT.braise(POTATO),{dur:"1–1.5 hr",timer:4500,timerLbl:"Braise"}),
+  st("Gravy Magic","Thicken the juices. Shiny gravy for everybody!","Move meat and veggies to a platter and tent with foil. Skim the fat. Bring the liquid to a simmer, whisk in <b>1 tbsp cornstarch</b> stirred into 2 tbsp cold water. Simmer 2 min. Taste for salt.",92,ACT.stir(BEANS),{dur:"~5 min"}),
+  st("Sunday Supper!","The whole family at the table. Best day of the week!","Pull the roast into big chunks. Veggies around it, gravy over everything. Leftovers make Monday sandwiches.",100,ACT.serve('plate',MEAT),{dur:"Family time!"})
+ ]}
+];
+
+/* ===== Chef Kenny scene library: outlined cartoon food + cookware ===== */
+var OL="#3E2E26";
+function O(w){return " stroke='"+OL+"' stroke-width='"+(w||1.6)+"' stroke-linejoin='round' stroke-linecap='round'";}
+function E_(cx,cy,rx,ry,f,extra){return "<ellipse cx='"+cx+"' cy='"+cy+"' rx='"+rx+"' ry='"+ry+"' fill='"+f+"'"+(extra===false?"":O())+"/>";}
+function R_(x,y,w,h,r,f,extra){return "<rect x='"+x+"' y='"+y+"' width='"+w+"' height='"+h+"' rx='"+r+"' fill='"+f+"'"+(extra===false?"":O())+"/>";}
+function C_(cx,cy,r,f,extra){return "<circle cx='"+cx+"' cy='"+cy+"' r='"+r+"' fill='"+f+"'"+(extra===false?"":O(1.2))+"/>";}
+function P_(d,f,w){return "<path d='"+d+"' fill='"+(f||"none")+"'"+O(w)+"/>";}
+function T_(x,y,s,txt,f){return "<text x='"+x+"' y='"+y+"' text-anchor='middle' font-family='Fredoka,sans-serif' font-weight='700' font-size='"+s+"' fill='"+(f||"#fff")+"'>"+txt+"</text>";}
+function G(cls,inner,style){return "<g class='"+cls+"'"+(style?" style='"+style+"'":"")+">"+inner+"</g>";}
+var rnd=(function(){var s=7;return function(){s=(s*9301+49297)%233280;return s/233280;};})();
+
+/* ---------- FOODS: f(x, y) with y = bottom/baseline ---------- */
+var F={
+ skirt:function(x,y,m){return P_("M"+(x-30)+" "+(y-4)+" Q"+(x-10)+" "+(y-12)+" "+(x+30)+" "+(y-7)+" L"+(x+28)+" "+(y-1)+" Q"+(x-8)+" "+(y-4)+" "+(x-30)+" "+(y)+" Z","#8A3B2C")+(m?F._marks(x,y-5,4):"")+P_("M"+(x-20)+" "+(y-6)+" q14 -4 36 -2","none",0.8);},
+ _marks:function(x,y,n){var s="";for(var i=0;i<n;i++){var xx=x-15+i*10;s+="<line class='mark' x1='"+(xx-3)+"' y1='"+(y-3)+"' x2='"+(xx+3)+"' y2='"+(y+3)+"' stroke='#3a1a12' stroke-width='2.2' stroke-linecap='round' style='animation-delay:"+(i*.25)+"s'/>";}return s;},
+ ribeye:function(x,y,m){return P_("M"+(x-24)+" "+(y-2)+" Q"+(x-26)+" "+(y-15)+" "+(x-8)+" "+(y-16)+" Q"+(x+22)+" "+(y-18)+" "+(x+25)+" "+(y-6)+" Q"+(x+24)+" "+y+" "+x+" "+y+" Z","#8E3A2B")+P_("M"+(x-14)+" "+(y-9)+" q6 -5 12 0 q-6 4 -12 0","#F2E4C8",1)+(m?F._marks(x+4,y-8,3):"");},
+ filet:function(x,y,m){return R_(x-14,y-18,28,18,9,"#8E3A2B")+E_(x,y-17,14,5,"#A2453A")+(m?"<line x1='"+(x-8)+"' y1='"+(y-19)+"' x2='"+(x+6)+"' y2='"+(y-15)+"' stroke='#3a1a12' stroke-width='2'/>":"");},
+ chuck:function(x,y){return P_("M"+(x-26)+" "+y+" L"+(x-24)+" "+(y-18)+" Q"+(x)+" "+(y-24)+" "+(x+24)+" "+(y-17)+" L"+(x+26)+" "+y+" Z","#8A3B2C")+P_("M"+(x-14)+" "+(y-10)+" q8 4 18 -2 M"+(x+4)+" "+(y-16)+" q3 5 10 4","none",1);},
+ roast:function(x,y){return F.chuck(x,y)+P_("M"+(x-24)+" "+(y-14)+" q24 -6 48 0","none",1);},
+ cubes:function(x,y){var s="";[[-18,0],[-6,0],[6,0],[18,0],[-12,-9],[0,-9],[12,-9]].forEach(function(p){s+=R_(x+p[0]-5,y+p[1]-9,10,9,2,"#8A3B2C");});return s;},
+ porkbutt:function(x,y){return P_("M"+(x-28)+" "+y+" Q"+(x-30)+" "+(y-22)+" "+(x-6)+" "+(y-25)+" Q"+(x+26)+" "+(y-26)+" "+(x+28)+" "+y+" Z","#B5643F")+P_("M"+(x-18)+" "+(y-16)+" q6 -6 14 -3 M"+(x+4)+" "+(y-20)+" q8 0 12 6","none",1)+C_(x+22,y-8,3,"#F2E4C8");},
+ breasts:function(x,y){return P_("M"+(x-30)+" "+y+" Q"+(x-30)+" "+(y-12)+" "+(x-16)+" "+(y-13)+" Q"+(x-2)+" "+(y-12)+" "+(x-4)+" "+y+" Z","#E9B98F")+P_("M"+(x+2)+" "+y+" Q"+(x+2)+" "+(y-12)+" "+(x+16)+" "+(y-13)+" Q"+(x+30)+" "+(y-12)+" "+(x+28)+" "+y+" Z","#C9483A");},
+ thighs:function(x,y,red){var c=red?"#B8452E":"#D59A5C";return P_("M"+(x-30)+" "+y+" q2 -12 14 -12 q12 0 12 12 Z",c)+P_("M"+(x-2)+" "+y+" q2 -12 14 -12 q12 0 12 12 Z",c)+P_("M"+(x+26)+" "+y+" q1 -9 8 -9","none",1);},
+ patties:function(x,y,ch){var s="";[-24,-8,8,24].forEach(function(d){s+=E_(x+d,y-4,7.5,4.5,"#7A3A2C")+(ch?P_("M"+(x+d-7)+" "+(y-7)+" l14 0 l-3 5 l-8 0 Z","#F2C14E",1):"");});return s;},
+ shortribs:function(x,y){var s="";[-16,4].forEach(function(d){s+=R_(x+d-9,y-16,18,16,4,"#7A2E22")+R_(x+d-9,y-4,18,4,2,"#F2E4C8");});return s;},
+ turkey:function(x,y,c){return P_("M"+(x-34)+" "+y+" Q"+(x-36)+" "+(y-16)+" "+(x-18)+" "+(y-20)+" Q"+(x)+" "+(y-26)+" "+(x+18)+" "+(y-20)+" Q"+(x+36)+" "+(y-16)+" "+(x+34)+" "+y+" Z",c||"#D9A066")+E_(x-30,y-6,6,5,c||"#D9A066")+E_(x+30,y-6,6,5,c||"#D9A066")+P_("M"+x+" "+(y-24)+" L"+x+" "+(y-4),"none",1);},
+ meatloaf:function(x,y,glaze){return R_(x-26,y-15,52,15,7,"#7A3A2C")+(glaze?P_("M"+(x-24)+" "+(y-12)+" Q"+x+" "+(y-19)+" "+(x+24)+" "+(y-12),"none",3).replace(OL,"#A32A1A"):"");},
+ bacon:function(x,y){return P_("M"+(x-12)+" "+y+" q4 -5 0 -10 q-4 -5 0 -10 l6 0 q4 5 0 10 q-4 5 0 10 Z","#C9584A",1.2)+P_("M"+(x+2)+" "+y+" q4 -5 0 -10 q-4 -5 0 -10 l6 0 q4 5 0 10 q-4 5 0 10 Z","#C9584A",1.2);},
+ ground:function(x,y,c){var s="";for(var i=0;i<14;i++){s+=C_(x-22+((i*7)%44),y-3-((i*5)%9),3.2,c||"#7A4030",false);}return P_("M"+(x-26)+" "+y+" Q"+x+" "+(y-16)+" "+(x+26)+" "+y+" Z",c||"#7A4030")+s;},
+ shredded:function(x,y,c){var s=P_("M"+(x-28)+" "+y+" Q"+x+" "+(y-18)+" "+(x+28)+" "+y+" Z",c);for(var i=0;i<6;i++){s+=P_("M"+(x-20+i*7)+" "+(y-2)+" q3 -7 -1 -12","none",1);}return s;},
+ slices:function(x,y,c){var s="";for(var i=0;i<6;i++){s+="<g class='slidein' style='--r:"+(i*4-8)+"deg;animation-delay:"+(i*.2)+"s'>"+R_(x-26+i*9,y-10,8,10,2,c||"#9A4A38")+R_(x-26+i*9,y-10,8,3,1,"#C56E5A",false)+"</g>";}return s;},
+ dough:function(x,y,n){var s="";for(var i=0;i<(n||3);i++){s+=E_(x-16+i*16,y-6,8,6,"#F2D7A0");}return s;},
+ friedbread:function(x,y){var s="";for(var i=0;i<4;i++){var xx=x-21+i*14;s+=E_(xx,y-7,8,7,"#D99A3A")+"<circle cx='"+(xx-2)+"' cy='"+(y-10)+"' r='1.2' fill='#FFF6DC'/><circle cx='"+(xx+3)+"' cy='"+(y-8)+"' r='1' fill='#FFF6DC'/><circle cx='"+(xx)+"' cy='"+(y-5)+"' r='1.1' fill='#FFF6DC'/>";}return s;},
+ quesataco:function(x,y){return P_("M"+(x-24)+" "+y+" Q"+x+" "+(y-24)+" "+(x+24)+" "+y+" Z","#C9452E")+P_("M"+(x-14)+" "+(y-2)+" q14 -6 28 0","#F2C14E",1);},
+ chilipan:function(x,y){return R_(x+18,y-9,16,4,2,"#2A2A2A")+P_("M"+(x-20)+" "+(y-8)+" Q"+(x-19)+" "+y+" "+x+" "+y+" Q"+(x+19)+" "+y+" "+(x+20)+" "+(y-8)+" Z","#2E2E2E")+E_(x,y-8,20,4,"#7C2E24");},
+ cornpan:function(x,y){return R_(x+18,y-9,16,4,2,"#2A2A2A")+P_("M"+(x-20)+" "+(y-8)+" Q"+(x-19)+" "+y+" "+x+" "+y+" Q"+(x+19)+" "+y+" "+(x+20)+" "+(y-8)+" Z","#2E2E2E")+E_(x,y-9,20,5,"#E3A63A")+C_(x-6,y-10,1.4,"#3F8A2E",false)+C_(x+5,y-9,1.4,"#3F8A2E",false);},
+ macdish:function(x,y){return R_(x-26,y-12,52,12,4,"#F7F2E7")+E_(x,y-11,24,3,"#E3A63A");},
+ restplate:function(x,y){return E_(x,y-3,18,4,"#FFFFFF")+F.filet(x,y-3).replace(/x-14|x\+14/g,function(m){return m;});},
+ /* produce */
+ onion:function(x,y){return E_(x,y-8,10,8,"#F6EFE6")+P_("M"+(x-6)+" "+(y-8)+" q6 -6 12 0 M"+(x-3)+" "+(y-8)+" q3 -3 6 0","none",1);},
+ redonion:function(x,y){return E_(x,y-8,10,8,"#9C3E6E")+P_("M"+(x-6)+" "+(y-8)+" q6 -6 12 0","none",1).replace(OL,"#F3D9E6");},
+ dice:function(x,y,c){var s="",cs=[].concat(c||"#F6EFE6");for(var i=0;i<16;i++){s+=R_(x-24+((i*13)%48),y-4-((i*7)%10),4.5,4.5,1,cs[i%cs.length],false);}return s;},
+ jalapeno:function(x,y){return P_("M"+(x-12)+" "+(y-3)+" Q"+(x)+" "+(y-12)+" "+(x+12)+" "+(y-5)+" Q"+(x+2)+" "+(y+1)+" "+(x-12)+" "+(y-3)+" Z","#3F8A2E")+P_("M"+(x-12)+" "+(y-3)+" l-4 -3","none",2);},
+ habanero:function(x,y){return E_(x-6,y-6,6,6,"#F07A1A")+E_(x+7,y-6,6,6,"#F07A1A")+P_("M"+(x-6)+" "+(y-12)+" l0 -3 M"+(x+7)+" "+(y-12)+" l0 -3","none",1.6);},
+ cilantro:function(x,y){var s=P_("M"+x+" "+y+" l-4 -12 M"+x+" "+y+" l0 -14 M"+x+" "+y+" l4 -12","none",1.4).replace(OL,"#3F7A28");[[-5,-14],[0,-17],[5,-14],[-2,-11],[3,-10]].forEach(function(p){s+=C_(x+p[0],y+p[1],3.4,"#59A23A",false);});return s;},
+ limes:function(x,y){return P_("M"+(x-13)+" "+y+" a8 8 0 0 1 16 0 Z","#7DBF3A")+P_("M"+(x-10)+" "+y+" a5 5 0 0 1 10 0","#E7F5B8",1)+C_(x+8,y-7,7,"#5FA22E");},
+ wedges:function(x,y){var s="";[-9,0,9].forEach(function(d){s+=P_("M"+(x+d-5)+" "+y+" Q"+(x+d)+" "+(y-10)+" "+(x+d+5)+" "+y+" Z","#7DBF3A");});return s;},
+ orange:function(x,y){return P_("M"+(x-9)+" "+y+" a9 9 0 0 1 18 0 Z","#F39A2B")+P_("M"+(x-6)+" "+y+" a6 6 0 0 1 12 0","#FFD38A",1);},
+ lemon:function(x,y){return E_(x,y-7,10,7,"#F7D84A")+C_(x+10,y-7,1.6,"#F7D84A");},
+ garlic:function(x,y){return P_("M"+(x-9)+" "+y+" Q"+(x-11)+" "+(y-10)+" "+x+" "+(y-16)+" Q"+(x+11)+" "+(y-10)+" "+(x+9)+" "+y+" Z","#FBF3E4")+P_("M"+x+" "+(y-15)+" L"+x+" "+(y-2)+" M"+(x-5)+" "+(y-12)+" Q"+(x-6)+" "+(y-5)+" "+(x-4)+" "+(y-1),"none",1);},
+ tomato:function(x,y){return E_(x-6,y-7,7,7,"#D9432F")+E_(x+7,y-7,7,7,"#C0392B")+P_("M"+(x-6)+" "+(y-14)+" l-2 -2 M"+(x+7)+" "+(y-14)+" l2 -2","none",1.4).replace(OL,"#3F7A28");},
+ avocado:function(x,y){return P_("M"+(x-8)+" "+y+" Q"+(x-12)+" "+(y-14)+" "+x+" "+(y-18)+" Q"+(x+12)+" "+(y-14)+" "+(x+8)+" "+y+" Z","#B9D65B")+C_(x,y-7,4,"#8A5A2E");},
+ russets:function(x,y){return E_(x-8,y-7,10,7,"#B98A5A")+E_(x+9,y-6,9,6,"#A87A4C")+C_(x-10,y-9,.9,"#6B4A2E",false)+C_(x+10,y-7,.9,"#6B4A2E",false);},
+ yukons:function(x,y){return E_(x-8,y-6,8,6,"#E7C66A")+E_(x+8,y-6,8,6,"#F3DA8A");},
+ carrots:function(x,y){return P_("M"+(x-14)+" "+(y-2)+" L"+(x+12)+" "+(y-6)+" L"+(x+12)+" "+(y)+" Z","#F07A1A")+P_("M"+(x+12)+" "+(y-4)+" l5 -4 M"+(x+12)+" "+(y-3)+" l6 0","none",1.4).replace(OL,"#3F7A28");},
+ corn:function(x,y){var s="";[-7,7].forEach(function(d){s+=E_(x+d,y-5,12,5,"#F2C83C")+P_("M"+(x+d-8)+" "+(y-5)+" l16 0","none",.8);});return s;},
+ celery:function(x,y){return R_(x-14,y-5,28,5,2.5,"#9CCB5A")+R_(x-12,y-10,26,5,2.5,"#86B84A")+C_(x+15,y-9,3,"#59A23A",false);},
+ romaine:function(x,y){return P_("M"+(x-14)+" "+y+" Q"+(x-16)+" "+(y-14)+" "+x+" "+(y-22)+" Q"+(x+16)+" "+(y-14)+" "+(x+14)+" "+y+" Z","#7FBF4A")+P_("M"+x+" "+(y-20)+" L"+x+" "+y,"none",1).replace(OL,"#E7F5B8");},
+ greenbeans:function(x,y){var s="";for(var i=0;i<5;i++){s+=P_("M"+(x-18)+" "+(y-2-i*2.5)+" q18 -3 36 0","none",2.4).replace(OL,"#4E9A3A");}return s;},
+ chickpeas:function(x,y){var s="";for(var i=0;i<12;i++){s+=C_(x-14+((i*9)%28),y-3-((i*5)%8),3,"#E3C27A");}return s;},
+ mirepoix:function(x,y){return F.dice(x,y,["#F07A1A","#9CCB5A","#F6EFE6"]);},
+ chiles:function(x,y){var s="";[-10,0,10].forEach(function(d,i){s+=P_("M"+(x+d-4)+" "+(y-1)+" Q"+(x+d)+" "+(y-18)+" "+(x+d+4)+" "+(y-1)+" Z",i%2?"#7A1F18":"#9A2A1C",1.2);});return s;},
+ thyme:function(x,y){var s=P_("M"+(x-12)+" "+(y-2)+" Q"+x+" "+(y-8)+" "+(x+12)+" "+(y-4),"none",1.2).replace(OL,"#4E7A2E");for(var i=0;i<6;i++){s+=E_(x-10+i*4,y-6-(i%2)*2,1.8,1.2,"#6FA04A",false);}return s;},
+ /* pantry */
+ tortillas:function(x,y){var s="";for(var i=0;i<4;i++){s+=E_(x,y-2-i*2.6,15,4,"#F2DFA8");}return s+C_(x-5,y-11,1,"#C9A060",false)+C_(x+5,y-12,1,"#C9A060",false);},
+ shells:function(x,y){return P_("M"+(x-14)+" "+y+" Q"+(x-4)+" "+(y-18)+" "+(x+6)+" "+y+" Z","#F2D27A")+P_("M"+(x-4)+" "+y+" Q"+(x+6)+" "+(y-18)+" "+(x+16)+" "+y+" Z","#F7DE8E");},
+ chipsbag:function(x,y){return P_("M"+(x-11)+" "+y+" L"+(x-12)+" "+(y-26)+" L"+(x+12)+" "+(y-26)+" L"+(x+11)+" "+y+" Z","#E8623C")+T_(x,y-11,6,"CHIPS")+P_("M"+(x-12)+" "+(y-26)+" l24 0","none",2);},
+ cheese:function(x,y){var s=P_("M"+(x-14)+" "+y+" Q"+x+" "+(y-12)+" "+(x+14)+" "+y+" Z","#F2C14E");for(var i=0;i<5;i++)s+=P_("M"+(x-8+i*4)+" "+(y-3)+" l2 -4","none",.8);return s;},
+ feta:function(x,y){return R_(x-10,y-10,20,10,2,"#FBF7EE")+C_(x+12,y-2,2,"#FBF7EE")+C_(x+15,y-4,1.5,"#FBF7EE");},
+ parm:function(x,y){return P_("M"+(x-12)+" "+y+" L"+(x+10)+" "+(y-14)+" L"+(x+12)+" "+y+" Z","#F2D27A")+C_(x+3,y-4,1,"#D8B050",false);},
+ eggs:function(x,y){return R_(x-15,y-7,30,7,2,"#C9B79A")+E_(x-8,y-9,5,6,"#FBF3E4")+E_(x+1,y-10,5,6,"#F3E2C6")+E_(x+10,y-9,5,6,"#FBF3E4");},
+ butter:function(x,y){return R_(x-12,y-8,24,8,2,"#F7E07A")+R_(x-12,y-8,9,8,2,"#FFFFFF");},
+ carton:function(x,y,lbl,c){return P_("M"+(x-8)+" "+y+" L"+(x-8)+" "+(y-20)+" L"+x+" "+(y-26)+" L"+(x+8)+" "+(y-20)+" L"+(x+8)+" "+y+" Z",c||"#FFFFFF")+R_(x-8,y-15,16,8,1,"#5BA3D9",false)+T_(x,y-9,4.5,lbl||"MILK");},
+ bottle:function(x,y,c,lbl,lc){return R_(x-6,y-18,12,18,3,c)+R_(x-2.5,y-25,5,8,1.5,c)+(lbl?R_(x-6,y-13,12,7,1,lc||"#FBF3E4",false):"");},
+ wine:function(x,y){return F.bottle(x,y,"#5A1A2A","l","#F3E6C8");},
+ beer:function(x,y){return F.bottle(x,y,"#8A5A1E","l","#F2C14E");},
+ oilbottle:function(x,y){return F.bottle(x,y,"#E8C34A","l","#59A23A");},
+ mustard:function(x,y){return R_(x-6,y-18,12,18,4,"#F2C81E")+P_("M"+(x-2)+" "+(y-18)+" L"+x+" "+(y-26)+" L"+(x+2)+" "+(y-18)+" Z","#C0392B",1.2);},
+ bbq:function(x,y){return F.bottle(x,y,"#6E1E14","l","#F2C14E");},
+ hotsauce:function(x,y){return R_(x-4,y-16,8,16,2,"#C0392B")+R_(x-2,y-22,4,7,1,"#FBF3E4");},
+ honey:function(x,y){return E_(x,y-8,9,8,"#E8A83A")+E_(x,y-17,5,4,"#E8A83A")+R_(x-3,y-23,6,4,1,"#C0392B");},
+ jar:function(x,y,c,lbl){return R_(x-9,y-18,18,18,3,c)+R_(x-10,y-22,20,5,2,"#8B6B4A")+(lbl?T_(x,y-7,4.5,lbl):"");},
+ can:function(x,y,lbl){return R_(x-9,y-18,18,18,2,"#C9CDD2")+R_(x-9,y-14,18,9,0,"#E8623C",false)+(lbl?T_(x,y-7.5,4.5,lbl):"");},
+ box:function(x,y,c,lbl){lbl=lbl||"";return R_(x-11,y-24,22,24,2,c)+T_(x,y-10,lbl.length>6?3.3:(lbl.length>4?4:5),lbl);},
+ rub:function(x,y,c){return R_(x-8,y-20,16,20,3,c||"#2B2622")+R_(x-8,y-24,16,5,2,"#C0392B")+R_(x-6,y-15,12,8,1,"#F2E4C8",false);},
+ shaker:function(x,y){return R_(x-5,y-16,10,16,2,"#DCE6EA")+R_(x-5,y-19,10,4,1.5,"#9AA");},
+ towels:function(x,y){return R_(x-11,y-20,22,20,4,"#FFFFFF")+R_(x-3,y-20,6,20,0,"#EDEDED",false)+P_("M"+(x-11)+" "+(y-20)+" l22 0","none",1.4);},
+ bun:function(x,y){return P_("M"+(x-13)+" "+(y-6)+" Q"+x+" "+(y-20)+" "+(x+13)+" "+(y-6)+" Z","#E0A35A")+R_(x-13,y-6,26,6,3,"#EDC58A");},
+ foil:function(x,y,w){w=w||30;return P_("M"+(x-w)+" "+y+" Q"+(x-w-2)+" "+(y-20)+" "+(x-w/3)+" "+(y-24)+" Q"+(x+w/3)+" "+(y-27)+" "+(x+w)+" "+(y-16)+" L"+(x+w+1)+" "+y+" Z","#C9CFD6")+P_("M"+(x-w/2)+" "+(y-18)+" l6 4 l6 -5 l6 4","none",1).replace(OL,"#8E99A6");},
+ packet:function(x,y){return F.foil(x,y,9);},
+ cup:function(x,y,c){return P_("M"+(x-9)+" "+(y-16)+" L"+(x-7)+" "+y+" L"+(x+7)+" "+y+" L"+(x+9)+" "+(y-16)+" Z","#FFFFFF")+E_(x,y-16,9,2.5,c||"#B5432A");},
+ shears:function(x,y){return P_("M"+(x-14)+" "+(y-8)+" L"+(x+12)+" "+(y-3)+" M"+(x-14)+" "+(y-3)+" L"+(x+12)+" "+(y-8),"none",2.2).replace(OL,"#9AA3AA")+C_(x-16,y-8,3,"#E8623C")+C_(x-16,y-3,3,"#E8623C");},
+ probe:function(x,y){return R_(x-7,y-14,14,14,3,"#E8623C")+R_(x-5,y-12,10,5,1,"#FBF3E4",false)+P_("M"+x+" "+(y-14)+" Q"+(x-8)+" "+(y-26)+" "+(x-20)+" "+(y-30),"none",1.2);},
+ pellets:function(x,y){return P_("M"+(x-12)+" "+y+" L"+(x-12)+" "+(y-22)+" Q"+x+" "+(y-27)+" "+(x+12)+" "+(y-22)+" L"+(x+12)+" "+y+" Z","#8E4A2E")+T_(x,y-10,4.6,"CHERRY");},
+ salsa:function(x,y){return F.jar(x,y,"#C0392B","SALSA");},
+ sourcream:function(x,y){return R_(x-10,y-12,20,12,3,"#FFFFFF")+R_(x-11,y-15,22,4,2,"#59A23A")+T_(x,y-4,4.2,"SOUR",OL);},
+ yogurt:function(x,y){return R_(x-10,y-12,20,12,3,"#FFFFFF")+R_(x-11,y-15,22,4,2,"#5BA3D9");},
+ dressing:function(x,y){return F.bottle(x,y,"#E5C36B");},
+ seasoning:function(x,y){return R_(x-9,y-16,18,16,2,"#E8623C")+T_(x,y-6,4.6,"TACO");},
+ bowlsm:function(x,y,c){return P_("M"+(x-12)+" "+(y-9)+" Q"+(x-11)+" "+y+" "+x+" "+y+" Q"+(x+11)+" "+y+" "+(x+12)+" "+(y-9)+" Z","#EEF2F3")+E_(x,y-9,12,3,c);}
+};
+
+/* ---------- CONTENTS inside vessels ---------- */
+function CONT(key,cx,cy,rx,ry){
+ var M={marinade:["#C88A2E",["#4E9A40","#F7D84A"]],water:["#BFE3F0",null],boil:["#BFE3F0",null],oil:["#F2C14E",null],rice:["#F5EEDC",["#FFFFFF"]],ricewater:["#E8EEF0",["#FFFFFF"]],refried:["#7A5236",null],refriedcheese:["#7A5236",["#F2C14E"]],blackbeans:["#2E2624",["#4A3A36"]],chili:["#7C2E24",["#5A1E16","#B8452E"]],chilihab:["#7C2E24",["#F07A1A","#5A1E16"]],gravy:["#6B3F25",null],wine:["#6E1F2A",["#F07A1A","#9CCB5A"]],sauce:["#5A1A1E",null],guacmash:["#9DBA4A",["#C9DE7A"]],guac:["#8FA84A",["#F6EFE6","#3F8A2E"]],pico:["#D9432F",["#F6EFE6","#3F8A2E"]],dressing:["#E5C36B",null],yogurt:["#FBF7EE",["#59A23A"]],eggs:["#F7D64A",["#FBEA8A"]],batter:["#F2C14E",["#F7DE8E","#3F8A2E"]],dough:["#F2D7A0",null],cheesesauce:["#F2B33C",null],mac:["#F2B33C",["#F7D27A"]],panko:["#F0E8D2",["#D8C9A0"]],meatmix:["#B0645A",["#F6EFE6"]],tacomeat:["#6E3B2A",["#9A5A3A"]],ground:["#7A4030",["#9A5A3A"]],broth:["#B07A3A",["#F6EFE6"]],onionbroth:["#9A6A3A",["#F6EFE6"]],garlicbeans:["#EDE3CC",["#59A23A"]],chipotle:["#8A2E1E",null],adobo:["#A8321E",null],chilepuree:["#7A1F18",null],bbqchicken:["#C9864A",["#6E1E14"]],chicken:["#E3B98A",null],salad:["#7FBF4A",["#F3E6C8","#9CCB5A","#E3C27A"]],saladmix:["#E3C9A0",["#9CCB5A","#9C3E6E","#E3C27A"]],consomme:["#B5432A",null],birria:["#9A2E1E",["#6E1E14"]],pizzasauce:["#C0392B",null],glaze:["#8A2A1A",null]};
+ var m=M[key]||["#C99A5B",null];var s="<ellipse class='swirl' cx='"+cx+"' cy='"+cy+"' rx='"+rx+"' ry='"+ry+"' fill='"+m[0]+"'/>";
+ if(m[1]){for(var i=0;i<9;i++){var a=i*2.39;s+="<circle class='swirl' cx='"+(cx+Math.cos(a)*rx*.6).toFixed(1)+"' cy='"+(cy+Math.sin(a)*ry*.5).toFixed(1)+"' r='"+(1.4+(i%3)*.5)+"' fill='"+m[1][i%m[1].length]+"'/>";}}
+ if(key==='oil'||key==='boil'||key==='water'){for(var j=0;j<4;j++){s+="<circle class='bub' cx='"+(cx-rx*.6+j*rx*.4).toFixed(1)+"' cy='"+(cy-1)+"' r='"+(1.6+j%2)+"' fill='#ffffffcc' style='animation-delay:"+(j*.45)+"s'/>";}}
+ return s;}
+
+/* ---------- WARES: w(x, opts) sitting on the counter (y=178) ---------- */
+function onTop(items,x,y,spread){var s="",n=items.length,sp=spread||(n>1?40/(n-1):0),k=n>1?1.05:1.22;items.forEach(function(it,i){var parts=it.split(":"),fn=F[parts[0]];if(fn){var ix=x+(n>1?(-20+i*sp):0);s+="<g style='transform-box:view-box;transform-origin:0 0' transform='translate("+ix+" "+y+") scale("+k+") translate("+(-ix)+" "+(-y)+")'>"+fn(ix,y,parts[1]==='m'||parts[1]==='red'||parts[1]==='ch'||parts[1]==='g'?true:parts[1])+"</g>";}});return s;}
+var W={
+ bowl:function(x,o){return P_("M"+(x-36)+" 156 Q"+(x-34)+" 181 "+x+" 182 Q"+(x+34)+" 181 "+(x+36)+" 156 Z","#E3EBEE")+"<ellipse cx='"+x+"' cy='156' rx='36' ry='7' fill='#F2F6F7'"+O()+"/>"+G("react",CONT(o.c,x,156.5,30,4.6)+(o.on?onTop(o.on,x,158):""))+P_("M"+(x-26)+" 164 q-2 8 6 13","none",1.4).replace(OL,"#FFFFFF")+(o.towel?P_("M"+(x-38)+" 152 Q"+x+" 146 "+(x+38)+" 152 L"+(x+40)+" 160 L"+(x-40)+" 160 Z","#E8623C")+P_("M"+(x-30)+" 154 l60 0","none",1).replace(OL,"#FFFFFF"):"");},
+ pot:function(x,o){return P_("M"+(x-32)+" 150 L"+(x+32)+" 150 L"+(x+29)+" 179 Q"+x+" 184 "+(x-29)+" 179 Z","#5A5F66")+R_(x-47,147,16,5,2,"#3A3D42")+R_(x+31,147,16,5,2,"#3A3D42")+"<ellipse cx='"+x+"' cy='150' rx='33' ry='7' fill='#3A3D42'"+O()+"/>"+G("react",CONT(o.c,x,150,27,4.8)+(o.on?onTop(o.on,x,152):""))+P_("M"+(x-24)+" 158 l0 16","none",2).replace(OL,"#8A9098");},
+ skillet:function(x,o){return R_(x+30,158,30,6,3,"#2A2A2A")+P_("M"+(x-36)+" 160 Q"+(x-34)+" 178 "+x+" 178 Q"+(x+34)+" 178 "+(x+36)+" 160 Z","#2E2E2E")+"<ellipse cx='"+x+"' cy='160' rx='36' ry='6' fill='#1E1E1E'"+O()+"/>"+G("react",CONT(o.c||"none",x,160,30,4)+(o.on?onTop(o.on,x,163,o.sp):""));},
+ dutch:function(x,o){var lid=o.lid?"<g class='lidbob'><ellipse cx='"+x+"' cy='146' rx='36' ry='8' fill='#D9542E'"+O()+"/>"+C_(x,138,4.5,"#3A3D42")+"</g>":"";return R_(x-46,150,14,7,3,"#C24A28")+R_(x+32,150,14,7,3,"#C24A28")+P_("M"+(x-34)+" 148 L"+(x+34)+" 148 L"+(x+31)+" 178 Q"+x+" 184 "+(x-31)+" 178 Z","#E8623C")+P_("M"+(x-33)+" 158 L"+(x+33)+" 158","none",1.2).replace(OL,"#F79A6A")+"<ellipse cx='"+x+"' cy='148' rx='35' ry='7' fill='#2E2420'"+O()+"/>"+G("react",(o.c?CONT(o.c,x,148.5,29,4.5):"")+(o.on?onTop(o.on,x,152,o.sp):""))+lid;},
+ board:function(x,o){return R_(x-50,168,100,11,5,"#D9B382")+C_(x+42,173.5,2.2,"#A97E4C",false)+G("react",o.on?onTop(o.on,x-4,169,o.sp):"");},
+ sheet:function(x,o){return R_(x-50,172,100,7,2,"#C9CFD6")+R_(x-46,170,92,3,1,"#E3E7EB",false)+G("react",o.on?onTop(o.on,x,172,o.sp):"");},
+ casserole:function(x,o){return R_(x-38,160,76,18,5,"#F7F2E7")+R_(x-44,162,8,6,2,"#F7F2E7")+R_(x+36,162,8,6,2,"#F7F2E7")+G("react",CONT(o.c,x,161,34,3.5)+(o.c==='mac'?P_("M"+(x-30)+" 161 Q"+x+" 155 "+(x+30)+" 161","none",3).replace(OL,"#D99A3A"):""));},
+ rack:function(x,o){var s=R_(x-48,170,96,6,1,"none");for(var i=0;i<9;i++)s+="<line x1='"+(x-44+i*11)+"' y1='170' x2='"+(x-44+i*11)+"' y2='176' stroke='#7A8088' stroke-width='1.2'/>";return s+"<line x1='"+(x-44)+"' y1='176' x2='"+(x-40)+"' y2='179' stroke='"+OL+"' stroke-width='1.6'/><line x1='"+(x+44)+"' y1='176' x2='"+(x+40)+"' y2='179' stroke='"+OL+"' stroke-width='1.6'/>"+G("react",o.on?onTop(o.on,x,170,o.sp):"");},
+ grill:function(x,o){var fl="";for(var i=0;i<4;i++){fl+="<path class='"+(i%2?'flick2':'flick')+"' d='M"+(x-33+i*22)+" 176 q-5 -12 2 -18 q-1 9 5 4 q4 9 -3 14 z' fill='"+(i%2?'#F7A93B':'#F0662B')+"' style='animation-delay:"+(i*.17)+"s'/>";}
+  return R_(x-48,166,96,13,4,"#2E2E2E")+fl+"<line x1='"+(x-44)+"' y1='166' x2='"+(x+44)+"' y2='166' stroke='#777' stroke-width='3'/>"+[ -30,-10,10,30].map(function(d){return "<line x1='"+(x+d)+"' y1='164' x2='"+(x+d)+"' y2='168' stroke='#555' stroke-width='2'/>";}).join("")+G("react",o.on?onTop(o.on,x,166,o.sp):"")+(o.smoke?SMOKE(x,152):"")+(o.sparks?SPARKS(x,156):"");},
+ traeger:function(x,o){var t=o.t||"225";return "<g class='trg'>"+R_(x-30,92,60,87,7,"#3A3A3A")+R_(x-30,150,60,6,0,"#2A2A2A",false)+R_(x-22,100,44,24,4,"#1C1C1C")+"<rect class='glow' x='"+(x-20)+"' y='102' width='26' height='20' rx='3' fill='#2A0E06'/>"+T_(x-7,116,10,t,"#F7A93B")+T_(x-7,121.5,4,"°F","#F7A93B")+C_(x+12,112,7,"#E9E4D8")+"<line class='needle' x1='"+(x+12)+"' y1='112' x2='"+(x+12)+"' y2='106.5' stroke='#C0392B' stroke-width='2' stroke-linecap='round'/>"+R_(x+18,80,8,13,2,"#4A4A4A")+"<path class='rise' d='M"+(x+22)+" 78 q-6 -8 0 -15' fill='none' stroke='#ffffffaa' stroke-width='3.5' stroke-linecap='round'/>"+"<ellipse class='glow' cx='"+x+"' cy='170' rx='22' ry='5' fill='"+(+t>=400?'#F07A1A':'#F7A93B')+"'/>"+"<path class='flick' d='M"+(x-6)+" 172 q-4 -12 3 -18 q-1 9 5 4 q4 9 -3 14 z' fill='#F0662B'/>"+(+t>=400?"<path class='flick2' d='M"+(x+8)+" 172 q-4 -12 3 -18 q-1 9 5 4 q4 9 -3 14 z' fill='#F7C23B'/>":"")+"</g>";},
+ oven:function(x,o){return R_(x-46,110,92,69,6,"#D8DCE0")+R_(x-38,130,76,40,5,"#2A1A12")+"<rect class='glow' x='"+(x-36)+"' y='132' width='72' height='36' rx='4' fill='#F7A93B' opacity='.55'/>"+G("react",o.on?onTop(o.on,x,162,o.sp):"")+R_(x-40,115,80,10,3,"#3A3A3A")+T_(x-18,123,7,(o.t||"425")+"°F","#F7A93B")+C_(x+20,120,3.5,"#9AA")+C_(x+31,120,3.5,"#9AA")+R_(x-30,126,60,3,1.5,"#9AA3AA");},
+ fryer:function(x,o){return W.pot(x,{c:"oil",on:o.on})+R_(x+18,128,5,30,2,"#DCE6EA")+C_(x+20.5,126,6,"#FFFFFF")+T_(x+20.5,128.5,5,"350",OL)+"<line class='needle' x1='"+(x+20.5)+"' y1='126' x2='"+(x+23)+"' y2='122' stroke='#C0392B' stroke-width='1.4'/>";},
+ blender:function(x,o){return R_(x-26,162,52,17,4,"#3A3A3A")+"<circle class='glow' cx='"+(x+6)+"' cy='171' r='3.6' fill='#F0662B'/>"+"<g class='jar'>"+P_("M"+(x-21)+" 100 L"+(x+21)+" 100 L"+(x+16)+" 162 L"+(x-16)+" 162 Z","#D6E8EE")+"<g class='spin'>"+R_(x-14,124,28,36,3,{chipotle:"#8A2E1E",adobo:"#A8321E",chilepuree:"#7A1F18"}[o.c]||"#8A2E1E",false)+"</g>"+R_(x-23,94,46,8,3,"#555")+"</g>";},
+ microwave:function(x,o){return R_(x-34,110,68,46,5,"#E3E7EB")+"<rect class='glow' x='"+(x-28)+"' y='116' width='40' height='34' rx='3' fill='#F7D27A'/>"+"<g class='spin'>"+C_(x-8,140,8,"#C0392B")+"</g>"+R_(x+16,116,12,8,1.5,"#1C1C1C")+T_(x+22,122.5,5,"1:00","#7CF07A")+C_(x+22,132,2.5,"#9AA")+C_(x+22,140,2.5,"#9AA")+R_(x-30,156,60,22,4,"#B98A5A",false);},
+ cooler:function(x,o){return R_(x-42,140,84,39,6,"#C0392B")+R_(x-44,134,88,10,4,"#FBF7EE")+R_(x-12,150,24,6,3,"#8A2A1A")+P_("M"+(x-30)+" 134 Q"+(x-30)+" 124 "+(x-20)+" 124 L"+(x+20)+" 124 Q"+(x+30)+" 124 "+(x+30)+" 134","none",2.4)+T_(x,170,7,"KEEP WARM","#FBF7EE");},
+ plate:function(x,o){return E_(x,174,40,7,"#FFFFFF")+E_(x,173,30,4.5,"#F3F4F4",false)+G("react",o.on?onTop(o.on,x,174,o.sp):"");}
+};
+function SMOKE(x,y){var s="";[-22,0,22].forEach(function(d,i){s+="<g class='sway' style='animation-delay:"+(i*.6)+"s'><path class='rise' d='M"+(x+d)+" "+y+" q-7 -9 0 -18' fill='none' stroke='#ffffffaa' stroke-width='4.5' stroke-linecap='round' style='animation-delay:"+(i*.85)+"s'/></g>";});return s;}
+function STEAM(x,y){var s="";[-12,10].forEach(function(d,i){s+="<g class='sway' style='animation-delay:"+(i*.7)+"s'><path class='rise' d='M"+(x+d)+" "+y+" q-6 -8 0 -15' fill='none' stroke='#ffffffc0' stroke-width='4' stroke-linecap='round' style='animation-delay:"+(i*1.1)+"s'/></g>";});return s;}
+function SPARKS(x,y){var s="";[[-22,0],[-6,-4],[12,-2],[26,2]].forEach(function(p,i){s+="<circle class='rspark' cx='"+(x+p[0])+"' cy='"+(y+p[1])+"' r='2.2' fill='"+(i%2?'#FBD24B':'#F7A93B')+"' style='animation-delay:"+(i*.08)+"s'/>";});return s;}
+function SALT(x,y){var s="";for(var i=0;i<5;i++)s+="<circle class='rdrop' cx='"+(x-6+i*3)+"' cy='"+y+"' r='1.5' fill='#FFFFFF' stroke='#B8B0A0' stroke-width='.5' style='animation-delay:"+(i*.11)+"s'/>";return s;}
+function BITS(x,y,c){var s="";for(var i=0;i<4;i++)s+="<rect class='rbit' x='"+(x-14+i*9)+"' y='"+y+"' width='4' height='4' rx='1' fill='"+c+"' style='animation-delay:"+(i*.04)+"s'/>";return s;}
+
+/* ---------- SERVE plates ---------- */
+var SERVE={
+ taco:function(x){return F.shells(x+2,72)+F.dice(x+1,66,["#7A3A2C","#59A23A"]).replace(/height='4.5'/g,"height='3'").replace(/width='4.5'/g,"width='3'");},
+ eggtaco:function(x){return F.shells(x+2,72)+C_(x-4,63,3,"#F7D64A",false)+C_(x+5,62,3,"#F7D64A",false)+C_(x,60,2,"#FBF7EE",false);},
+ burger:function(x){return R_(x-12,64,24,6,3,"#EDC58A")+R_(x-13,58,26,6,3,"#6E3226")+P_("M"+(x-13)+" 58 l26 0 l-4 4 l-18 0 Z","#F2C14E",1)+P_("M"+(x-12)+" 58 Q"+x+" 46 "+(x+12)+" 58 Z","#E0A35A");},
+ steak:function(x){var s="";for(var i=0;i<4;i++)s+=R_(x-14+i*6,61,6,10,2,"#9A4A38");return s+E_(x+14,68,8,3.6,"#F2C83C");},
+ filet:function(x){return R_(x-12,58,16,12,6,"#8E3A2B")+E_(x-4,59,8,3,"#A2453A")+P_("M"+(x+6)+" 70 q6 -2 12 0 M"+(x+6)+" 67 q6 -2 12 0","none",2).replace(OL,"#4E9A3A");},
+ rib:function(x){return E_(x+4,70,14,4,"#F3ECDA")+R_(x-6,58,16,12,3,"#6E2A22")+R_(x-6,67,16,3,1.5,"#F2E4C8")+P_("M"+(x-6)+" 58 Q"+(x+2)+" 54 "+(x+10)+" 58","none",2).replace(OL,"#4A1418");},
+ potato:function(x){return E_(x,66,13,7,"#B98A5A")+P_("M"+(x-6)+" 62 l12 0 M"+x+" 59 l0 6","none",1.2)+C_(x-3,61,2.5,"#F7E07A",false)+C_(x+4,62,2,"#59A23A",false);},
+ sandwich:function(x){return F.bun(x,72).replace("#EDC58A","#B5643F");},
+ turkey:function(x){var s="";for(var i=0;i<4;i++)s+=R_(x-14+i*7,61,7,11,2,i%2?"#F3E2C6":"#E3B98A");return s+E_(x+12,68,6,4,"#C98A4A");},
+ loaf:function(x){return R_(x-14,60,12,12,2,"#7A3A2C")+R_(x,60,12,12,2,"#7A3A2C")+R_(x-14,59,26,3,1,"#8A2A1A",false);},
+ roast:function(x){return P_("M"+(x-14)+" 72 Q"+(x-12)+" 58 "+x+" 58 Q"+(x+10)+" 60 "+(x+8)+" 72 Z","#7A3A2C")+E_(x+12,69,5,4,"#E7C66A")+R_(x+6,62,9,4,2,"#F07A1A")+P_("M"+(x-14)+" 66 Q"+x+" 70 "+(x+16)+" 66","none",2).replace(OL,"#6B3F25");},
+ bread:function(x){var s="";[-12,-2,8].forEach(function(d,i){s+=E_(x+d,68-(i%2)*3,6,5,"#D99A3A")+C_(x+d-1,66-(i%2)*3,1,"#FFF6DC",false);});return s+P_("M"+(x+12)+" 64 L"+(x+13)+" 72 L"+(x+21)+" 72 L"+(x+22)+" 64 Z","#FFFFFF",1.2)+E_(x+17,64,5,1.6,"#C0392B");},
+ chicken:function(x){return P_("M"+(x-14)+" 71 q1 -10 10 -10 q9 0 9 10 Z","#B8452E")+C_(x+8,69,2.2,"#E3C27A")+C_(x+12,70,2.2,"#E3C27A")+C_(x+4,70,2.2,"#E3C27A")+P_("M"+(x-8)+" 63 q3 2 6 0","none",1.2).replace(OL,"#FBF7EE");},
+ chipbag:function(x){return F.chipsbag(x,74)+E_(x,48,10,3,"#6E3B2A")+C_(x-4,47,1.6,"#F2C14E",false)+C_(x+3,46,1.6,"#F2C14E",false);}
+};
+function serveBowl(x,c,top){return "<path d='M"+(x-15)+" 64 Q"+(x-14)+" 74 "+x+" 75 Q"+(x+14)+" 74 "+(x+15)+" 64 Z' fill='#E3E8EA'"+O(1.4)+"/>"+E_(x,64,15,4,c)+(top?C_(x-4,62,2,top,false)+C_(x+5,63,1.8,top,false):"");}
+
+/* ===== Scene builder ===== */
+function tempOf(real){var m=(real||"").match(/(\d{3})\s*(?:&#176;|°)F?/g)||[];var best=0;m.forEach(function(s){var n=parseInt(s,10);if(n>=180&&n<=600&&n>best)best=n;});return best?String(best):null;}
+var HASB={stir:1,chop:1,whisk:1,season:1,slice:1,tongs:1,lid:1,blend:1,serve:1,cheer:1,peek:1,dial:1};
+Object.keys(HASB).forEach(function(p){var i=new Image();i.src=KP+p+"-b.webp";});
+function kGroup(pose){var A="<image class='kimg' data-pose='"+pose+"' href='"+KP+pose+".webp' x='50' y='4' width='200' height='200'/>";if(!HASB[pose])return "<g class='kin'><g class='kmove m-"+pose+"'>"+A+"</g></g>";return "<g class='kin'><g class='kmove m-"+pose+"'><g class='fa'>"+A+"</g><g class='fb'><image class='kimg' href='"+KP+pose+"-b.webp' x='50' y='4' width='200' height='200'/></g></g></g>";}
+function build(sp,real){
+ var p=sp.p,svg="<svg viewBox='0 0 300 210' class='sc p-"+p+"'>",body="",d=0.06;
+ function pin(inner){d+=0.07;return "<g class='pin' style='animation-delay:"+d.toFixed(2)+"s'>"+inner+"</g>";}
+ if(p==='serve'){var s=sp.s,f="";var xs=[96,206];xs.forEach(function(x){f+=(typeof s==='string'?SERVE[s](x):serveBowl(x,s[1],s[2]))+STEAM(x,60);});
+  return svg+WALL+kGroup('serve')+"<g class='react'>"+f+"</g>"+COUNTER+"</svg>";}
+ var front="";
+ var ex=(sp.x||[]).filter(function(e){return F[e[0]];}),n=ex.length,LAY={1:[250],2:[224,264],3:[212,243,274],4:[206,230,254,278]},sc=n>=4?1.3:1.5;
+ ex.forEach(function(e,i){var xx=(LAY[n]||LAY[4])[i]||250;front+=pin("<g style='transform-box:view-box;transform-origin:0 0' transform='translate("+xx+" 178) scale("+sc+") translate("+(-xx)+" -178)'>"+F[e[0]](xx,178,e[2],e[3])+"</g>");});
+ if(sp.m){var o=sp.m[2]||{};if(sp.m[0]==='traeger'||sp.m[0]==='oven')o.t=o.t||tempOf(real)||(sp.m[0]==='oven'?'425':'225');front=pin(W[sp.m[0]](sp.m[1],o))+front;}
+ var fx="";(sp.fx||[]).forEach(function(k){var a=k.split("@"),x=+a[1]||(sp.m?sp.m[1]:110);if(a[0]==='smoke')fx+=SMOKE(x,150);if(a[0]==='steam')fx+=STEAM(x,142);if(a[0]==='sparks')fx+=SPARKS(x,156);if(a[0]==='salt')fx+=SALT(x,100);if(a[0]==='bits')fx+=BITS(x,160,a[2]||'#F6EFE6');});
+ return svg+WALL+kGroup(p)+COUNTER+front+fx+"</svg>";}
+
+/* ===== Per-step scenes. m:[ware,x,opts]  x:[[food,x,arg]] ===== */
+var SCN={
+ asada:[
+  {p:'whisk',m:['bowl',92,{c:'marinade'}],x:[['limes',212],['orange',238],['garlic',262],['cilantro',284]]},
+  {p:'peek',m:['sheet',130,{on:['skirt']}],x:[['towels',262]]},
+  {p:'dial',m:['traeger',69],x:[['pellets',262]]},
+  {p:'wait',m:['grill',108,{on:['skirt'],smoke:1}]},
+  {p:'chop',m:['board',108,{on:['dice']}],x:[['cilantro',214],['wedges',240],['tortillas',270]],fx:['bits@104@#F6EFE6']},
+  {p:'dial',m:['traeger',69]},
+  {p:'tongs',m:['grill',80,{on:['skirt:m'],sparks:1}],x:[['probe',262]]},
+  {p:'slice',m:['board',110,{on:['slices']}]},
+  {p:'serve',s:'taco'}],
+ barbacoa:[
+  {p:'season',m:['board',96,{on:['chuck']}],x:[['rub',232],['garlic',258]],fx:['salt@90']},
+  {p:'wait',m:['grill',108,{on:['chuck'],smoke:1}]},
+  {p:'blend',m:['blender',69,{c:'chipotle'}],x:[['garlic',214],['limes',240],['can',268,'CHIPOTLE']]},
+  {p:'lid',m:['dutch',98,{c:'chipotle',on:['chuck']}],fx:['steam@98']},
+  {p:'slice',m:['board',110,{on:['shredded']}],x:[['cup',258,'#8A2E1E']]},
+  {p:'serve',s:'taco'}],
+ guac:[
+  {p:'chop',m:['board',108,{on:['dice']}],x:[['jalapeno',220],['cilantro',248],['onion',274]],fx:['bits@104@#3F8A2E']},
+  {p:'stir',m:['bowl',118,{c:'guacmash'}],x:[['avocado',224],['avocado',252]]},
+  {p:'stir',m:['bowl',118,{c:'guac'}],x:[['limes',226],['oilbottle',258]]},
+  {p:'serve',s:['bowl','#8FA84A','#F6EFE6']}],
+ quesabirria:[
+  {p:'season',m:['board',96,{on:['chuck']}],x:[['rub',232]],fx:['salt@90']},
+  {p:'wait',m:['grill',108,{on:['chuck'],smoke:1}]},
+  {p:'blend',m:['blender',69,{c:'adobo'}],x:[['chiles',214],['tomato',242],['garlic',268]]},
+  {p:'lid',m:['dutch',98,{c:'birria',on:['chuck']}],fx:['steam@98']},
+  {p:'slice',m:['board',110,{on:['shredded']}],x:[['cup',258,'#B5432A']]},
+  {p:'tongs',m:['skillet',80,{on:['quesataco']}],x:[['cheese',224],['tortillas',254]],fx:['sparks@80']},
+  {p:'serve',s:'taco'}],
+ carnitas:[
+  {p:'season',m:['board',96,{on:['porkbutt']}],x:[['rub',236]],fx:['salt@90']},
+  {p:'wait',m:['grill',108,{on:['porkbutt'],smoke:1}]},
+  {p:'lid',m:['dutch',98,{c:'broth',on:['porkbutt']}],x:[['orange',230],['onion',256]],fx:['steam@98']},
+  {p:'tongs',m:['skillet',80,{on:['shredded']}],fx:['sparks@80']},
+  {p:'serve',s:'taco'}],
+ chicken:[
+  {p:'season',m:['board',96,{on:['breasts']}],x:[['rub',228,'#E8A83A'],['rub',252,'#8A1F18']],fx:['salt@90']},
+  {p:'wait',m:['grill',108,{on:['breasts'],smoke:1}],x:[['probe',264]]},
+  {p:'slice',m:['board',110,{on:['shredded:#E3B98A']}]},
+  {p:'stir',m:['bowl',118,{c:'bbqchicken'}],x:[['bbq',232],['carton',258,'BROTH','#E3C9A0']]},
+  {p:'serve',s:['bowl','#C9864A','#59A23A']}],
+ mac:[
+  {p:'peek',m:['pot',130,{c:'boil'}],x:[['box',254,'#5BA3D9','ELBOWS']],fx:['steam@130']},
+  {p:'stir',m:['pot',118,{c:'cheesesauce'}],x:[['carton',220,'MILK'],['cheese',246],['butter',274]],fx:['steam@118']},
+  {p:'season',m:['casserole',96,{c:'mac'}],x:[['box',236,'#F2C14E','PANKO'],['butter',266]],fx:['salt@90']},
+  {p:'wait',m:['grill',108,{on:['macdish'],smoke:1}]},
+  {p:'serve',s:['bowl','#F2B33C','#D99A3A']}],
+ shortribs:[
+  {p:'season',m:['board',96,{on:['shortribs']}],x:[['shaker',232]],fx:['salt@90']},
+  {p:'tongs',m:['dutch',80,{on:['shortribs']}],fx:['sparks@80']},
+  {p:'stir',m:['dutch',118,{c:'wine'}],x:[['wine',230],['carrots',258]],fx:['steam@118']},
+  {p:'lid',m:['dutch',98,{c:'sauce',on:['shortribs']}],x:[['thyme',236],['carton',264,'STOCK','#E3C9A0']],fx:['steam@98']},
+  {p:'peek',m:['pot',130,{c:'boil',on:['russets']}],x:[['butter',236],['carton',264,'MILK']],fx:['steam@130']},
+  {p:'stir',m:['pot',118,{c:'sauce'}],fx:['steam@118']},
+  {p:'serve',s:'rib'}],
+ potatoes:[
+  {p:'season',m:['board',96,{on:['russets']}],x:[['oilbottle',236]],fx:['salt@90']},
+  {p:'dial',m:['traeger',69],x:[['russets',248]]},
+  {p:'wait',m:['grill',108,{on:['russets'],smoke:1}],x:[['probe',264]]},
+  {p:'serve',s:'potato'}],
+ rice:[
+  {p:'stir',m:['bowl',118,{c:'ricewater'}],x:[['box',248,'#F5EEDC','RICE']]},
+  {p:'peek',m:['pot',130,{c:'boil'}],fx:['steam@130']},
+  {p:'stir',m:['pot',118,{c:'rice'}],x:[['limes',228],['cilantro',256]],fx:['steam@118']},
+  {p:'serve',s:['bowl','#F5EEDC','#59A23A']}],
+ beans:[
+  {p:'stir',m:['pot',118,{c:'refried'}],x:[['can',226,'BEANS'],['butter',254]],fx:['steam@118']},
+  {p:'stir',m:['pot',118,{c:'refried'}],x:[['carton',240,'MILK']],fx:['steam@118']},
+  {p:'stir',m:['pot',118,{c:'refriedcheese'}],x:[['cheese',240]],fx:['steam@118']},
+  {p:'serve',s:['bowl','#7A5236','#F2C14E']}],
+ pico:[
+  {p:'chop',m:['board',108,{on:['dice:#D9432F']}],x:[['tomato',218],['onion',244],['jalapeno',270]],fx:['bits@104@#D9432F']},
+  {p:'stir',m:['bowl',118,{c:'pico'}],x:[['limes',236]]},
+  {p:'wait',m:['bowl',108,{c:'pico'}],x:[['cilantro',248]]},
+  {p:'serve',s:['bowl','#D9432F','#F6EFE6']}],
+ salad:[
+  {p:'wait',m:['board',108,{on:['shredded:#E3B98A']}]},
+  {p:'whisk',m:['bowl',92,{c:'dressing'}],x:[['honey',214],['mustard',238],['oilbottle',262]]},
+  {p:'chop',m:['board',108,{on:['dice:#E3B98A']}],x:[['bowlsm',250,'#E3B98A']],fx:['bits@104@#E3B98A']},
+  {p:'chop',m:['board',108,{on:['romaine']}],x:[['celery',218],['redonion',246],['chickpeas',272]],fx:['bits@104@#7FBF4A']},
+  {p:'stir',m:['bowl',118,{c:'saladmix'}]},
+  {p:'stir',m:['bowl',118,{c:'salad'}],x:[['romaine',244]]},
+  {p:'serve',s:['bowl','#7FBF4A','#FBF7EE']}],
+ burgers:[
+  {p:'season',m:['board',96,{on:['patties']}],x:[['shaker',236]],fx:['salt@90']},
+  {p:'dial',m:['traeger',69],x:[['pellets',262]]},
+  {p:'wait',m:['grill',108,{on:['patties'],smoke:1}]},
+  {p:'dial',m:['traeger',69],x:[['patties',250]]},
+  {p:'tongs',m:['grill',80,{on:['patties:ch'],sparks:1}],x:[['probe',262]]},
+  {p:'serve',s:'burger'}],
+ chili:[
+  {p:'blend',m:['blender',69,{c:'chilepuree'}],x:[['chiles',214],['carton',242,'STOCK','#E3C9A0']]},
+  {p:'season',m:['board',96,{on:['cubes']}],x:[['bacon',230],['ground',264]],fx:['salt@90']},
+  {p:'wait',m:['grill',108,{on:['cubes'],smoke:1}],x:[['foil',262]]},
+  {p:'tongs',m:['dutch',80,{on:['cubes','bacon']}],fx:['sparks@80']},
+  {p:'stir',m:['dutch',118,{c:'chili'}],x:[['beer',224],['garlic',248],['jalapeno',272]],fx:['steam@118']},
+  {p:'stir',m:['dutch',118,{c:'chilihab'}],x:[['habanero',244],['probe',270]],fx:['smoke@118']},
+  {p:'stir',m:['dutch',118,{c:'chili'}],x:[['box',236,'#E3C27A','MASA'],['bottle',262,'#E8C34A']],fx:['steam@118']},
+  {p:'serve',s:['bowl','#7C2E24','#F2C14E']}],
+ cornbreadchili:[
+  {p:'stir',m:['skillet',118,{c:'chili'}],x:[['jalapeno',220],['onion',246],['can',272,'BEANS']],fx:['steam@118']},
+  {p:'wait',m:['grill',108,{on:['chilipan'],smoke:1}]},
+  {p:'whisk',m:['bowl',92,{c:'batter'}],x:[['box',214,'#5BA3D9','CORN MIX'],['eggs',244],['corn',274]]},
+  {p:'dial',m:['traeger',69],x:[]},
+  {p:'stir',m:['skillet',118,{c:'chili',on:['dough:4']}]},
+  {p:'wait',m:['grill',108,{on:['cornpan'],smoke:1}]},
+  {p:'serve',s:['bowl','#7C2E24','#F2C14E']}],
+ filet:[
+  {p:'season',m:['board',96,{on:['filet']}],x:[['shaker',236]],fx:['salt@90']},
+  {p:'dial',m:['traeger',69],x:[['garlic',232],['butter',260]]},
+  {p:'wait',m:['grill',108,{on:['filet','packet'],smoke:1}],x:[['probe',264]]},
+  {p:'dial',m:['traeger',69],x:[['restplate',250]]},
+  {p:'stir',m:['pot',118,{c:'garlicbeans'}],x:[['can',224,'BEANS'],['butter',250],['thyme',278]],fx:['steam@118']},
+  {p:'tongs',m:['grill',80,{on:['filet:m','greenbeans'],sparks:1}]},
+  {p:'season',m:['board',96,{on:['filet:m','butter']}]},
+  {p:'serve',s:'filet'}],
+ harissa:[
+  {p:'season',m:['board',96,{on:['thighs']}],x:[['towels',236]],fx:['salt@90']},
+  {p:'whisk',m:['bowl',92,{c:'yogurt'}],x:[['yogurt',214],['lemon',240],['cilantro',266]]},
+  {p:'chop',m:['board',108,{on:['redonion','redonion']}],x:[['chickpeas',222],['can',250,'BEANS'],['oilbottle',276]],fx:['bits@104@#9C3E6E']},
+  {p:'season',m:['sheet',96,{on:['chickpeas','thighs:red']}],x:[['jar',236,'#B8452E','HARISSA']]},
+  {p:'wait',m:['oven',112,{on:['thighs:red']}]},
+  {p:'serve',s:'chicken'}],
+ walkingtacos:[
+  {p:'stir',m:['skillet',118,{c:'ground'}],fx:['steam@118']},
+  {p:'stir',m:['skillet',118,{c:'tacomeat'}],x:[['seasoning',238]],fx:['steam@118']},
+  {p:'chop',m:['board',108,{on:['dice:#9C3E6E']}],x:[['cheese',214],['salsa',240],['sourcream',266]],fx:['bits@104@#9C3E6E']},
+  {p:'serve',s:'chipbag'}],
+ ribeye:[
+  {p:'season',m:['board',96,{on:['ribeye']}],x:[['corn',232],['rub',264]],fx:['salt@90']},
+  {p:'dial',m:['traeger',69],x:[['pellets',262]]},
+  {p:'wait',m:['grill',108,{on:['ribeye','corn'],smoke:1}],x:[['probe',264]]},
+  {p:'peek',m:['pot',130,{c:'boil',on:['russets']}],x:[['butter',236],['carton',264,'MILK']],fx:['steam@130']},
+  {p:'dial',m:['traeger',69],x:[['restplate',250]]},
+  {p:'tongs',m:['grill',80,{on:['ribeye:m','corn'],sparks:1}]},
+  {p:'slice',m:['board',110,{on:['slices']}]},
+  {p:'serve',s:'steak'}],
+ pulledpork:[
+  {p:'season',m:['board',96,{on:['porkbutt']}],x:[['mustard',230],['rub',256]],fx:['salt@90']},
+  {p:'dial',m:['traeger',69],x:[['pellets',262]]},
+  {p:'wait',m:['grill',108,{on:['porkbutt'],smoke:1}],x:[['probe',264]]},
+  {p:'peek',m:['board',130,{on:['foil']}],x:[['bottle',248,'#F2C14E','l','#C0392B']]},
+  {p:'wait',m:['grill',108,{on:['foil'],smoke:1}],x:[['probe',264]]},
+  {p:'wait',m:['cooler',108],x:[['towels',254]]},
+  {p:'slice',m:['board',110,{on:['shredded:#B5643F']}],x:[['bun',256]]},
+  {p:'serve',s:'sandwich'}],
+ meatloaf:[
+  {p:'stir',m:['bowl',118,{c:'panko'}],x:[['box',226,'#F2C14E','PANKO'],['carton',252,'MILK']]},
+  {p:'stir',m:['bowl',118,{c:'meatmix'}],x:[['eggs',222],['onion',250],['garlic',274]]},
+  {p:'season',m:['sheet',96,{on:['meatloaf']}],x:[['rub',236]],fx:['salt@90']},
+  {p:'wait',m:['grill',108,{on:['meatloaf'],smoke:1}],x:[['probe',264]]},
+  {p:'dial',m:['traeger',69],x:[]},
+  {p:'stir',m:['grill',118,{on:['meatloaf:g']}],x:[['bbq',232],['honey',258]]},
+  {p:'serve',s:'loaf'}],
+ turkey:[
+  {p:'chop',m:['board',108,{on:['turkey']}],x:[['shears',248]]},
+  {p:'season',m:['sheet',96,{on:['turkey']}],x:[['shaker',236]],fx:['salt@90']},
+  {p:'season',m:['sheet',96,{on:['turkey','butter']}],x:[['butter',232],['rub',260]]},
+  {p:'dial',m:['traeger',69],x:[['pellets',262]]},
+  {p:'wait',m:['grill',108,{on:['turkey'],smoke:1}],x:[['probe',264]]},
+  {p:'wait',m:['board',108,{on:['foil']}]},
+  {p:'slice',m:['board',110,{on:['slices:#E3B98A']}]},
+  {p:'serve',s:'turkey'}],
+ breakfasttacos:[
+  {p:'stir',m:['pot',118,{c:'blackbeans'}],x:[['can',240,'BLACK']],fx:['steam@118']},
+  {p:'chop',m:['board',108,{on:['dice:#3F8A2E']}],x:[['feta',228],['hotsauce',256]],fx:['bits@104@#3F8A2E']},
+  {p:'whisk',m:['bowl',92,{c:'eggs'}],x:[['eggs',222],['butter',252]]},
+  {p:'tongs',m:['skillet',80,{on:['tortillas']}]},
+  {p:'serve',s:'eggtaco'}],
+ crazybread:[
+  {p:'stir',m:['bowl',118,{c:'dough'}],x:[['box',224,'#E8623C','ROLL MIX'],['eggs',254]]},
+  {p:'wait',m:['bowl',108,{c:'dough',towel:1}]},
+  {p:'peek',m:['fryer',130],x:[['oilbottle',250]]},
+  {p:'tongs',m:['fryer',80,{on:['dough:3']}],x:[['bowlsm',240,'#F2D7A0']]},
+  {p:'season',m:['rack',96,{on:['friedbread']}],x:[['parm',236]],fx:['salt@90']},
+  {p:'dial',m:['microwave',69],x:[['jar',246,'#C0392B','PIZZA']]},
+  {p:'serve',s:'bread'}],
+ potroast:[
+  {p:'season',m:['board',96,{on:['roast']}],x:[['shaker',236]],fx:['salt@90']},
+  {p:'tongs',m:['dutch',80,{on:['roast']}],fx:['sparks@80']},
+  {p:'stir',m:['dutch',118,{c:'onionbroth'}],x:[['carton',224,'BROTH','#E3C9A0'],['garlic',250],['thyme',276]],fx:['steam@118']},
+  {p:'lid',m:['dutch',98,{c:'gravy',on:['roast']}],fx:['steam@98']},
+  {p:'lid',m:['dutch',98,{c:'gravy',on:['yukons','roast','carrots']}],x:[['yukons',232],['carrots',262]],fx:['steam@98']},
+  {p:'stir',m:['pot',118,{c:'gravy'}],fx:['steam@118']},
+  {p:'serve',s:'roast'}]
+};
+function applyScenes(){RECIPES.forEach(function(r){var L=SCN[r.id];if(!L)return;r.steps.forEach(function(s,i){if(L[i])s.scene=build(L[i],s.real);});});}
+
+applyScenes();
+
+var BOOPS=["Did somebody say TACOS? *tail wag intensifies*","I'm not begging. I'm... quality control.","Corgi law says the cook gets first bite.","Woof roughly means 'more butter.'","These paws were made for whisking.","Smells like victory. And beef.","Short legs, tall appetite."];
+
+var KEY="kenny-kitchen-v1";
+var ridx=0, cur=0;
+var timer={sec:0,running:false,endAt:null,done:false,dur:0};
+
+async function load(){try{if(window.storage){var r=await window.storage.get(KEY);if(r&&r.value){var o=JSON.parse(r.value);ridx=o.ridx||0;cur=o.cur||0;}}}catch(e){}}
+async function save(){try{if(window.storage)await window.storage.set(KEY,JSON.stringify({ridx:ridx,cur:cur}));}catch(e){}}
+
+var actx=null;
+function ensureCtx(){if(!actx){try{actx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}}
+function sizzle(){ensureCtx();if(!actx)return;try{var dur=1.3,buf=actx.createBuffer(1,Math.floor(actx.sampleRate*dur),actx.sampleRate),d=buf.getChannelData(0);for(var i=0;i<d.length;i++){d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,1.4);}var src=actx.createBufferSource();src.buffer=buf;var f=actx.createBiquadFilter();f.type="highpass";f.frequency.value=1400;var g=actx.createGain();g.gain.value=.14;src.connect(f);f.connect(g);g.connect(actx.destination);src.start();}catch(e){}}
+function ding(){ensureCtx();if(!actx)return;try{var o=actx.createOscillator(),g=actx.createGain();o.connect(g);g.connect(actx.destination);o.frequency.value=880;g.gain.value=.12;o.start();setTimeout(function(){o.frequency.value=1175;},140);setTimeout(function(){o.stop();},340);}catch(e){}}
+
+var PAW="<svg class='paw' viewBox='0 0 24 24'><ellipse cx='12' cy='15' rx='6' ry='5' fill='#E8623C'/><circle cx='6' cy='8' r='2.4' fill='#E8623C'/><circle cx='12' cy='6' r='2.4' fill='#E8623C'/><circle cx='18' cy='8' r='2.4' fill='#E8623C'/></svg>";
+function renderPaws(){var steps=RECIPES[ridx].steps;document.getElementById("paws").innerHTML=steps.map(function(s,i){return PAW.replace("paw",i<=cur?"paw on":"paw");}).join("");}
+var GROUPS=[["Taco Night",["asada","barbacoa","quesabirria","carnitas","walkingtacos"]],["Weeknight Dinners",["filet","ribeye","harissa","burgers","salad"]],["Big Cooks",["pulledpork","chili","cornbreadchili","shortribs","chicken","meatloaf"]],["Family Traditions",["crazybread","potroast"]],["Breakfast",["breakfasttacos"]],["Holidays",["turkey"]],["Sides & Salsas",["guac","pico","rice","beans","mac","potatoes"]]];
+function splitName(n){var m=n.match(/^(\S+)\s+(.*)$/);return m?{e:m[1],t:m[2]}:{e:"🍽️",t:n};}
+function renderPicker(){var nm=splitName(RECIPES[ridx].name);document.getElementById("picker").innerHTML="<span class='pb-emoji'>"+nm.e+"</span><span class='pb-txt'><span class='pb-lbl'>Now cooking</span><span class='pb-name'>"+nm.t+"</span></span><span class='pb-go'>Change ▾</span>";}
+function menuCard(i){var r=RECIPES[i],nm=splitName(r.name);return "<button class='rc"+(i===ridx?" on":"")+"' data-i='"+i+"'><span class='rc-e'>"+nm.e+"</span><span class='rc-n'>"+nm.t+"</span><span class='rc-s'>"+r.steps.length+" steps</span></button>";}
+function renderMenu(){var q=(document.getElementById("menuQ").value||"").trim().toLowerCase();var used={},out="";
+ function match(i){return !q||RECIPES[i].name.toLowerCase().indexOf(q)>-1;}
+ var idx={};RECIPES.forEach(function(r,i){idx[r.id]=i;});
+ var groups=GROUPS.map(function(g){return [g[0],g[1].filter(function(id){return id in idx;}).map(function(id){used[id]=1;return idx[id];})];});
+ var rest=RECIPES.map(function(r,i){return i;}).filter(function(i){return !used[RECIPES[i].id];});if(rest.length)groups.push(["More",rest]);
+ groups.forEach(function(g){var list=g[1].filter(match);if(!list.length)return;out+="<div class='grp'>"+g[0]+"</div><div class='grid'>"+list.map(menuCard).join("")+"</div>";});
+ var body=document.getElementById("menuBody");body.innerHTML=out||"<div class='empty'>No recipe by that name. Kenny checked twice. 🐾</div>";
+ Array.prototype.forEach.call(body.querySelectorAll(".rc"),function(c){c.onclick=function(){ridx=+c.getAttribute("data-i");cur=0;closeMenu();renderPicker();render();window.scrollTo(0,0);};});}
+function openMenu(){document.getElementById("menuQ").value="";renderMenu();document.getElementById("menu").classList.add("open");document.body.classList.add("locked");var on=document.querySelector(".rc.on");if(on)on.scrollIntoView({block:"center"});}
+function closeMenu(){document.getElementById("menu").classList.remove("open");document.body.classList.remove("locked");}
+document.getElementById("picker").onclick=openMenu;
+document.getElementById("menuX").onclick=closeMenu;
+document.getElementById("menuBg").onclick=closeMenu;
+document.getElementById("menuQ").oninput=renderMenu;
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeMenu();});
+
+function fmt(s){s=Math.max(0,s);var m=Math.floor(s/60),ss=s%60;return m+":"+String(ss).padStart(2,"0");}
+function startTimerFor(dur){timer={sec:dur,running:false,endAt:null,done:false,dur:dur};}
+function toggleTimer(){ensureCtx();if(timer.done){timer.done=false;timer.running=false;timer.sec=timer.dur;timer.endAt=null;}else if(timer.running){timer.sec=Math.max(0,Math.round((timer.endAt-Date.now())/1000));timer.running=false;timer.endAt=null;}else{timer.running=true;timer.endAt=Date.now()+timer.sec*1000;}paintTimer();}
+function paintTimer(){var el=document.getElementById("timerBtn");if(!el)return;var rem=timer.sec;if(timer.running){rem=Math.max(0,Math.round((timer.endAt-Date.now())/1000));timer.sec=rem;if(rem<=0&&!timer.done){timer.running=false;timer.done=true;ding();}}el.className="timer"+(timer.running?" running":"")+(timer.done?" done":"");var lbl=el.getAttribute("data-lbl");el.textContent=timer.done?("\u23F0 "+lbl+" done!"):(timer.running?("\u275A\u275A "+fmt(rem)):("\u25B6 "+lbl+" "+fmt(rem)));}
+
+function render(){
+ var R=RECIPES[ridx];var steps=R.steps;if(cur>steps.length-1)cur=steps.length-1;var s=steps[cur];
+ document.getElementById("meterName").textContent=R.meter||"🍳 Cook Meter";
+ document.getElementById("stageTag").textContent="Step "+(cur+1)+" of "+steps.length;
+ document.getElementById("stageTitle").innerHTML=s.title;
+ document.getElementById("realBox").innerHTML=s.real+(s.dur?("<br><span class='dur'>\u23F1 "+s.dur+"</span>"):"");
+ document.getElementById("bubble").textContent=s.kenny;
+ document.getElementById("scene").innerHTML=s.scene;
+ var ex=document.getElementById("extras");ex.innerHTML="";
+ if(s.timer){startTimerFor(s.timer);var b=document.createElement("button");b.className="timer";b.id="timerBtn";b.setAttribute("data-lbl",s.timerLbl||"Timer");b.onclick=toggleTimer;ex.appendChild(b);paintTimer();}
+ if(s.sizzle){var z=document.createElement("button");z.className="sizzle-btn";z.textContent="\uD83D\uDD25 SIZZLE!";z.onclick=sizzle;ex.appendChild(z);sizzle();}
+ document.getElementById("meterFill").style.width=s.cook+"%";
+ var pct=document.getElementById("meterPct");pct.textContent=s.cook===0?"Raw":s.cook<40?"Getting going":s.cook<70?"Getting there":s.cook<100?"Almost!":"\uD83C\uDFC6 Done!";
+ document.getElementById("back").disabled=(cur===0);
+ var nx=document.getElementById("next");nx.textContent=cur===steps.length-1?"\uD83C\uDF89 Done!":"Next \u25B6";
+ renderPaws();
+ if(cur===steps.length-1)bigFinale();
+ save();
+}
+
+document.getElementById("next").onclick=function(){ensureCtx();var steps=RECIPES[ridx].steps;if(cur<steps.length-1){cur++;render();}else{bigFinale();}};
+document.getElementById("back").onclick=function(){if(cur>0){cur--;render();}};
+document.getElementById("scene").onclick=boop;
+document.getElementById("boop").onclick=boop;
+function boop(){var sc=document.getElementById("scene");var prev=sc.innerHTML;document.getElementById("bubble").textContent=BOOPS[Math.floor(Math.random()*BOOPS.length)];if(!sc.querySelector("image[data-pose='cheer']")){sc.innerHTML=idleScene();clearTimeout(window._bt);window._bt=setTimeout(function(){if(sc.querySelector("image[data-pose='idle']"))sc.innerHTML=prev;},2200);}sc.classList.remove("boop");void sc.offsetWidth;sc.classList.add("boop");setTimeout(function(){sc.classList.remove("boop");},520);ding();}
+
+function party(n){n=n||26;var em=["\uD83C\uDF89","\uD83C\uDF2E","\uD83E\uDD69","\uD83C\uDF36\uFE0F","\uD83C\uDF8A","\uD83D\uDC3E","\u2B50","\uD83D\uDD25","\uD83C\uDF4B"];for(var i=0;i<n;i++){var c=document.createElement("div");c.className="confetti";c.textContent=em[Math.floor(Math.random()*em.length)];c.style.left=Math.random()*100+"vw";c.style.animationDuration=(2+Math.random()*2)+"s";c.style.animationDelay=(Math.random()*.6)+"s";document.body.appendChild(c);(function(cc){setTimeout(function(){cc.remove();},4200);})(c);}}
+function bigFinale(){var fr=ridx,fc=cur;clearTimeout(window._ct);window._ct=setTimeout(function(){if(ridx===fr&&cur===fc){var scf=document.getElementById("scene");if(scf)scf.innerHTML=cheerScene();}},2300);ding();party(46);setTimeout(function(){party(38);ding();},450);setTimeout(function(){party(38);},950);setTimeout(function(){party(34);ding();},1500);var card=document.querySelector(".card");if(card){card.classList.remove("celebrate");void card.offsetWidth;card.classList.add("celebrate");}}
+
+(async function(){await load();renderPicker();render();setInterval(function(){if(document.getElementById("timerBtn"))paintTimer();},1000);})();
+</script>
+
+
+</body></html>
