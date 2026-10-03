@@ -251,11 +251,57 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
   .p-dial .fb{animation:fb-dial var(--P) linear infinite;} .p-dial .fa{animation:fa-dial var(--P) linear infinite;}
   @keyframes fb-dial{0%,24%{opacity:0}30%,70%{opacity:1}76%,100%{opacity:0}} @keyframes fa-dial{0%,30%{opacity:1}30.1%,69.9%{opacity:0}70%,100%{opacity:1}}
   @media (prefers-reduced-motion: reduce){.scene svg *{animation:none!important;}}
+
+  .view{display:none;} .view.on{display:block;animation:vin .3s ease-out;}
+  @keyframes vin{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  h1 button{all:unset;cursor:pointer;}
+  .hero{cursor:pointer;}
+  .hi{font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;text-align:center;margin:4px 0 2px;color:var(--char);}
+  .hi-sub{text-align:center;font-size:14px;color:#6b5a4c;margin:0 0 14px;font-weight:600;}
+  .resume{display:flex;align-items:center;gap:12px;width:100%;background:var(--bbq);color:#fff;border:3px solid var(--char);border-radius:18px;padding:12px 14px;margin-bottom:14px;cursor:pointer;box-shadow:0 4px 0 rgba(62,46,38,.25);font:inherit;text-align:left;}
+  .resume:active,.tile:active,.homebtn:active{transform:translateY(2px);}
+  .resume .r-e{font-size:28px;line-height:1;}
+  .resume .r-t{flex:1;display:flex;flex-direction:column;}
+  .resume .r-l{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.9;}
+  .resume .r-n{font-family:'Fredoka',sans-serif;font-weight:600;font-size:18px;}
+  .resume .r-s{font-size:12px;font-weight:700;opacity:.9;}
+  .resume .r-go{font-family:'Fredoka',sans-serif;font-weight:600;font-size:15px;background:#fff;color:var(--bbq-deep);border-radius:12px;padding:6px 10px;white-space:nowrap;}
+  .sec{font-family:'Fredoka',sans-serif;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#5f6f4a;margin:2px 2px 8px;}
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+  .tile{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:98px;background:var(--card);border:3px solid var(--char);border-radius:18px;padding:12px 14px;cursor:pointer;font:inherit;color:var(--char);text-align:left;box-shadow:0 4px 0 rgba(62,46,38,.16);}
+  .tile .t-e{font-size:30px;line-height:1.1;}
+  .tile .t-n{font-family:'Fredoka',sans-serif;font-weight:600;font-size:17px;line-height:1.15;}
+  .tile .t-s{font-size:12px;font-weight:700;color:#8a7a6a;}
+  .resume[hidden]{display:none;}
+  .tile.all.wide{grid-column:1 / -1;flex-direction:row;align-items:center;gap:12px;min-height:0;}
+  .tile.all{background:#fff;}
+  .tile.allx{grid-column:1 / -1;flex-direction:row;align-items:center;gap:12px;min-height:0;background:#fff;}
+  .tile.all .t-n{flex:1;}
+  .surprise{display:block;width:100%;font-family:'Fredoka',sans-serif;font-weight:600;font-size:17px;background:var(--sun);color:var(--char);border:3px solid var(--char);border-radius:16px;padding:13px;cursor:pointer;box-shadow:0 4px 0 rgba(62,46,38,.25);margin-bottom:16px;}
+  .toprow{display:flex;gap:8px;margin-bottom:10px;}
+  .toprow .pickbar{flex:1;margin-bottom:0;min-width:0;}
+  .homebtn{flex:0 0 58px;background:var(--card);border:3px solid var(--char);border-radius:18px;font-size:24px;cursor:pointer;box-shadow:0 4px 0 rgba(62,46,38,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;font-family:'Fredoka',sans-serif;color:var(--char);padding:4px 0;}
+  .homebtn small{font-size:11px;font-weight:600;}
+  .menu-all{display:block;margin:16px auto 0;font-family:'Fredoka',sans-serif;font-weight:600;font-size:15px;background:none;border:0;color:var(--bbq-deep);text-decoration:underline;cursor:pointer;}
 </style>
 <div class="sun"></div>
 <div class="wrap">
-  <h1>🐕‍🦺 Chef Kenny's Kitchen</h1>
-  <button class="pickbar" id="picker" aria-haspopup="dialog"></button>
+  <h1><button id="goHomeH" aria-label="Home">🐕‍🦺 Chef Kenny's Kitchen</button></h1>
+  <div class="view" id="home">
+    <div class="scene hero" id="homeScene"></div>
+    <div class="hi" id="homeHi">Hi! I'm Chef Kenny.</div>
+    <p class="hi-sub">What are we cooking today?</p>
+    <button class="resume" id="resume" hidden></button>
+    <div class="sec">Pick a kind of meal</div>
+    <div class="tiles" id="tiles"></div>
+    <button class="surprise" id="surprise">🎲 Surprise me, Kenny!</button>
+    <p class="footer">Pick a meal and Kenny cooks it with you, one step at a time. 🐾</p>
+  </div>
+  <div class="view" id="cook">
+  <div class="toprow">
+    <button class="homebtn" id="homeBtn" aria-label="Back to home">🏠<small>Home</small></button>
+    <button class="pickbar" id="picker" aria-haspopup="dialog"></button>
+  </div>
   <div class="paws" id="paws"></div>
   <div class="scene" id="scene"></div>
   <div class="bubble-row">
@@ -276,8 +322,9 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
     <button class="btn back" id="back">◀</button>
     <button class="btn next" id="next">Next ▶</button>
   </div>
-  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Pick a recipe"><div class="menu-bg" id="menuBg"></div><div class="menu-sheet"><div class="menu-head"><h2>What are we cooking?</h2><button class="menu-x" id="menuX" aria-label="Close">✕</button></div><input class="menu-search" id="menuQ" type="search" placeholder="Search recipes..." autocomplete="off"><div class="menu-body" id="menuBody"></div></div></div>
   <p class="footer">Tap the recipe up top to switch. Kenny cooks it with you, step by step. 🐾</p>
+  </div>
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Pick a recipe"><div class="menu-bg" id="menuBg"></div><div class="menu-sheet"><div class="menu-head"><h2>What are we cooking?</h2><button class="menu-x" id="menuX" aria-label="Close">✕</button></div><input class="menu-search" id="menuQ" type="search" placeholder="Search recipes..." autocomplete="off"><div class="menu-body" id="menuBody"></div></div></div>
 </div>
 
 <script>
@@ -336,7 +383,7 @@ var ACT={
 function cheerScene(){return "<svg viewBox='0 0 300 210' class='sc p-cheer'>"+WALL+kGroup("cheer")+COUNTER+"<circle class='spark' cx='60' cy='60' r='3' fill='#FBC23C'/><circle class='spark' cx='240' cy='50' r='3' fill='#F58AA0' style='animation-delay:.3s'/><circle class='spark' cx='70' cy='120' r='2.5' fill='#59A23A' style='animation-delay:.6s'/><circle class='spark' cx='235' cy='110' r='2.5' fill='#E8623C' style='animation-delay:.9s'/>"+E;}
 function idleScene(){return "<svg viewBox='0 0 300 210' class='sc p-idle'>"+WALL+kGroup("idle")+COUNTER+"</svg>";}
 var blinkT=null;
-function startBlink(){clearInterval(blinkT);blinkT=setInterval(function(){var im=document.querySelector(".scene image[data-pose='idle']");if(!im)return;im.setAttribute("href",KP+"blink.webp");setTimeout(function(){im.setAttribute("href",KP+"idle.webp");},170);},2600);}
+function startBlink(){clearInterval(blinkT);blinkT=setInterval(function(){Array.prototype.forEach.call(document.querySelectorAll(".scene image[data-pose='idle']"),function(im){im.setAttribute("href",KP+"blink.webp");setTimeout(function(){im.setAttribute("href",KP+"idle.webp");},170);});},2600);}
 startBlink();
 
 var MEAT="#7A3A2C",CHILI="#7C2E24",GUAC="#8FA84A",CHEESE="#F2C14E",POTATO="#F3ECDA",CHK="#C99A5B",PORK="#C67B5A",ONION="#F0E6E8",RICE="#F0E8D2",BEANS="#6B4A2E",TOMATO="#C0392B";
@@ -930,8 +977,9 @@ var KEY="kenny-kitchen-v1";
 var ridx=0, cur=0;
 var timer={sec:0,running:false,endAt:null,done:false,dur:0};
 
-async function load(){try{if(window.storage){var r=await window.storage.get(KEY);if(r&&r.value){var o=JSON.parse(r.value);ridx=o.ridx||0;cur=o.cur||0;}}}catch(e){}}
-async function save(){try{if(window.storage)await window.storage.set(KEY,JSON.stringify({ridx:ridx,cur:cur}));}catch(e){}}
+var hasSave=false;
+async function load(){var v=null;try{if(window.storage){var r=await window.storage.get(KEY);if(r&&r.value)v=r.value;}}catch(e){}if(!v){try{v=localStorage.getItem(KEY);}catch(e){}}if(v){try{var o=JSON.parse(v);ridx=Math.min(o.ridx||0,RECIPES.length-1);cur=o.cur||0;hasSave=true;}catch(e){}}}
+async function save(){var v=JSON.stringify({ridx:ridx,cur:cur});hasSave=true;try{localStorage.setItem(KEY,v);}catch(e){}try{if(window.storage)await window.storage.set(KEY,v);}catch(e){}}
 
 var actx=null;
 function ensureCtx(){if(!actx){try{actx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}}
@@ -940,6 +988,7 @@ function ding(){ensureCtx();if(!actx)return;try{var o=actx.createOscillator(),g=
 
 var PAW="<svg class='paw' viewBox='0 0 24 24'><ellipse cx='12' cy='15' rx='6' ry='5' fill='#E8623C'/><circle cx='6' cy='8' r='2.4' fill='#E8623C'/><circle cx='12' cy='6' r='2.4' fill='#E8623C'/><circle cx='18' cy='8' r='2.4' fill='#E8623C'/></svg>";
 function renderPaws(){var steps=RECIPES[ridx].steps;document.getElementById("paws").innerHTML=steps.map(function(s,i){return PAW.replace("paw",i<=cur?"paw on":"paw");}).join("");}
+var GEMO={"Taco Night":"🌮","Weeknight Dinners":"🥩","Big Cooks":"🔥","Family Traditions":"💛","Breakfast":"🍳","Holidays":"🦃","Sides & Salsas":"🥑","More":"🍽️"};
 var GROUPS=[["Taco Night",["asada","barbacoa","quesabirria","carnitas","walkingtacos"]],["Weeknight Dinners",["filet","ribeye","harissa","burgers","salad"]],["Big Cooks",["pulledpork","chili","cornbreadchili","shortribs","chicken","meatloaf"]],["Family Traditions",["crazybread","potroast"]],["Breakfast",["breakfasttacos"]],["Holidays",["turkey"]],["Sides & Salsas",["guac","pico","rice","beans","mac","potatoes"]]];
 function splitName(n){var m=n.match(/^(\S+)\s+(.*)$/);return m?{e:m[1],t:m[2]}:{e:"🍽️",t:n};}
 function renderPicker(){var nm=splitName(RECIPES[ridx].name);document.getElementById("picker").innerHTML="<span class='pb-emoji'>"+nm.e+"</span><span class='pb-txt'><span class='pb-lbl'>Now cooking</span><span class='pb-name'>"+nm.t+"</span></span><span class='pb-go'>Change ▾</span>";}
@@ -949,12 +998,14 @@ function renderMenu(){var q=(document.getElementById("menuQ").value||"").trim().
  var idx={};RECIPES.forEach(function(r,i){idx[r.id]=i;});
  var groups=GROUPS.map(function(g){return [g[0],g[1].filter(function(id){return id in idx;}).map(function(id){used[id]=1;return idx[id];})];});
  var rest=RECIPES.map(function(r,i){return i;}).filter(function(i){return !used[RECIPES[i].id];});if(rest.length)groups.push(["More",rest]);
- groups.forEach(function(g){var list=g[1].filter(match);if(!list.length)return;out+="<div class='grp'>"+g[0]+"</div><div class='grid'>"+list.map(menuCard).join("")+"</div>";});
- var body=document.getElementById("menuBody");body.innerHTML=out||"<div class='empty'>No recipe by that name. Kenny checked twice. 🐾</div>";
- Array.prototype.forEach.call(body.querySelectorAll(".rc"),function(c){c.onclick=function(){ridx=+c.getAttribute("data-i");cur=0;closeMenu();renderPicker();render();window.scrollTo(0,0);};});}
-function openMenu(){document.getElementById("menuQ").value="";renderMenu();document.getElementById("menu").classList.add("open");document.body.classList.add("locked");var on=document.querySelector(".rc.on");if(on)on.scrollIntoView({block:"center"});}
+ var only=(!q&&menuGrp)?menuGrp:null;document.querySelector(".menu-head h2").textContent=only?((GEMO[only]||"")+" "+only):"What are we cooking?";
+ groups.forEach(function(g){if(only&&g[0]!==only)return;var list=g[1].filter(match);if(!list.length)return;out+="<div class='grp'>"+g[0]+"</div><div class='grid'>"+list.map(menuCard).join("")+"</div>";});
+ var body=document.getElementById("menuBody");body.innerHTML=(out||"<div class='empty'>No recipe by that name. Kenny checked twice. 🐾</div>")+(only?"<button class='menu-all' id='menuAll'>See all recipes</button>":"");var ma=document.getElementById("menuAll");if(ma)ma.onclick=function(){menuGrp=null;renderMenu();body.scrollTop=0;};
+ Array.prototype.forEach.call(body.querySelectorAll(".rc"),function(c){c.onclick=function(){startRecipe(+c.getAttribute("data-i"));};});}
+var menuGrp=null;
+function openMenu(g){menuGrp=(typeof g==="string")?g:null;document.getElementById("menuQ").value="";renderMenu();document.getElementById("menu").classList.add("open");document.body.classList.add("locked");var on=document.querySelector(".rc.on");if(on)on.scrollIntoView({block:"center"});}
 function closeMenu(){document.getElementById("menu").classList.remove("open");document.body.classList.remove("locked");}
-document.getElementById("picker").onclick=openMenu;
+document.getElementById("picker").onclick=function(){openMenu();};
 document.getElementById("menuX").onclick=closeMenu;
 document.getElementById("menuBg").onclick=closeMenu;
 document.getElementById("menuQ").oninput=renderMenu;
@@ -994,7 +1045,26 @@ function boop(){var sc=document.getElementById("scene");var prev=sc.innerHTML;do
 function party(n){n=n||26;var em=["\uD83C\uDF89","\uD83C\uDF2E","\uD83E\uDD69","\uD83C\uDF36\uFE0F","\uD83C\uDF8A","\uD83D\uDC3E","\u2B50","\uD83D\uDD25","\uD83C\uDF4B"];for(var i=0;i<n;i++){var c=document.createElement("div");c.className="confetti";c.textContent=em[Math.floor(Math.random()*em.length)];c.style.left=Math.random()*100+"vw";c.style.animationDuration=(2+Math.random()*2)+"s";c.style.animationDelay=(Math.random()*.6)+"s";document.body.appendChild(c);(function(cc){setTimeout(function(){cc.remove();},4200);})(c);}}
 function bigFinale(){var fr=ridx,fc=cur;clearTimeout(window._ct);window._ct=setTimeout(function(){if(ridx===fr&&cur===fc){var scf=document.getElementById("scene");if(scf)scf.innerHTML=cheerScene();}},2300);ding();party(46);setTimeout(function(){party(38);ding();},450);setTimeout(function(){party(38);},950);setTimeout(function(){party(34);ding();},1500);var card=document.querySelector(".card");if(card){card.classList.remove("celebrate");void card.offsetWidth;card.classList.add("celebrate");}}
 
-(async function(){await load();renderPicker();render();setInterval(function(){if(document.getElementById("timerBtn"))paintTimer();},1000);})();
+
+function groupsList(){var idx={};RECIPES.forEach(function(r,i){idx[r.id]=i;});return GROUPS.map(function(g){return [g[0],g[1].filter(function(id){return id in idx;}).map(function(id){return idx[id];})];}).filter(function(g){return g[1].length;});}
+function startRecipe(i){ridx=i;cur=0;closeMenu();renderPicker();showView("cook");render();}
+function renderHome(){
+ var gl=groupsList();
+ document.getElementById("tiles").innerHTML=gl.map(function(g){var n=g[1].length;return "<button class='tile' data-g=\""+g[0]+"\"><span class='t-e'>"+(GEMO[g[0]]||"🍽️")+"</span><span class='t-n'>"+g[0]+"</span><span class='t-s'>"+n+(n===1?" recipe":" recipes")+"</span></button>";}).join("")+"<button class='tile all"+(gl.length%2?"":" wide")+"' data-g=''><span class='t-e'>🔍</span><span class='t-n'>All recipes</span><span class='t-s'>"+RECIPES.length+" recipes</span></button>";
+ Array.prototype.forEach.call(document.querySelectorAll("#tiles .tile"),function(t){t.onclick=function(){var g=t.getAttribute("data-g");if(g){var gg=gl.filter(function(x){return x[0]===g;})[0];if(gg&&gg[1].length===1){startRecipe(gg[1][0]);return;}}openMenu(g||null);};});
+ var rs=document.getElementById("resume"),R=RECIPES[ridx];
+ if(hasSave&&R&&cur>0&&cur<R.steps.length-1){var nm=splitName(R.name);rs.innerHTML="<span class='r-e'>"+nm.e+"</span><span class='r-t'><span class='r-l'>Pick up where you left off</span><span class='r-n'>"+nm.t+"</span><span class='r-s'>Step "+(cur+1)+" of "+R.steps.length+"</span></span><span class='r-go'>Keep going ▶</span>";rs.hidden=false;}else{rs.hidden=true;}
+ document.getElementById("homeScene").innerHTML=idleScene();
+}
+var HELLOS=["Hi! I'm Chef Kenny.","Hey there, chef!","Welcome back to the kitchen!","Chef Kenny, reporting for duty!"];
+function showView(v){document.getElementById("home").classList.toggle("on",v==="home");document.getElementById("cook").classList.toggle("on",v==="cook");var want=v==="cook"?"#cook":"#home";if(location.hash!==want){try{history.pushState(null,"",want);}catch(e){location.hash=want;}}if(v==="home"){renderHome();document.getElementById("homeHi").textContent=HELLOS[Math.floor(Math.random()*HELLOS.length)];clearTimeout(window._ct);}window.scrollTo(0,0);}
+window.addEventListener("popstate",function(){if(location.hash==="#cook"){showView("cook");render();}else{closeMenu();showView("home");}});
+document.getElementById("homeBtn").onclick=function(){showView("home");};
+document.getElementById("goHomeH").onclick=function(){showView("home");};
+document.getElementById("resume").onclick=function(){renderPicker();showView("cook");render();};
+document.getElementById("homeScene").onclick=function(){document.getElementById("homeHi").textContent=BOOPS[Math.floor(Math.random()*BOOPS.length)];ding();var sc=document.getElementById("homeScene");sc.classList.remove("boop");void sc.offsetWidth;sc.classList.add("boop");setTimeout(function(){sc.classList.remove("boop");},520);};
+document.getElementById("surprise").onclick=function(){ensureCtx();var pool=[];groupsList().forEach(function(g){if(g[0]!=="Sides & Salsas")pool=pool.concat(g[1]);});if(!pool.length)pool=RECIPES.map(function(r,i){return i;});var i=pool[Math.floor(Math.random()*pool.length)];if(pool.length>1&&i===ridx)i=pool[(pool.indexOf(i)+1)%pool.length];ding();startRecipe(i);};
+(async function(){await load();renderPicker();if(location.hash==="#cook"){showView("cook");render();}else{try{history.replaceState(null,"","#home");}catch(e){}showView("home");}setInterval(function(){if(document.getElementById("timerBtn"))paintTimer();},1000);})();
 </script>
 
 
