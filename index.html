@@ -283,6 +283,33 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
   .homebtn{flex:0 0 58px;background:var(--card);border:3px solid var(--char);border-radius:18px;font-size:24px;cursor:pointer;box-shadow:0 4px 0 rgba(62,46,38,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;font-family:'Fredoka',sans-serif;color:var(--char);padding:4px 0;}
   .homebtn small{font-size:11px;font-weight:600;}
   .menu-all{display:block;margin:16px auto 0;font-family:'Fredoka',sans-serif;font-weight:600;font-size:15px;background:none;border:0;color:var(--bbq-deep);text-decoration:underline;cursor:pointer;}
+  .ingbtn{display:flex;align-items:center;gap:10px;width:100%;background:#fff;border:3px solid var(--char);border-radius:16px;padding:9px 12px;margin-bottom:10px;cursor:pointer;box-shadow:0 3px 0 rgba(62,46,38,.16);font:inherit;color:var(--char);text-align:left;}
+  .ingbtn[hidden]{display:none;}
+  .ingbtn:active{transform:translateY(2px);}
+  .ib-e{font-size:22px;} .ib-t{font-family:'Fredoka',sans-serif;font-weight:600;font-size:16px;} .ib-s{flex:1;font-size:13px;font-weight:700;color:#8a7a6a;} .ib-go{font-family:'Fredoka',sans-serif;font-weight:600;font-size:14px;color:var(--bbq-deep);}
+  .serv{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#fff;border:2px solid var(--char);border-radius:16px;padding:10px 12px;margin:4px 0 8px;}
+  .serv-l{font-family:'Fredoka',sans-serif;font-weight:600;font-size:17px;}
+  .sv-b{width:44px;height:44px;border-radius:50%;border:3px solid var(--char);background:var(--sun);font-family:'Fredoka',sans-serif;font-weight:700;font-size:24px;line-height:1;cursor:pointer;color:var(--char);box-shadow:0 3px 0 rgba(62,46,38,.2);}
+  .sv-b:active{transform:translateY(2px);}
+  .sv-n{font-family:'Fredoka',sans-serif;font-weight:700;font-size:26px;min-width:34px;text-align:center;}
+  .sv-reset{margin-left:auto;background:none;border:0;color:var(--bbq-deep);font-weight:800;font-size:13px;text-decoration:underline;cursor:pointer;font-family:inherit;}
+  .serv-note{font-size:13px;color:#6b5a4c;margin:0 2px 8px;font-weight:600;line-height:1.35;}
+  .ing-h{font-family:'Fredoka',sans-serif;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8a7a6a;margin:14px 2px 6px;}
+  .ing{display:flex;align-items:flex-start;gap:10px;padding:10px 4px;border-bottom:1px dashed var(--line);cursor:pointer;font-size:16px;line-height:1.3;}
+  .ing input{position:absolute;opacity:0;pointer-events:none;}
+  .ing-box{flex:0 0 22px;height:22px;border:2.5px solid var(--char);border-radius:7px;background:#fff;margin-top:1px;display:flex;align-items:center;justify-content:center;}
+  .ing.got .ing-box{background:var(--leaf);border-color:var(--leaf);}
+  .ing.got .ing-box::after{content:"✓";color:#fff;font-weight:900;font-size:15px;}
+  .ing-q{flex:0 0 auto;min-width:64px;font-weight:800;color:var(--bbq-deep);}
+  .ing-q:empty{min-width:0;}
+  .ing-t{flex:1;}
+  .ing.got .ing-q,.ing.got .ing-t{opacity:.45;text-decoration:line-through;}
+  .ing-acts{display:flex;gap:10px;margin:16px 0 12px;}
+  .ing-copy{flex:1;font-family:'Fredoka',sans-serif;font-weight:600;font-size:15px;background:#fff;border:2.5px solid var(--char);border-radius:14px;padding:11px;cursor:pointer;color:var(--char);}
+  .ing-clear{background:none;border:0;color:#8a7a6a;font-weight:800;font-size:13px;text-decoration:underline;cursor:pointer;font-family:inherit;}
+  .ing-go{display:block;width:100%;}
+  .sq{background:#FFE9A8;border-radius:4px;padding:0 2px;}
+  .scaled-tag{display:inline-block;font-size:11px;font-weight:800;color:#5a7a2a;background:#E6F3D2;border-radius:8px;padding:2px 7px;margin-left:6px;vertical-align:middle;letter-spacing:.02em;}
 </style>
 <div class="sun"></div>
 <div class="wrap">
@@ -302,6 +329,7 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
     <button class="homebtn" id="homeBtn" aria-label="Back to home">🏠<small>Home</small></button>
     <button class="pickbar" id="picker" aria-haspopup="dialog"></button>
   </div>
+  <button class="ingbtn" id="ingBtn" aria-haspopup="dialog"></button>
   <div class="paws" id="paws"></div>
   <div class="scene" id="scene"></div>
   <div class="bubble-row">
@@ -324,6 +352,7 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
   </div>
   <p class="footer">Tap the recipe up top to switch. Kenny cooks it with you, step by step. 🐾</p>
   </div>
+  <div class="menu" id="ingSheet" role="dialog" aria-modal="true" aria-label="Ingredients"><div class="menu-bg" id="ingBg"></div><div class="menu-sheet"><div class="menu-head"><h2 id="ingTitle">Ingredients</h2><button class="menu-x" id="ingX" aria-label="Close">✕</button></div><div class="menu-body" id="ingBody"></div></div></div>
   <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Pick a recipe"><div class="menu-bg" id="menuBg"></div><div class="menu-sheet"><div class="menu-head"><h2>What are we cooking?</h2><button class="menu-x" id="menuX" aria-label="Close">✕</button></div><input class="menu-search" id="menuQ" type="search" placeholder="Search recipes..." autocomplete="off"><div class="menu-body" id="menuBody"></div></div></div>
 </div>
 
@@ -516,8 +545,8 @@ var RECIPES=[
   st("Scoop &amp; Serve","Chili on the bottom, cornbread on top, corgi very pleased.","Spoon into bowls, cornbread and all. Sprinkle with <b>cilantro</b>. Butter on the cornbread never hurt anybody.",100,ACT.serve('bowl',CHILI),{dur:"Feast!"})
  ]},
  {id:"filet",name:"🥩 Reverse Sear Filet",meter:"🥩 Filet Meter",steps:[
-  st("Salt the Fancy Steak","Salt on every side. Even the edges. I checked.","Salt <b>one 7&#8211;8 oz filet</b> (at least 1.5 in thick) all over, sides too. Uncovered on a plate in the fridge, about <b>2.5 hr</b>. Dry surface, fast crust.",5,ACT.season(MEAT),{dur:"~2.5 hr"}),
-  st("Wake Up, Grill!","Low and gentle tonight, grill. Indoor voice.","Traeger to <b>225&#176;F</b>. Steak out on the counter. Cut the top off <b>1 head garlic</b>, drizzle oil, wrap in foil. Set a stick of <b>butter</b> out to soften.",15,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
+  st("Salt the Fancy Steak","Salt on every side. Even the edges. I checked.","Salt <b>one <span class='ns'>7&#8211;8 oz</span> filet</b> (at least 1.5 in thick) all over, sides too. Uncovered on a plate in the fridge, about <b>2.5 hr</b>. Dry surface, fast crust.",5,ACT.season(MEAT),{dur:"~2.5 hr"}),
+  st("Wake Up, Grill!","Low and gentle tonight, grill. Indoor voice.","Traeger to <b>225&#176;F</b>. Steak out on the counter. Cut the top off <b><span class='ns'>1 head</span> garlic</b>, drizzle oil, wrap in foil. Set a stick of <b>butter</b> out to soften.",15,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
   st("Smoky Snooze","Probe in, alarm set, paws up. The grill's got this.","Steak and garlic packet on at 225. Probe alarm at <b>112&#176;F</b>. About 50 min, but go by the probe.",40,ACT.smokewait(MEAT),{dur:"~50 min",timer:3000,timerLbl:"Smoke"}),
   st("Off at 112, Crank It","Beep beep! Steak takes a little break. Grill goes BIG.","At <b>112&#176;F</b> pull the steak to a plate, garlic off. Dial to <b>500&#176;F</b>. A thick filet waits happily on the counter while it climbs.",55,ACT.fireup(),{dur:"12–15 min",timer:780,timerLbl:"Heat climb"}),
   st("Butter & Beans","Smoky garlic squish! Half for butter, half for beans. Fair is fair.","Squeeze the smoked garlic out. Half into the butter with chopped <b>thyme</b> and a pinch of salt. Half into a pan with <b>1 can cannellini</b>, olive oil and a splash of can liquid. Warm, mash about half, add <b>lemon</b> and salt.",70,ACT.stir(ONION),{dur:"~10 min"}),
@@ -570,7 +599,7 @@ var RECIPES=[
  ]},
  {id:"turkey",name:"🦃 Spatchcock Turkey",meter:"🦃 Turkey Meter",steps:[
   st("Flat Bird Magic","Snip out the backbone and squish it flat. Flat birds cook even!","Cut out the backbone of a <b>12&#8211;14 lb turkey</b> with poultry shears. Flip it and press hard on the breastbone until it lies flat. Save the backbone for gravy.",5,ACT.chop(CHK),{dur:"15 min"}),
-  st("Dry Brine Nap","Salt, then fridge, uncovered. Dry skin is crispy skin!","Salt all over, about <b>1 tsp kosher salt per lb</b>, some under the skin. Uncovered on a rack in the fridge <b>24&#8211;48 hr</b>.",15,ACT.season(CHK),{dur:"1–2 days"}),
+  st("Dry Brine Nap","Salt, then fridge, uncovered. Dry skin is crispy skin!","Salt all over, about <b><span class='ns'>1 tsp</span> kosher salt per lb</b>, some under the skin. Uncovered on a rack in the fridge <b>24&#8211;48 hr</b>.",15,ACT.season(CHK),{dur:"1–2 days"}),
   st("Butter Under the Skin","Sneaky butter pockets. My favorite kind of sneaky!","Mash <b>1 stick softened butter</b> with <b>Meat Church Honey Hog</b> or chopped herbs. Rub it under the breast and thigh skin. No more salt.",25,ACT.season(CHEESE),{dur:"10 min"}),
   st("Hot & Smoky","Hotter than usual today. Crispy skin needs heat!","Traeger to <b>325&#176;F</b>, cherry pellets. Plan extra time, your grill runs cool.",32,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
   st("Gobble Gobble Cook","Two probes, one in the breast. I'm on bird watch.","Bird on, skin up, legs toward the hot side. Probe the thickest part of the breast. Pull when the <b>breast hits 160&#176;F</b> and thighs read <b>175&#176;F+</b>. About <b>2&#8211;2.5 hr</b>.",75,ACT.smokewait(CHK),{dur:"2–2.5 hr",timer:3600,timerLbl:"Check temps"}),
@@ -763,7 +792,7 @@ function serveBowl(x,c,top){return "<path d='M"+(x-15)+" 64 Q"+(x-14)+" 74 "+x+"
 
 /* ===== Scene builder ===== */
 function tempOf(real){var m=(real||"").match(/(\d{3})\s*(?:&#176;|°)F?/g)||[];var best=0;m.forEach(function(s){var n=parseInt(s,10);if(n>=180&&n<=600&&n>best)best=n;});return best?String(best):null;}
-var HASB={stir:1,chop:1,whisk:1,season:1,slice:1,tongs:1,lid:1,blend:1,serve:1,cheer:1,peek:1,dial:1};
+var HASB={stir:1,chop:1,whisk:1,season:1,tongs:1,lid:1,blend:1,serve:1,cheer:1,peek:1,dial:1};
 Object.keys(HASB).forEach(function(p){var i=new Image();i.src=KP+p+"-b.webp";});
 function kGroup(pose){var A="<image class='kimg' data-pose='"+pose+"' href='"+KP+pose+".webp' x='50' y='4' width='200' height='200'/>";if(!HASB[pose])return "<g class='kin'><g class='kmove m-"+pose+"'>"+A+"</g></g>";return "<g class='kin'><g class='kmove m-"+pose+"'><g class='fa'>"+A+"</g><g class='fb'><image class='kimg' href='"+KP+pose+"-b.webp' x='50' y='4' width='200' height='200'/></g></g></g>";}
 function build(sp,real){
@@ -1016,12 +1045,464 @@ function startTimerFor(dur){timer={sec:dur,running:false,endAt:null,done:false,d
 function toggleTimer(){ensureCtx();if(timer.done){timer.done=false;timer.running=false;timer.sec=timer.dur;timer.endAt=null;}else if(timer.running){timer.sec=Math.max(0,Math.round((timer.endAt-Date.now())/1000));timer.running=false;timer.endAt=null;}else{timer.running=true;timer.endAt=Date.now()+timer.sec*1000;}paintTimer();}
 function paintTimer(){var el=document.getElementById("timerBtn");if(!el)return;var rem=timer.sec;if(timer.running){rem=Math.max(0,Math.round((timer.endAt-Date.now())/1000));timer.sec=rem;if(rem<=0&&!timer.done){timer.running=false;timer.done=true;ding();}}el.className="timer"+(timer.running?" running":"")+(timer.done?" done":"");var lbl=el.getAttribute("data-lbl");el.textContent=timer.done?("\u23F0 "+lbl+" done!"):(timer.running?("\u275A\u275A "+fmt(rem)):("\u25B6 "+lbl+" "+fmt(rem)));}
 
+// Ingredient lists. Item: [qty, unit, name, flag]. qty: number, [lo,hi], or null (to taste / no amount).
+// name "lime|limes" = singular|plural. flag "fixed" = does not scale. {h:"..."} = section header.
+var ING={
+asada:{serves:4,items:[
+ {h:"Marinade"},
+ [1.25,"lb","skirt steak"],
+ [3,"","lime|limes"],
+ [1,"","orange|oranges"],
+ [4,"","garlic clove|garlic cloves"],
+ [1/3,"cup","cilantro"],
+ [1,"","jalapeño|jalapeños"],
+ [3,"tbsp","oil"],
+ [1,"tsp","ground cumin"],
+ [1,"tsp","chili powder"],
+ [null,"","Salt and pepper"],
+ {h:"To serve"},
+ [0.5,"","white onion, diced|white onions, diced"],
+ [0.5,"cup","cilantro, chopped"],
+ [2,"","lime, in wedges|limes, in wedges"],
+ [12,"","tortilla|tortillas"],
+ [null,"","Or bowls: rice, beans, pico and guac (all in Sides & Salsas)"]
+]},
+barbacoa:{serves:6,items:[
+ [3.5,"lb","beef chuck roast"],
+ [1,"tbsp","kosher salt"],
+ [1,"tsp","black pepper"],
+ [1,"tbsp","ground cumin"],
+ [1,"tsp","dried oregano"],
+ {h:"Braising liquid"},
+ [2,"","chipotle in adobo (1 for mild)|chipotles in adobo (1 for mild)"],
+ [4,"","garlic clove|garlic cloves"],
+ [2,"","lime, juiced|limes, juiced"],
+ [1,"tbsp","apple cider vinegar"],
+ [2,"cup","beef broth"],
+ [1,"","white onion, quartered|white onions, quartered"],
+ [2,"","bay leaf|bay leaves"],
+ {h:"To serve"},
+ [18,"","corn tortilla|corn tortillas"],
+ [1,"","white onion, chopped|white onions, chopped"],
+ [1,"cup","cilantro, chopped"],
+ [3,"","lime, in wedges|limes, in wedges"],
+ [0.5,"cup","cotija or queso fresco (optional)"]
+]},
+guac:{serves:6,items:[
+ [4,"","ripe avocado|ripe avocados"],
+ [0.5,"","white onion|white onions"],
+ [2,"","jalapeño|jalapeños"],
+ [0.5,"cup","cilantro"],
+ [2,"","lime|limes"],
+ [2,"tbsp","olive oil"],
+ [null,"","Salt"]
+]},
+quesabirria:{serves:6,items:[
+ [3.5,"lb","beef chuck roast"],
+ [1,"tbsp","kosher salt"],
+ [1,"tsp","black pepper"],
+ [1,"tsp","ground cumin"],
+ {h:"Chile sauce and braise"},
+ [6,"","dried guajillo chile|dried guajillo chiles"],
+ [3,"","dried ancho chile|dried ancho chiles"],
+ [2,"","dried chile de árbol (optional heat)|dried chiles de árbol (optional heat)"],
+ [3,"","roma tomato|roma tomatoes"],
+ [1,"","white onion, halved|white onions, halved"],
+ [4,"","garlic clove|garlic cloves"],
+ [4,"cup","beef broth"],
+ [2,"tbsp","apple cider vinegar"],
+ [1,"tbsp","dried Mexican oregano"],
+ [1,"","cinnamon stick|cinnamon sticks"],
+ [2,"","bay leaf|bay leaves"],
+ [2,"","whole clove|whole cloves"],
+ {h:"To serve"},
+ [18,"","corn tortilla|corn tortillas"],
+ [2,"cup","Oaxaca or Monterey Jack, shredded"],
+ [1,"","white onion, chopped|white onions, chopped"],
+ [1,"cup","cilantro, chopped"],
+ [3,"","lime|limes"]
+]},
+carnitas:{serves:6,items:[
+ [4,"lb","boneless pork shoulder (butt)"],
+ [1,"tbsp","kosher salt"],
+ [1,"tsp","black pepper"],
+ [1,"tbsp","ground cumin"],
+ [1,"tbsp","mild chili powder"],
+ [1,"tsp","dried oregano"],
+ [1,"tsp","garlic powder"],
+ {h:"Braise"},
+ [1,"","orange, zest and juice|oranges, zest and juice"],
+ [1,"","white onion, quartered|white onions, quartered"],
+ [2,"","bay leaf|bay leaves"],
+ [1,"cup","chicken broth"],
+ {h:"To serve"},
+ [18,"","corn tortilla|corn tortillas"],
+ [1,"","white onion, chopped|white onions, chopped"],
+ [1,"cup","cilantro, chopped"],
+ [3,"","lime, in wedges|limes, in wedges"],
+ [0.5,"cup","cotija or queso fresco (optional)"]
+]},
+chicken:{serves:6,items:[
+ [2,"lb","boneless skinless chicken breast"],
+ [1,"tbsp","olive oil or yellow mustard (binder)"],
+ [1,"tbsp","Meat Church Peach or Honey Hog (sandwich half)"],
+ [1,"tbsp","Meat Church Holy Voodoo (rice-bowl half)"],
+ [0.5,"cup","chicken broth"],
+ [0.5,"cup","BBQ sauce"],
+ {h:"To serve"},
+ [6,"","bun|buns"],
+ [null,"","Coleslaw, or rice and broccoli for lunches"]
+]},
+mac:{serves:8,items:[
+ [1,"lb","elbow macaroni"],
+ [5,"tbsp","butter"],
+ [5,"tbsp","flour"],
+ [4,"cup","whole milk, warmed"],
+ [2,"cup","sharp cheddar, freshly grated"],
+ [1.5,"cup","Monterey Jack, freshly grated"],
+ [4,"oz","cream cheese"],
+ [1,"tsp","kosher salt"],
+ [0.5,"tsp","black pepper"],
+ {h:"Topping"},
+ [1,"cup","panko"],
+ [2,"tbsp","butter, melted"]
+]},
+shortribs:{serves:6,items:[
+ [6,"","bone-in English-cut short rib (4–5 lb total)|bone-in English-cut short ribs (4–5 lb total)"],
+ [2,"tbsp","kosher salt"],
+ [1,"tsp","black pepper"],
+ [2,"tbsp","neutral oil"],
+ [2,"","yellow onion, diced|yellow onions, diced"],
+ [2,"","carrot, diced|carrots, diced"],
+ [2,"","celery stalk, diced|celery stalks, diced"],
+ [6,"","garlic clove, smashed|garlic cloves, smashed"],
+ [3,"tbsp","tomato paste"],
+ [1,"","bottle (750 ml) dry red wine|bottles (750 ml) dry red wine"],
+ [3,"cup","beef stock"],
+ [2,"tbsp","balsamic vinegar"],
+ [4,"","thyme sprig|thyme sprigs"],
+ [2,"","rosemary sprig|rosemary sprigs"],
+ [2,"","bay leaf|bay leaves"],
+ {h:"Potato purée"},
+ [3,"lb","russet potatoes"],
+ [6,"tbsp","butter, warm"],
+ [1,"cup","whole milk, warm"],
+ {h:"Gremolata"},
+ [1,"","lemon, zested|lemons, zested"],
+ [0.25,"cup","parsley, finely chopped"],
+ [1,"","garlic clove, minced|garlic cloves, minced"]
+]},
+potatoes:{serves:4,items:[
+ [4,"","russet potato|russet potatoes"],
+ [1,"tbsp","oil"],
+ [1,"tbsp","kosher salt"],
+ {h:"Toppings"},
+ [4,"tbsp","butter"],
+ [0.5,"cup","sour cream"],
+ [1,"cup","shredded cheddar"],
+ [2,"tbsp","chives, sliced"]
+]},
+rice:{serves:4,items:[
+ [1,"cup","long-grain white rice"],
+ [1.5,"cup","water or broth"],
+ [1,"tbsp","oil"],
+ [0.5,"tsp","salt"],
+ [1,"","lime, juiced|limes, juiced"],
+ [1/3,"cup","cilantro, chopped"]
+]},
+beans:{serves:4,items:[
+ [1,"","can (16 oz) refried beans|cans (16 oz) refried beans"],
+ [1,"tbsp","butter"],
+ [0.5,"tsp","ground cumin"],
+ [0.25,"tsp","garlic powder"],
+ [[2,3],"tbsp","milk or water"],
+ [0.5,"cup","shredded cheese, plus a little to top"],
+ [null,"","Salt"]
+]},
+pico:{serves:6,items:[
+ [4,"","roma tomato, seeded|roma tomatoes, seeded"],
+ [0.5,"","white onion|white onions"],
+ [1,"","jalapeño|jalapeños"],
+ [1/3,"cup","cilantro"],
+ [[1,2],"","lime|limes"],
+ [null,"","Salt"]
+]},
+salad:{serves:4,items:[
+ [1,"lb","rotisserie chicken, pulled (about 3 cups)"],
+ {h:"Dressing"},
+ [2,"tbsp","apple cider vinegar"],
+ [1,"tbsp","dijon mustard"],
+ [2,"tsp","honey"],
+ [0.25,"tsp","salt"],
+ [0.5,"tsp","black pepper"],
+ [6,"tbsp","olive oil"],
+ {h:"Salad"},
+ [3,"","romaine heart|romaine hearts"],
+ [[4,5],"","celery stalk|celery stalks"],
+ [1,"","red onion|red onions"],
+ [0.75,"cup","cashews"],
+ [2/3,"cup","feta, crumbled"],
+ [1,"","can (15 oz) chickpeas|cans (15 oz) chickpeas"]
+]},
+burgers:{serves:4,items:[
+ [1,"lb","80/20 ground beef"],
+ [null,"","Salt and pepper"],
+ [4,"","slice of cheese|slices of cheese"],
+ [4,"","bun|buns"],
+ [null,"","Your toppings"]
+]},
+chili:{serves:12,items:[
+ {h:"Meat"},
+ [4,"lb","chuck roast, cut in ¾ in cubes"],
+ [1,"lb","thick-cut bacon, diced"],
+ [1,"lb","ground meat (beef, venison, buffalo or chorizo)"],
+ [2,"tbsp","oil"],
+ {h:"Dried chiles"},
+ [6,"","dried ancho chile|dried ancho chiles"],
+ [4,"","dried guajillo chile|dried guajillo chiles"],
+ [3,"","dried chile de árbol|dried chiles de árbol"],
+ [2,"","dried chipotle morita|dried chipotle moritas"],
+ {h:"Fresh heat"},
+ [6,"","jalapeño, seeded and chopped|jalapeños, seeded and chopped"],
+ [[3,5],"","habanero or serrano|habaneros or serranos"],
+ {h:"Everything else"},
+ [2,"","large yellow onion, diced|large yellow onions, diced"],
+ [10,"","garlic clove, minced|garlic cloves, minced"],
+ [1,"","can (6 oz) tomato paste|cans (6 oz) tomato paste"],
+ [1,"","can (14 oz) fire-roasted crushed tomatoes|cans (14 oz) fire-roasted crushed tomatoes"],
+ [1,"","bottle (12 oz) beer|bottles (12 oz) beer"],
+ [[5,6],"cup","beef stock (3 cups go to soaking the chiles)"],
+ [2,"tbsp","cumin seed or ground cumin"],
+ [1,"tbsp","Mexican oregano"],
+ [1,"tbsp","smoked paprika"],
+ [2,"tsp","ground coriander"],
+ [2,"tsp","coarse black pepper"],
+ [1,"tsp","cayenne"],
+ [3,"","bay leaf|bay leaves"],
+ [0.25,"cup","masa harina"],
+ [2,"tbsp","apple cider vinegar"],
+ [null,"","Kosher salt"],
+ {h:"To serve"},
+ [null,"","Cornbread or Fritos, cheddar, onion, sour cream, lime"]
+]},
+cornbreadchili:{serves:6,items:[
+ {h:"Chili (or use ~6 cups of your Smoked Texas Chili)"},
+ [1.5,"lb","ground beef"],
+ [2,"","poblano, diced|poblanos, diced"],
+ [1,"","onion, diced|onions, diced"],
+ [1,"","jalapeño, diced|jalapeños, diced"],
+ [2,"","garlic clove|garlic cloves"],
+ [2,"tsp","chili powder"],
+ [2,"tsp","ground cumin"],
+ [1,"","can (15 oz) chili beans|cans (15 oz) chili beans"],
+ [1,"","can (15 oz) tomato sauce|cans (15 oz) tomato sauce"],
+ [1,"","can (14.5 oz) diced tomatoes|cans (14.5 oz) diced tomatoes"],
+ [0.25,"cup","water"],
+ [null,"","Salt"],
+ {h:"Cornbread top"},
+ [1,"","box (8 oz) Jiffy corn muffin mix|boxes (8 oz) Jiffy corn muffin mix"],
+ [0.5,"cup","buttermilk"],
+ [1,"","egg|eggs"],
+ [0.5,"cup","corn"],
+ [0.25,"cup","sharp cheddar, shredded"],
+ [0.25,"cup","scallions, sliced"],
+ [null,"","Cilantro and butter to finish"]
+]},
+filet:{serves:1,items:[
+ [1,"","filet, 7–8 oz and 1.5 in thick|filets, 7–8 oz and 1.5 in thick"],
+ [null,"","Kosher salt"],
+ {h:"Garlic butter"},
+ [1,"","head of garlic|heads of garlic","fixed"],
+ [1,"","stick of butter, softened|sticks of butter, softened","fixed"],
+ [null,"","Fresh thyme, chopped"],
+ {h:"Sides"},
+ [1,"","can cannellini beans|cans cannellini beans"],
+ [1,"tbsp","olive oil"],
+ [0.5,"","lemon|lemons"],
+ [4,"oz","green beans"]
+]},
+harissa:{serves:4,items:[
+ [4,"","bone-in, skin-on chicken thigh (about 2 lb)|bone-in, skin-on chicken thighs (about 2 lb)"],
+ [null,"","Kosher salt"],
+ [2,"tbsp","harissa"],
+ [1,"tbsp","olive oil (for the harissa)"],
+ {h:"Chickpeas"},
+ [2,"","can (15 oz) chickpeas|cans (15 oz) chickpeas"],
+ [1,"","red onion, in thick wedges|red onions, in thick wedges"],
+ [3,"tbsp","olive oil"],
+ [1,"tsp","ground cumin"],
+ [1,"tsp","ground coriander"],
+ [1,"tsp","smoked paprika"],
+ [1,"tsp","salt"],
+ {h:"To finish"},
+ [1,"cup","Greek yogurt"],
+ [1,"","garlic clove, grated|garlic cloves, grated"],
+ [1,"","lemon|lemons"],
+ [0.25,"cup","parsley, chopped"],
+ [null,"","Feta (optional)"]
+]},
+walkingtacos:{serves:4,items:[
+ [1,"lb","80/20 ground beef"],
+ [1,"","packet taco seasoning|packets taco seasoning"],
+ [2/3,"cup","water"],
+ [1,"","small red onion|small red onions"],
+ [2,"","jalapeño|jalapeños"],
+ [1,"cup","shredded Mexican cheese"],
+ [0.5,"cup","salsa"],
+ [0.5,"cup","sour cream"],
+ [4,"","snack bag of Fritos Scoops or Doritos|snack bags of Fritos Scoops or Doritos"],
+ [4,"","slice American cheese (optional)|slices American cheese (optional)"]
+]},
+ribeye:{serves:2,items:[
+ [1,"","thick ribeye (about 1 lb)|thick ribeyes (about 1 lb each)"],
+ [null,"","Salt and Meat Church Gospel (or Holy Cow)"],
+ [2,"","ear of corn, husked|ears of corn, husked"],
+ [1,"tsp","oil"],
+ [null,"","Meat Church Honey Hog (for the corn)"],
+ {h:"Potatoes"},
+ [1,"lb","russet potatoes"],
+ [2,"tbsp","butter"],
+ [0.25,"cup","warm milk"],
+ [null,"","Salt"]
+]},
+pulledpork:{serves:12,items:[
+ [[7,8],"lb","bone-in pork butt"],
+ [0.25,"cup","yellow mustard"],
+ [0.5,"cup","Meat Church Honey Hog, plus a little to finish"],
+ [0.5,"cup","apple juice"],
+ {h:"To serve"},
+ [12,"","bun|buns"],
+ [null,"","Slaw and your favorite sauce"]
+]},
+meatloaf:{serves:6,items:[
+ [0.75,"cup","panko"],
+ [0.5,"cup","milk"],
+ [2,"lb","80/20 ground beef"],
+ [2,"","egg|eggs"],
+ [1,"","small onion, grated|small onions, grated"],
+ [2,"","garlic clove|garlic cloves"],
+ [1,"tbsp","Worcestershire"],
+ [1.5,"tsp","kosher salt"],
+ [0.5,"tsp","black pepper"],
+ [null,"","Meat Church Gospel (for the outside)"],
+ {h:"Glaze"},
+ [0.5,"cup","BBQ sauce"],
+ [2,"tbsp","honey"]
+]},
+turkey:{serves:12,items:[
+ [[12,14],"lb","whole turkey"],
+ [[12,14],"tsp","kosher salt (1 tsp per lb)"],
+ [1,"","stick of butter, softened|sticks of butter, softened"],
+ [null,"","Meat Church Honey Hog or chopped fresh herbs"]
+]},
+breakfasttacos:{serves:3,items:[
+ [6,"","egg|eggs"],
+ [1,"tbsp","butter"],
+ [1,"","can (15 oz) black beans|cans (15 oz) black beans"],
+ [[1,2],"","jalapeño|jalapeños"],
+ [0.5,"cup","feta, crumbled"],
+ [9,"","small soft taco shell|small soft taco shells"],
+ [null,"","Salt and hot sauce"]
+]},
+crazybread:{serves:6,items:[
+ [1,"","box (16 oz) Pillsbury Hot Roll Mix, with its yeast packet|boxes (16 oz) Pillsbury Hot Roll Mix, with their yeast packets"],
+ [1,"cup","hot water (120–130°F)"],
+ [2,"tbsp","butter, softened"],
+ [1,"","egg|eggs"],
+ [null,"","Avocado or canola oil, about 1 inch deep in your pot"],
+ [0.5,"cup","parmesan, grated"],
+ [1,"","jar (14 oz) pizza sauce|jars (14 oz) pizza sauce"]
+]},
+potroast:{serves:6,items:[
+ [[3,3.5],"lb","chuck roast"],
+ [2,"tsp","kosher salt"],
+ [null,"","Black pepper"],
+ [1,"tbsp","oil"],
+ [1,"","big onion, sliced|big onions, sliced"],
+ [4,"","garlic clove|garlic cloves"],
+ [2,"cup","beef broth"],
+ [1,"tbsp","Worcestershire"],
+ [3,"","thyme sprig|thyme sprigs"],
+ [1,"","rosemary sprig|rosemary sprigs"],
+ [2,"","bay leaf|bay leaves"],
+ [1.5,"lb","Yukon gold potatoes, halved"],
+ [4,"","carrot, in big chunks|carrots, in big chunks"],
+ {h:"Gravy"},
+ [1,"tbsp","cornstarch"],
+ [2,"tbsp","cold water"]
+]}
+};
+
+var FRC={"½":.5,"⅓":1/3,"⅔":2/3,"¼":.25,"¾":.75,"⅛":.125};
+function fq(x){if(x<=0)return "0";if(x>=20)return String(Math.round(x));var w=Math.floor(x),r=x-w,F=x>=10?[[0,""],[.5,"½"],[1,""]]:[[0,""],[.125,"⅛"],[.25,"¼"],[1/3,"⅓"],[.5,"½"],[2/3,"⅔"],[.75,"¾"],[1,""]];var b=F[0];F.forEach(function(f){if(Math.abs(f[0]-r)<Math.abs(b[0]-r))b=f;});if(b[0]===1){w++;b=[0,""];}if(w===0&&!b[1])return "⅛";return (w?String(w):"")+b[1];}
+var SERV={},GOT={},IKEY=KEY+"-ing";
+try{var _iv=JSON.parse(localStorage.getItem(IKEY)||"{}");SERV=_iv.s||{};GOT=_iv.g||{};}catch(e){}
+function saveIng(){try{localStorage.setItem(IKEY,JSON.stringify({s:SERV,g:GOT}));}catch(e){}}
+function curId(){return RECIPES[ridx].id;}
+function servesOf(id){var I=ING[id];return I?(SERV[id]||I.serves):0;}
+function factor(){var I=ING[curId()];return I?servesOf(curId())/I.serves:1;}
+function unitFor(u,hi){if(u==="cup")return hi>1?"cups":"cup";return u;}
+function itemText(it,f){var q=it[0],u=it[1],nm=it[2],fixed=it[3]==="fixed";var k=fixed?1:f;var parts=nm.split("|"),sing=parts[0],plur=parts[1]||parts[0];
+ if(q===null)return {q:"",t:sing};
+ var lo,hi,qs;if(Array.isArray(q)){lo=q[0]*k;hi=q[1]*k;qs=fq(lo)+"–"+fq(hi);}else{lo=hi=q*k;qs=fq(lo);}
+ var unit=unitFor(u,hi);var name=(u===""&&hi>1)?plur:sing;return {q:qs+(unit?" "+unit:""),t:name};}
+function ingCount(){var I=ING[curId()];if(!I)return 0;return I.items.filter(function(x){return Array.isArray(x);}).length;}
+function renderIngBtn(){var b=document.getElementById("ingBtn");var I=ING[curId()];if(!I){b.hidden=true;return;}b.hidden=false;var got=GOT[curId()]||{},n=ingCount(),have=Object.keys(got).filter(function(k){return got[k];}).length;
+ b.innerHTML="<span class='ib-e'>🛒</span><span class='ib-t'>Ingredients</span><span class='ib-s'>Serves "+servesOf(curId())+(have?" · "+have+"/"+n+" ready":"")+"</span><span class='ib-go'>View ▸</span>";}
+function renderIng(){var id=curId(),I=ING[id];if(!I)return;var f=factor(),sv=servesOf(id),got=GOT[id]||{};var nm=splitName(RECIPES[ridx].name);
+ document.getElementById("ingTitle").textContent=nm.e+" "+nm.t;
+ var h="<div class='serv'><span class='serv-l'>Serves</span><button class='sv-b' id='svMinus' aria-label='Fewer servings'>−</button><span class='sv-n'>"+sv+"</span><button class='sv-b' id='svPlus' aria-label='More servings'>+</button>"+(sv!==I.serves?"<button class='sv-reset' id='svReset'>Reset to "+I.serves+"</button>":"")+"</div>";
+ h+=sv!==I.serves?"<p class='serv-note'>🐾 Kenny scaled everything for "+sv+", in this list and in the steps. Cook times stay about the same, but a bigger cut can take longer, so go by the probe.</p>":"<p class='serv-note'>Tap an item when you've got it out. Change the servings and Kenny does the math.</p>";
+ h+="<div class='ing-list'>";var idx=0;
+ I.items.forEach(function(it){if(!Array.isArray(it)){h+="<div class='ing-h'>"+it.h+"</div>";return;}var i=idx++;var t=itemText(it,f);
+  h+="<label class='ing"+(got[i]?" got":"")+"'><input type='checkbox' data-i='"+i+"'"+(got[i]?" checked":"")+"><span class='ing-box'></span><span class='ing-q'>"+t.q+"</span><span class='ing-t'>"+t.t+"</span></label>";});
+ h+="</div><div class='ing-acts'><button class='ing-copy' id='ingCopy'>📋 Copy list for Notes</button><button class='ing-clear' id='ingClear'>Uncheck all</button></div><button class='btn next ing-go' id='ingGo'>Let's cook! ▶</button>";
+ var body=document.getElementById("ingBody");body.innerHTML=h;
+ Array.prototype.forEach.call(body.querySelectorAll(".ing input"),function(c){c.onchange=function(){var g=GOT[id]=GOT[id]||{};g[c.getAttribute("data-i")]=c.checked;c.parentNode.classList.toggle("got",c.checked);saveIng();renderIngBtn();};});
+ document.getElementById("svMinus").onclick=function(){setServ(Math.max(1,sv-1));};
+ document.getElementById("svPlus").onclick=function(){setServ(Math.min(40,sv+1));};
+ var rs=document.getElementById("svReset");if(rs)rs.onclick=function(){setServ(I.serves);};
+ document.getElementById("ingCopy").onclick=copyIng;
+ document.getElementById("ingClear").onclick=function(){GOT[id]={};saveIng();renderIng();renderIngBtn();};
+ document.getElementById("ingGo").onclick=closeIng;}
+function setServ(n){var id=curId();SERV[id]=n;if(n===ING[id].serves)delete SERV[id];saveIng();renderIng();renderIngBtn();render();}
+function ingPlain(){var id=curId(),I=ING[id],f=factor(),nm=splitName(RECIPES[ridx].name);var out=nm.t.toUpperCase()+"\nServes "+servesOf(id)+"\n";
+ I.items.forEach(function(it){if(!Array.isArray(it)){out+="\n"+it.h.toUpperCase()+"\n";return;}var t=itemText(it,f);out+="- "+(t.q?t.q+" ":"")+t.t+"\n";});return out.trim()+"\n";}
+function copyIng(){var txt=ingPlain(),btn=document.getElementById("ingCopy");function ok(){btn.textContent="✅ Copied! Paste it into Notes";setTimeout(function(){if(btn)btn.textContent="📋 Copy list for Notes";},2200);}
+ function fb(){var ta=document.createElement("textarea");ta.value=txt;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");ok();}catch(e){}ta.remove();}
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok,fb);}else fb();}
+function openIng(){renderIng();document.getElementById("ingSheet").classList.add("open");document.body.classList.add("locked");document.getElementById("ingBody").scrollTop=0;}
+function closeIng(){document.getElementById("ingSheet").classList.remove("open");if(!document.getElementById("menu").classList.contains("open"))document.body.classList.remove("locked");}
+document.getElementById("ingBtn").onclick=openIng;
+document.getElementById("ingX").onclick=closeIng;
+document.getElementById("ingBg").onclick=closeIng;
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeIng();});
+// scale amounts inside step text
+var QN="(\\d+(?:\\.\\d+)?(?:\\s?[½⅓⅔¼¾⅛])?|[½⅓⅔¼¾⅛])";
+var QRE=new RegExp(QN+"(\\s*(?:–|-|to|or)\\s*"+QN+")?","g");
+var QBL=/^\s*(°|º|F\b|min|minute|hr|hour|sec|second|in\b|inch|-in|-inch|%|side|sides|turns|times|x\b|days?\b|weeks?|months?|degrees|more\b|per\b|am\b|pm\b)/i;
+var PLUR={cup:"cups",can:"cans",bottle:"bottles",box:"boxes",stick:"sticks",packet:"packets",egg:"eggs",lime:"limes",orange:"oranges","jalapeño":"jalapeños",onion:"onions",head:"heads",clove:"cloves",lemon:"lemons",jar:"jars"};var SING={};Object.keys(PLUR).forEach(function(k){SING[PLUR[k]]=k;});
+var QPRE=/(past|at|until|by|every|after|step|day|up to)\s*$/i;
+function pv(s){s=s.replace(/\s/g,"");var m=s.match(/^(\d+(?:\.\d+)?)?([½⅓⅔¼¾⅛])?$/);if(!m)return NaN;return (m[1]?parseFloat(m[1]):0)+(m[2]?FRC[m[2]]:0);}
+function scaleText(t,f){var out="",last=0,m;QRE.lastIndex=0;
+ while((m=QRE.exec(t))){var st=m.index,en=st+m[0].length,before=t.slice(0,st),after=t.slice(en);var prev=before.slice(-1);
+  var a=pv(m[1]),b=m[3]?pv(m[3]):null;var okNext=/^\s*[A-Za-zÀ-ÿ(~]/.test(after)||(/into\s*$/i.test(before)&&/^\s*[.,;]/.test(after));
+  if(/[\w\/.]/.test(prev)||/^\//.test(after)||QBL.test(after)||QPRE.test(before)||!okNext||isNaN(a)||a>=100||(b!==null&&(isNaN(b)||b>=100))){continue;}
+  var sep=m[2]?m[2].slice(0,m[2].length-m[3].length):"";
+  var rep=fq(a*f)+(b!==null?sep+fq(b*f):"");
+  var big=(b!==null?b:a)*f>1;var wm=after.match(/^(\s*)([A-Za-zñ]+)/);if(wm){var w=wm[2],lw=w.toLowerCase(),nw=null;if(big&&PLUR[lw])nw=PLUR[lw];else if(!big&&SING[lw])nw=SING[lw];if(nw){after=wm[1]+nw+after.slice(wm[0].length);t=t.slice(0,en)+after;}}
+  out+=t.slice(last,st)+"\u0001"+rep+"\u0002";last=en;QRE.lastIndex=en;}
+ return out+t.slice(last);}
+function scaleHTML(html,f){if(!f||Math.abs(f-1)<1e-6)return html;var d=document.createElement("div");d.innerHTML=html;
+ (function walk(n){Array.prototype.slice.call(n.childNodes).forEach(function(c){if(c.nodeType===3){c.nodeValue=scaleText(c.nodeValue,f);}else if(c.nodeType===1&&!(c.classList&&c.classList.contains("ns")))walk(c);});})(d);
+ return d.innerHTML.replace(/\u0001/g,"<span class='sq'>").replace(/\u0002/g,"</span>");}
+
 function render(){
  var R=RECIPES[ridx];var steps=R.steps;if(cur>steps.length-1)cur=steps.length-1;var s=steps[cur];
  document.getElementById("meterName").textContent=R.meter||"🍳 Cook Meter";
- document.getElementById("stageTag").textContent="Step "+(cur+1)+" of "+steps.length;
+ var _f=factor();document.getElementById("stageTag").innerHTML="Step "+(cur+1)+" of "+steps.length+(Math.abs(_f-1)>1e-6?"<span class='scaled-tag'>Scaled for "+servesOf(R.id)+"</span>":"");
  document.getElementById("stageTitle").innerHTML=s.title;
- document.getElementById("realBox").innerHTML=s.real+(s.dur?("<br><span class='dur'>\u23F1 "+s.dur+"</span>"):"");
+ document.getElementById("realBox").innerHTML=scaleHTML(s.real,_f)+(s.dur?("<br><span class='dur'>\u23F1 "+s.dur+"</span>"):"");
  document.getElementById("bubble").textContent=s.kenny;
  document.getElementById("scene").innerHTML=s.scene;
  var ex=document.getElementById("extras");ex.innerHTML="";
@@ -1031,7 +1512,7 @@ function render(){
  var pct=document.getElementById("meterPct");pct.textContent=s.cook===0?"Raw":s.cook<40?"Getting going":s.cook<70?"Getting there":s.cook<100?"Almost!":"\uD83C\uDFC6 Done!";
  document.getElementById("back").disabled=(cur===0);
  var nx=document.getElementById("next");nx.textContent=cur===steps.length-1?"\uD83C\uDF89 Done!":"Next \u25B6";
- renderPaws();
+ renderPaws();renderIngBtn();
  if(cur===steps.length-1)bigFinale();
  save();
 }
@@ -1047,7 +1528,7 @@ function bigFinale(){var fr=ridx,fc=cur;clearTimeout(window._ct);window._ct=setT
 
 
 function groupsList(){var idx={};RECIPES.forEach(function(r,i){idx[r.id]=i;});return GROUPS.map(function(g){return [g[0],g[1].filter(function(id){return id in idx;}).map(function(id){return idx[id];})];}).filter(function(g){return g[1].length;});}
-function startRecipe(i){ridx=i;cur=0;closeMenu();renderPicker();showView("cook");render();}
+function startRecipe(i){ridx=i;cur=0;closeMenu();renderPicker();showView("cook");render();if(ING[RECIPES[i].id])openIng();}
 function renderHome(){
  var gl=groupsList();
  document.getElementById("tiles").innerHTML=gl.map(function(g){var n=g[1].length;return "<button class='tile' data-g=\""+g[0]+"\"><span class='t-e'>"+(GEMO[g[0]]||"🍽️")+"</span><span class='t-n'>"+g[0]+"</span><span class='t-s'>"+n+(n===1?" recipe":" recipes")+"</span></button>";}).join("")+"<button class='tile all"+(gl.length%2?"":" wide")+"' data-g=''><span class='t-e'>🔍</span><span class='t-n'>All recipes</span><span class='t-s'>"+RECIPES.length+" recipes</span></button>";
@@ -1058,7 +1539,7 @@ function renderHome(){
 }
 var HELLOS=["Hi! I'm Chef Kenny.","Hey there, chef!","Welcome back to the kitchen!","Chef Kenny, reporting for duty!"];
 function showView(v){document.getElementById("home").classList.toggle("on",v==="home");document.getElementById("cook").classList.toggle("on",v==="cook");var want=v==="cook"?"#cook":"#home";if(location.hash!==want){try{history.pushState(null,"",want);}catch(e){location.hash=want;}}if(v==="home"){renderHome();document.getElementById("homeHi").textContent=HELLOS[Math.floor(Math.random()*HELLOS.length)];clearTimeout(window._ct);}window.scrollTo(0,0);}
-window.addEventListener("popstate",function(){if(location.hash==="#cook"){showView("cook");render();}else{closeMenu();showView("home");}});
+window.addEventListener("popstate",function(){if(location.hash==="#cook"){showView("cook");render();}else{closeMenu();closeIng();showView("home");}});
 document.getElementById("homeBtn").onclick=function(){showView("home");};
 document.getElementById("goHomeH").onclick=function(){showView("home");};
 document.getElementById("resume").onclick=function(){renderPicker();showView("cook");render();};
