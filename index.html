@@ -254,7 +254,8 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
 
   .view{display:none;} .view.on{display:block;animation:vin .3s ease-out;}
   @keyframes vin{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
-  h1 button{all:unset;cursor:pointer;}
+  h1 button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;}
+  .h1-kenny{width:46px;height:46px;filter:drop-shadow(0 2px 0 rgba(201,74,40,.6));}
   .hero{cursor:pointer;}
   .hi{font-family:'Fredoka',sans-serif;font-weight:700;font-size:22px;text-align:center;margin:4px 0 2px;color:var(--char);}
   .hi-sub{text-align:center;font-size:14px;color:#6b5a4c;margin:0 0 14px;font-weight:600;}
@@ -313,7 +314,7 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
 </style>
 <div class="sun"></div>
 <div class="wrap">
-  <h1><button id="goHomeH" aria-label="Home">🐕‍🦺 Chef Kenny's Kitchen</button></h1>
+  <h1><button id="goHomeH" aria-label="Home"><img class="h1-kenny" src="kenny-head.webp" alt="" width="46" height="46">Chef Kenny's Kitchen</button></h1>
   <div class="view" id="home">
     <div class="scene hero" id="homeScene"></div>
     <div class="hi" id="homeHi">Hi! I'm Chef Kenny.</div>
