@@ -539,7 +539,8 @@ var RECIPES=[
   st("Bowl of Red!","Cornbread, cheddar, onions. Better on day two, but who can wait?","Rest 20 min off heat. Serve with cornbread or Fritos, cheddar, onion, sour cream, lime.",100,ACT.serve('bowl',CHILI),{dur:"Feast!"})
  ]},
  {id:"cornbreadchili",name:"🍞 Chili Cornbread Skillet",meter:"🍞 Skillet Meter",steps:[
-  st("Chili in the Skillet","Homemade or quick, the skillet doesn't judge.","Use ~6 cups of your <b>Smoked Texas Chili</b>, or the quick version: brown <b>1.5 lb ground beef</b> + salt in a <b>12-in cast-iron skillet</b>, add <b>2 poblanos, 1 onion, 1 jalape&#241;o, 2 garlic</b>, then <b>2 tsp chili powder, 2 tsp cumin</b>, a <b>15 oz can chili beans</b>, <b>15 oz tomato sauce</b>, <b>14.5 oz diced tomatoes</b>, &#188; cup water. Simmer 10 min.",15,ACT.stir(CHILI),{dur:"~25 min"}),
+  st("Chorizo Goes First","Red fat in the pan! That's the good stuff. Don't you dare pour it out.","<b>No oil.</b> Render <b>1 lb fresh chorizo</b> in a <b>12-in cast-iron skillet</b> over <b>medium</b>, 4&#8211;5 min, until it has color and has given up its fat. Scoop the chorizo out with a slotted spoon and <b>leave the fat in the pan</b>. The beef browns in that fat, which is the whole trick.",10,ACT.stir(CHILI),{dur:"5 min"}),
+  st("Brown It in the Red Fat","Beef goes in the chorizo fat. Nobody's adding oil today.","Turn the heat up and brown <b>1 lb lean ground beef (90/10)</b> in the chorizo fat with <b>1 tsp salt</b>. Drain back down to about <b>2 tbsp</b> of fat. Add <b>2 poblanos, 1 onion, 1 jalape&#241;o, 2 garlic</b>, then <b>2 tsp chili powder, 2 tsp cumin</b>, a <b>15 oz can chili beans</b>, <b>15 oz tomato sauce</b>, <b>14.5 oz diced tomatoes</b>. Chorizo back in. <b>Skip the water</b>, there's 2 lb of meat in here now. Simmer 10 min.",22,ACT.stir(CHILI),{dur:"~25 min"}),
   st("Low &amp; Smoky Snooze","Just 180 degrees. The chili sips smoke like tea.","Traeger to <b>180&#176;F</b>. Skillet on the bottom grate, smoke <b>1 hr</b>, stir once halfway.",35,ACT.smokewait(CHILI),{dur:"1 hr",timer:3600,timerLbl:"Smoke"}),
   st("Whisk the Corny Hat","Jiffy, buttermilk, egg, corn, cheese. Stir stir stir!","Whisk <b>1 box (8 oz) Jiffy corn muffin mix</b>, <b>&#189; cup buttermilk</b>, <b>1 egg</b>. Stir in <b>&#189; cup corn</b>, <b>&#188; cup sharp cheddar</b>, <b>&#188; cup sliced scallions</b>. Chill till the chili's done.",45,ACT.whisk(CHEESE),{dur:"5 min"}),
   st("Crank It Up","Skillet out, dial UP. Hot hot hot!","Pull the skillet to a heatproof spot. Close the lid and raise the Traeger to <b>400&#176;F</b>.",55,ACT.fireup(),{dur:"~10 min"}),
@@ -915,6 +916,7 @@ var SCN={
   {p:'stir',m:['dutch',118,{c:'chili'}],x:[['box',236,'#E3C27A','MASA'],['bottle',262,'#E8C34A']],fx:['steam@118']},
   {p:'serve',s:['bowl','#7C2E24','#F2C14E']}],
  cornbreadchili:[
+  {p:'stir',m:['skillet',118,{c:'tacomeat'}],fx:['steam@118']},
   {p:'stir',m:['skillet',118,{c:'chili'}],x:[['jalapeno',220],['onion',246],['can',272,'BEANS']],fx:['steam@118']},
   {p:'wait',m:['grill',108,{on:['chilipan'],smoke:1}]},
   {p:'whisk',m:['bowl',92,{c:'batter'}],x:[['box',214,'#5BA3D9','CORN MIX'],['eggs',244],['corn',274]]},
@@ -1354,7 +1356,8 @@ chili:{serves:12,items:[
 ]},
 cornbreadchili:{serves:6,items:[
  {h:"Chili (or use ~6 cups of your Smoked Texas Chili)"},
- [1.5,"lb","ground beef"],
+ [1,"lb","fresh chorizo, bulk not cured"],
+ [1,"lb","lean ground beef (90/10)"],
  [2,"","poblano, diced|poblanos, diced"],
  [1,"","onion, diced|onions, diced"],
  [1,"","jalapeño, diced|jalapeños, diced"],
@@ -1364,7 +1367,6 @@ cornbreadchili:{serves:6,items:[
  [1,"","can (15 oz) chili beans|cans (15 oz) chili beans"],
  [1,"","can (15 oz) tomato sauce|cans (15 oz) tomato sauce"],
  [1,"","can (14.5 oz) diced tomatoes|cans (14.5 oz) diced tomatoes"],
- [0.25,"cup","water"],
  [null,"","Salt"],
  {h:"Cornbread top"},
  [1,"","box (8 oz) Jiffy corn muffin mix|boxes (8 oz) Jiffy corn muffin mix"],
