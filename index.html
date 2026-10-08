@@ -276,6 +276,8 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
   .resume[hidden]{display:none;}
   .tile.all.wide{grid-column:1 / -1;flex-direction:row;align-items:center;gap:12px;min-height:0;}
   .tile.all{background:#fff;}
+  .tile.soon{border-style:dashed;background:transparent;box-shadow:none;cursor:default;opacity:.62;}
+  .tile.soon .t-s{color:#a08f7e;font-style:italic;}
   .tile.allx{grid-column:1 / -1;flex-direction:row;align-items:center;gap:12px;min-height:0;background:#fff;}
   .tile.all .t-n{flex:1;}
   .surprise{display:block;width:100%;font-family:'Fredoka',sans-serif;font-weight:600;font-size:17px;background:var(--sun);color:var(--char);border:3px solid var(--char);border-radius:16px;padding:13px;cursor:pointer;box-shadow:0 4px 0 rgba(62,46,38,.25);margin-bottom:16px;}
@@ -529,7 +531,7 @@ var RECIPES=[
   st("Toast & Stack","Buns toasted, burgers stacked. I'm gonna sit right here and stare at you.","Buns cut side down on the grate for the <b>last 45 sec</b>. Rest the patties <b>2 min</b>, then build. Smoking renders out more fat than grilling, which is why 80/20 was not optional.",100,ACT.serve('plate',MEAT),{dur:"Chow time!"})
  ]},
  {id:"chili",name:"🌶️ Smoked Texas Chili",meter:"🌶️ Chili Meter",steps:[
-  st("Toast the Chile Squad","Toast, soak, BLEND. Don't burn 'em or we start over!","Stem &amp; seed <b>6 ancho, 4 guajillo, 3 &#225;rbol, 2 chipotle morita</b>. Toast 30 sec a side, soak 30 min in <b>3 cups hot beef stock</b>, blend smooth.",10,ACT.blend(CHILI),{dur:"~45 min",timer:1800,timerLbl:"Soak"}),
+  st("Toast the Chile Squad","Toast, soak, BLEND. Don't burn 'em or we start over!","<b>Mike's chili.</b> Family recipe, not borrowed from anybody. Stem &amp; seed <b>6 ancho, 4 guajillo, 3 &#225;rbol, 2 chipotle morita</b>. Toast 30 sec a side, soak 30 min in <b>3 cups hot beef stock</b>, blend smooth.",10,ACT.blend(CHILI),{dur:"~45 min",timer:1800,timerLbl:"Soak"}),
   st("Dress the Chuck","Big cubes, big salt. Mr. Beef is getting ready.","Cube <b>4 lb chuck</b> (&#190; in). Toss with oil, heavy <b>kosher salt</b>, coarse <b>pepper</b>. Dice <b>1 lb bacon</b>; break up <b>1 lb ground meat</b>.",18,ACT.season(MEAT),{dur:"10 min"}),
   st("The Smoke Bath","Two hours of smoke. Pecan or oak. I'll guard the door.","Smoker <b>250&#176;F</b>, pecan or oak. Chuck on a rack, ground meat &amp; bacon in foil pans. Smoke <b>2 hrs</b>. Save every drop of drippings.",35,ACT.smokewait(MEAT),{dur:"2 hr",timer:7200,timerLbl:"Smoke"}),
   st("Sizzle Town","Render the bacon, sear the chuck. Don't crowd the pan!","Render bacon till crisp, scoop out. Sear chuck in batches in the bacon fat, hard, 2&#8211;3 min a side.",48,ACT.flip(MEAT),{dur:"~20 min",sizzle:true}),
@@ -565,6 +567,25 @@ var RECIPES=[
   st("Spicy Jackets","Harissa under the skin. Sneaky flavor! I love sneaky.","Mix <b>2 tbsp harissa</b> with 1 tbsp olive oil. Rub over the thighs and <b>under the skin</b>. No more salt. Skin up, right on the chickpeas.",55,ACT.season(TOMATO),{dur:"3 min"}),
   st("Walk Away","Fifty minutes. I'll guard the oven. Very serious job.","Middle rack, <b>50 min</b>, until the skin is deep brown and the thighs hit <b>180&#176;F</b>. Not 165, the extra heat makes them tender.",88,ACT.smokewait(CHK),{dur:"50 min",timer:3000,timerLbl:"Roast"}),
   st("Crispy Finish","Lemon squeeze, big yogurt spoon. Dinner! Is there a corgi portion?","Skin went soft? <b>2&#8211;3 min under the broiler</b>. Squeeze the other lemon half over the pan. Chickpeas down, chicken on top, yogurt, parsley, <b>feta</b> if you have it.",100,ACT.serve('plate',CHK),{dur:"Dig in!"})
+ ]},
+ {id:"cacio",name:"🍝 Cacio e Pepe",meter:"🍝 Pasta Meter",steps:[
+  st("Snow, Not Shreds","Tiny tiny tiny! If it looks like shredded cheese, grate it smaller.","Grate <b>6 oz Pecorino Romano</b> on the <b>finest holes</b> you have, a microplane if you've got one. You want fluffy snow, not shreds. <b>Buy the block.</b> Pre-grated cheese is coated in anti-caking powder and it will never melt smooth.",10,ACT.chop(CHEESE),{dur:"5 min"}),
+  st("Wake Up the Pepper","Sniff sniff. SNIFF. Okay, that's the good part.","Toast <b>2 tbsp whole peppercorns</b> in a <b>dry 12-in skillet</b> over medium, <b>1&#8211;2 min</b>, shaking the pan, until you can smell them across the kitchen. Tip them onto a board, crack them <b>coarse</b> under a heavy pan, and put them back in the dry skillet off the heat.",24,ACT.stir(BEANS),{dur:"5 min"}),
+  st("A Skimpy Pot","Less water! I know. Trust the short dog.","Boil <b>4 quarts</b> of water, not the usual 6. Less water means starchier water, and that starch is what turns cheese into sauce. Salt it with only <b>1 tbsp</b>, the pecorino brings plenty. <b>Don't add the pasta yet.</b> Fresh tonnarelli cooks in about 3 min, so everything else gets ready first.",38,ACT.boil(POTATO),{dur:"~8 min"}),
+  st("Make the Crema","Warm, not hot! Hot cheese gets angry and clumpy.","Ladle <b>about &#189; cup</b> of the hot water into a bowl and whisk the grated pecorino into it a splash at a time, until it's a <b>smooth, loose paste</b> about the texture of thin yogurt. <b>Leave it off the heat.</b> This paste is the whole insurance policy. Cheese that goes in dry is cheese that clumps.",52,ACT.whisk(CHEESE),{dur:"3 min"}),
+  st("Pasta In, Water Out","Two jobs at once. I'd help but I have no thumbs.","Drop in <b>1 lb fresh tonnarelli</b> and set a timer for <b>2 min</b>. Right away, ladle <b>1 cup</b> of that starchy water into the pepper skillet and bubble it over medium about <b>1 min</b> so the pepper blooms. Using dried spaghetti instead? Same move, you just have 10 min instead of 2.",70,ACT.stir(BEANS),{dur:"2&#8211;3 min",timer:120,timerLbl:"Fresh pasta"}),
+  st("Off the Heat, Then Cheese","Hands off the knob! We wait for the hiss to quit.","Tongs the pasta straight into the skillet <b>30 sec before it's done</b>, dripping is good. Toss hard for <b>30 sec</b> so it drinks the peppery water. Now <b>kill the heat and wait 30 sec</b>, until the pan stops hissing. Then in goes the crema and you toss like crazy. Too thick, splash in more pasta water. <b>No butter, no oil, no cream.</b>",90,ACT.stir(CHEESE),{dur:"~3 min",timer:30,timerLbl:"Let the pan cool"}),
+  st("Eat It Standing Up","Right now! This one waits for nobody. Especially not a corgi.","Into warm bowls immediately. More pecorino, more cracked pepper. Cacio e pepe tightens up the second it cools, so it does not wait and it does not reheat.",100,ACT.serve('bowl',CHEESE),{dur:"Go go go!"})
+ ]},
+ {id:"freshpasta",name:"🍜 Fresh Pasta",meter:"🍜 Dough Meter",steps:[
+  st("Flour, Eggs, Go","Lumpy and ugly is correct. Keep going.","In the KitchenAid bowl, stir together <b>300 g \"00\" flour</b>, <b>100 g semolina</b> and <b>1 tsp fine salt</b>. Add <b>4 large eggs</b>, <b>1 extra yolk</b> and <b>1 tbsp olive oil</b>. Run the <b>flat beater on low about 1 min</b>, until it looks like wet sand with shaggy clumps. No semolina? Use 400 g of the 00 and carry on.",10,ACT.whisk(RICE),{dur:"3 min"}),
+  st("Hook It and Knead It","It's supposed to fight you. That's the gluten saying hello.","Swap to the <b>dough hook</b> and run <b>speed 2 for 5 min</b>. It should pull into one ball and clear the sides. <b>Crumbly and dry</b>, add water <b>1 tsp at a time</b>. <b>Tacky</b>, dust in a little flour. Then knead by hand on the counter <b>2&#8211;3 min</b> until it's smooth and springs back when you poke it.",25,ACT.chop(RICE),{dur:"8 min"}),
+  st("Nap Time, Non-Negotiable","Thirty minutes. I'll nap too. I'm excellent at this part.","Wrap it tight in plastic and leave it on the counter <b>30 min</b>, up to 2 hr. Skip this and the dough snaps back every single time you roll it. Overnight in the fridge works too, just let it come back to room temp before you roll.",35,ACT.season(POTATO),{dur:"30 min",timer:1800,timerLbl:"Dough rest"}),
+  st("Four Little Bricks","Keep the other three covered! Dry dough is sad dough.","Cut the dough into <b>4 pieces</b>. Keep three under an upturned bowl or wrapped while you work the fourth. Press one flat into a rough rectangle with your palm, a little <b>narrower than the roller</b>.",45,ACT.slice(RICE),{dur:"2 min"}),
+  st("Roll, Fold, Roll","Three times through on the widest setting. It's a workout. For you.","Roller on <b>setting 1</b>, mixer on <b>speed 2</b>. Run the piece through, <b>fold it in thirds like a letter</b>, and run it through again. Do that <b>3 or 4 times</b> and the sheet goes from ragged to smooth and even. Dust with semolina any time it feels tacky.",58,ACT.slice(POTATO),{dur:"~4 min"}),
+  st("Step It Down to 4","Stop at four! Thin is for fettuccine. We want square.","Now once through each setting with no folding: <b>1, 2, 3, then 4</b>. <b>Stop at 4.</b> Tonnarelli wants a sheet about as thick as the noodle is wide, so the cut strand comes out square. Go thinner and you've made spaghetti, which is fine, it's just a different noodle.",70,ACT.slice(POTATO),{dur:"~3 min"}),
+  st("Cut and Nest","Snow it with semolina. Noodles that touch become one big noodle.","Dust the sheet on <b>both sides</b> with semolina, then run it through the <b>spaghetti cutter</b>. Toss the strands with more semolina and set them in <b>loose nests</b> on a sheet pan. Repeat with the other three pieces.",85,ACT.chop(POTATO),{dur:"~10 min"}),
+  st("Two Minutes, Tops","Blink and it's done. Watch it like a sandwich left on the counter.","Fresh pasta cooks <b>2&#8211;3 min</b> in well-salted boiling water, so start tasting at 2. Use it the same day, or freeze the nests solid on the pan and bag them, then boil from frozen and add a minute. Making <b>Cacio e Pepe</b>? Have the sauce ready before the pasta ever hits the water.",100,ACT.serve('bowl',POTATO),{dur:"Dinner time!"})
  ]},
  {id:"walkingtacos",name:"🌮 Walking Tacos",meter:"🌮 Taco Meter",steps:[
   st("Beef Crumble","Break it up, brown it good. Little beefy pebbles!","Brown <b>1 lb 80/20 ground beef</b> in a skillet, breaking it up. Drain the fat.",25,ACT.stir(MEAT),{dur:"~8 min",sizzle:true}),
@@ -815,7 +836,24 @@ var OUTDOOR={traeger:1,grill:1},DECK="<image href='p-scene-deck.webp' x='0' y='0
 
 /* ===== Per-step scenes. m:[ware,x,opts]  x:[[food,x,arg]] ===== */
 var SCN={
- asada:[
+ cacio:[
+  {p:'chop',m:['board',108,{on:['parm']}],x:[['bowlsm',250]]},
+  {p:'stir',m:['skillet',118],x:[['shaker',250]],fx:['bits@118@#3A3A3A']},
+  {p:'wait',m:['pot',110,{c:'boil'}],x:[['shaker',250]],fx:['steam@110']},
+  {p:'whisk',m:['bowl',92,{c:'cheesesauce'}],x:[['parm',230],['cup',262]]},
+  {p:'stir',m:['skillet',118,{c:'broth'}],x:[['cup',230],['shaker',262]],fx:['steam@118']},
+  {p:'stir',m:['skillet',118,{c:'cheesesauce'}],x:[['bowlsm',230],['parm',262]],fx:['steam@118']},
+  {p:'serve',s:['bowl','#F0E8D2','#3A3A3A']}],
+ freshpasta:[
+  {p:'whisk',m:['bowl',92,{c:'dough'}],x:[['eggs',224],['oilbottle',264]]},
+  {p:'stir',m:['bowl',92,{c:'dough'}],x:[['bowlsm',250]]},
+  {p:'wait',m:['board',108,{on:['dough']}],x:[['foil',250]]},
+  {p:'slice',m:['board',108,{on:['dough']}],x:[['bowlsm',250]]},
+  {p:'slice',m:['board',108,{on:['dough']}],x:[['shaker',250]]},
+  {p:'slice',m:['board',108,{on:['dough']}],x:[['bowlsm',230],['shaker',262]]},
+  {p:'chop',m:['sheet',130,{on:['dough']}],x:[['shaker',250]]},
+  {p:'serve',s:['bowl','#F0E8D2','#E3C27A']}],
+  asada:[
   {p:'whisk',m:['bowl',92,{c:'marinade'}],x:[['limes',212],['orange',238],['garlic',262],['cilantro',284]]},
   {p:'peek',m:['sheet',130,{on:['skirt']}],x:[['towels',262]]},
   {p:'dial',m:['traeger',69],x:[['pellets',262]]},
@@ -1086,8 +1124,9 @@ function ding(){ensureCtx();if(!actx)return;try{var o=actx.createOscillator(),g=
 
 var PAW="<svg class='paw' viewBox='0 0 24 24'><ellipse cx='12' cy='15' rx='6' ry='5' fill='#E8623C'/><circle cx='6' cy='8' r='2.4' fill='#E8623C'/><circle cx='12' cy='6' r='2.4' fill='#E8623C'/><circle cx='18' cy='8' r='2.4' fill='#E8623C'/></svg>";
 function renderPaws(){var steps=RECIPES[ridx].steps;document.getElementById("paws").innerHTML=steps.map(function(s,i){return PAW.replace("paw",i<=cur?"paw on":"paw");}).join("");}
-var GEMO={"Taco Night":"🌮","Weeknight Dinners":"🥩","Big Cooks":"🔥","Family Traditions":"💛","Breakfast":"🍳","Holidays":"🦃","Sides & Salsas":"🥑","More":"🍽️"};
-var GROUPS=[["Taco Night",["asada","barbacoa","quesabirria","carnitas","walkingtacos"]],["Weeknight Dinners",["filet","ribeye","harissa","burgers","salad"]],["Big Cooks",["pulledpork","chili","cornbreadchili","shortribs","chicken","meatloaf"]],["Family Traditions",["crazybread","potroast"]],["Breakfast",["breakfasttacos"]],["Holidays",["turkey"]],["Sides & Salsas",["guac","pico","rice","beans","mac","potatoes"]]];
+var GEMO={"Mains":"🍽️","Sides & Staples":"🥄","Sauces & Salsas":"🥑","Desserts":"🍪"};
+var SOON=["Desserts"];
+var GROUPS=[["Mains",["asada","barbacoa","quesabirria","carnitas","walkingtacos","breakfasttacos","burgers","filet","ribeye","harissa","cacio","salad","chili","cornbreadchili","pulledpork","shortribs","chicken","meatloaf","potroast","turkey"]],["Sides & Staples",["freshpasta","rice","beans","mac","potatoes","crazybread"]],["Sauces & Salsas",["guac","pico"]]];
 function splitName(n){var m=n.match(/^(\S+)\s+(.*)$/);return m?{e:m[1],t:m[2]}:{e:"🍽️",t:n};}
 function renderPicker(){var nm=splitName(RECIPES[ridx].name);document.getElementById("picker").innerHTML="<span class='pb-emoji'>"+nm.e+"</span><span class='pb-txt'><span class='pb-lbl'>Now cooking</span><span class='pb-name'>"+nm.t+"</span></span><span class='pb-go'>Change ▾</span>";}
 function menuCard(i){var r=RECIPES[i],nm=splitName(r.name);return "<button class='rc"+(i===ridx?" on":"")+"' data-i='"+i+"'><span class='rc-e'>"+nm.e+"</span><span class='rc-n'>"+nm.t+"</span><span class='rc-s'>"+r.steps.length+" steps</span></button>";}
@@ -1117,6 +1156,26 @@ function paintTimer(){var el=document.getElementById("timerBtn");if(!el)return;v
 // Ingredient lists. Item: [qty, unit, name, flag]. qty: number, [lo,hi], or null (to taste / no amount).
 // name "lime|limes" = singular|plural. flag "fixed" = does not scale. {h:"..."} = section header.
 var ING={
+cacio:{serves:4,items:[
+ {h:"Pasta"},
+ [1,"lb","fresh tonnarelli (see Fresh Pasta) or dried spaghetti"],
+ [1,"tbsp","kosher salt, for the water"],
+ {h:"Sauce"},
+ [6,"oz","Pecorino Romano, in a block"],
+ [2,"tbsp","whole black peppercorns"],
+ [null,"","Extra pecorino and cracked pepper to finish"],
+ [null,"","No butter, no oil, no cream. That's the dish."]
+]},
+freshpasta:{serves:4,items:[
+ [300,"g","\"00\" flour (about 2&#188; cups)"],
+ [100,"g","semolina rimacinata (or 100 g more 00)"],
+ [4,"","large egg|large eggs"],
+ [1,"","extra egg yolk|extra egg yolks"],
+ [1,"tsp","fine salt"],
+ [1,"tbsp","olive oil"],
+ [null,"","Extra semolina, for dusting"],
+ [null,"","Makes about 1 lb, which is dinner for 4"]
+]},
 asada:{serves:4,items:[
  {h:"Marinade"},
  [1.25,"lb","skirt steak"],
@@ -1134,7 +1193,7 @@ asada:{serves:4,items:[
  [0.5,"cup","cilantro, chopped"],
  [2,"","lime, in wedges|limes, in wedges"],
  [12,"","tortilla|tortillas"],
- [null,"","Or bowls: rice, beans, pico and guac (all in Sides & Salsas)"]
+ [null,"","Or bowls: rice and beans from Sides & Staples, pico and guac from Sauces & Salsas"]
 ]},
 barbacoa:{serves:6,items:[
  [3.5,"lb","beef chuck roast"],
@@ -1600,8 +1659,8 @@ function groupsList(){var idx={};RECIPES.forEach(function(r,i){idx[r.id]=i;});re
 function startRecipe(i){ridx=i;cur=0;closeMenu();renderPicker();showView("cook");render();if(ING[RECIPES[i].id])openIng();}
 function renderHome(){
  var gl=groupsList();
- document.getElementById("tiles").innerHTML=gl.map(function(g){var n=g[1].length;return "<button class='tile' data-g=\""+g[0]+"\"><span class='t-e'>"+(GEMO[g[0]]||"🍽️")+"</span><span class='t-n'>"+g[0]+"</span><span class='t-s'>"+n+(n===1?" recipe":" recipes")+"</span></button>";}).join("")+"<button class='tile all"+(gl.length%2?"":" wide")+"' data-g=''><span class='t-e'>🔍</span><span class='t-n'>All recipes</span><span class='t-s'>"+RECIPES.length+" recipes</span></button>";
- Array.prototype.forEach.call(document.querySelectorAll("#tiles .tile"),function(t){t.onclick=function(){var g=t.getAttribute("data-g");if(g){var gg=gl.filter(function(x){return x[0]===g;})[0];if(gg&&gg[1].length===1){startRecipe(gg[1][0]);return;}}openMenu(g||null);};});
+ document.getElementById("tiles").innerHTML=gl.map(function(g){var n=g[1].length;return "<button class='tile' data-g=\""+g[0]+"\"><span class='t-e'>"+(GEMO[g[0]]||"🍽️")+"</span><span class='t-n'>"+g[0]+"</span><span class='t-s'>"+n+(n===1?" recipe":" recipes")+"</span></button>";}).join("")+SOON.map(function(nm){return "<button class='tile soon' data-soon='1' aria-disabled='true'><span class='t-e'>"+(GEMO[nm]||"🍽️")+"</span><span class='t-n'>"+nm+"</span><span class='t-s'>Under construction</span></button>";}).join("")+"<button class='tile all"+((gl.length+SOON.length)%2?"":" wide")+"' data-g=''><span class='t-e'>🔍</span><span class='t-n'>All recipes</span><span class='t-s'>"+RECIPES.length+" recipes</span></button>";
+ Array.prototype.forEach.call(document.querySelectorAll("#tiles .tile"),function(t){t.onclick=function(){if(t.hasAttribute("data-soon"))return;var g=t.getAttribute("data-g");if(g){var gg=gl.filter(function(x){return x[0]===g;})[0];if(gg&&gg[1].length===1){startRecipe(gg[1][0]);return;}}openMenu(g||null);};});
  var rs=document.getElementById("resume"),R=RECIPES[ridx];
  if(hasSave&&R&&cur>0&&cur<R.steps.length-1){var nm=splitName(R.name);rs.innerHTML="<span class='r-e'>"+nm.e+"</span><span class='r-t'><span class='r-l'>Pick up where you left off</span><span class='r-n'>"+nm.t+"</span><span class='r-s'>Step "+(cur+1)+" of "+R.steps.length+"</span></span><span class='r-go'>Keep going ▶</span>";rs.hidden=false;}else{rs.hidden=true;}
  document.getElementById("homeScene").innerHTML=idleScene();
@@ -1613,7 +1672,7 @@ document.getElementById("homeBtn").onclick=function(){showView("home");};
 document.getElementById("goHomeH").onclick=function(){showView("home");};
 document.getElementById("resume").onclick=function(){renderPicker();showView("cook");render();};
 document.getElementById("homeScene").onclick=function(){document.getElementById("homeHi").textContent=BOOPS[Math.floor(Math.random()*BOOPS.length)];ding();var sc=document.getElementById("homeScene");sc.classList.remove("boop");void sc.offsetWidth;sc.classList.add("boop");setTimeout(function(){sc.classList.remove("boop");},520);};
-document.getElementById("surprise").onclick=function(){ensureCtx();var pool=[];groupsList().forEach(function(g){if(g[0]!=="Sides & Salsas")pool=pool.concat(g[1]);});if(!pool.length)pool=RECIPES.map(function(r,i){return i;});var i=pool[Math.floor(Math.random()*pool.length)];if(pool.length>1&&i===ridx)i=pool[(pool.indexOf(i)+1)%pool.length];ding();startRecipe(i);};
+document.getElementById("surprise").onclick=function(){ensureCtx();var pool=[];groupsList().forEach(function(g){if(g[0]==="Mains")pool=pool.concat(g[1]);});if(!pool.length)pool=RECIPES.map(function(r,i){return i;});var i=pool[Math.floor(Math.random()*pool.length)];if(pool.length>1&&i===ridx)i=pool[(pool.indexOf(i)+1)%pool.length];ding();startRecipe(i);};
 (async function(){await load();renderPicker();if(location.hash==="#cook"){showView("cook");render();}else{try{history.replaceState(null,"","#home");}catch(e){}showView("home");}setInterval(function(){if(document.getElementById("timerBtn"))paintTimer();},1000);})();
 </script>
 
