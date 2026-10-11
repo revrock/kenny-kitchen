@@ -1,7 +1,10 @@
 {
   "name": "Chef Kenny's Kitchen",
   "short_name": "Kenny's Kitchen",
-  "start_url": ".",
+  "description": "Cook along with Chef Kenny, one step at a time.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#9BD9EC",
   "theme_color": "#E8623C",

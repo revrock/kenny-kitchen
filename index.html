@@ -3,7 +3,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Chef Kenny's Kitchen</title>
-<meta name="theme-color" content="#E8623C">
+<meta name="description" content="Cook along with Chef Kenny, a corgi in a chef's hat. Family recipes, Traeger cooks and taco nights, one step at a time, with shopping lists that scale and timers built in.">
+<link rel="canonical" href="https://cookwithkenny.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Chef Kenny's Kitchen">
+<meta property="og:title" content="Chef Kenny's Kitchen">
+<meta property="og:description" content="Family recipes, one step at a time, with a corgi chef.">
+<meta property="og:url" content="https://cookwithkenny.com/">
+<meta property="og:image" content="https://cookwithkenny.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Chef Kenny, a tricolor corgi in a chef's hat, cheering in a cartoon kitchen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chef Kenny's Kitchen">
+<meta name="twitter:description" content="Family recipes, one step at a time, with a corgi chef.">
+<meta name="twitter:image" content="https://cookwithkenny.com/og-image.jpg">
+<meta name="theme-color" content="#E8623C" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F1B2A" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -336,6 +353,93 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
   .scaled-tag{display:inline-block;font-size:11px;font-weight:800;color:#5a7a2a;background:#E6F3D2;border-radius:8px;padding:2px 7px;margin-left:6px;vertical-align:middle;letter-spacing:.02em;}
 
 
+
+
+/* ===== Accessible text accents (both themes) ===== */
+:root{--accent-text:#A63A1B;--muted:#6E5D4F;}
+.real b{color:var(--accent-text);}
+.pb-lbl,.stage-tag{color:var(--accent-text);}
+.grp,.empty,.tile .t-s,.ib-s,.ing-h,.ing-clear,#ucPop .uc-r span,#ucPop .uc-note{color:var(--muted);}
+.sec{color:#4A5A36;}
+.dur{color:#6E5D4F;}
+.hi-sub{color:#5A4A3D;}
+.footer{color:#3F5626;}
+/* ===== Dark mode ===== */
+@media (prefers-color-scheme: dark){
+:root:not([data-theme="light"]){--sky:#0F1B2A;--sky2:#172638;--grass:#1C2A1E;--card:#2A221E;--char:#F3E8DC;--line:#4D4038;--accent-text:#FF9F80;--muted:#CDBBA8;color-scheme:dark;}
+:root:not([data-theme="light"]) body{background:linear-gradient(180deg,var(--sky) 0%,var(--sky2) 45%,#1A2A24 75%,var(--grass) 100%);background-attachment:fixed;}
+:root:not([data-theme="light"]) .sun{opacity:.35;filter:saturate(.6);}
+:root:not([data-theme="light"]) .bubble,
+:root:not([data-theme="light"]) .timer,
+:root:not([data-theme="light"]) .btn.back,
+:root:not([data-theme="light"]) .menu-x,
+:root:not([data-theme="light"]) .menu-search,
+:root:not([data-theme="light"]) .rc,
+:root:not([data-theme="light"]) .tile.all,
+:root:not([data-theme="light"]) .tile.allx,
+:root:not([data-theme="light"]) .ingbtn,
+:root:not([data-theme="light"]) .serv,
+:root:not([data-theme="light"]) .ing-box,
+:root:not([data-theme="light"]) .ing-copy,
+:root:not([data-theme="light"]) .tchip,
+:root:not([data-theme="light"]) .lk-in{background:#352B26;color:var(--char);}
+:root:not([data-theme="light"]) .ing.got .ing-box{background:var(--leaf);}
+:root:not([data-theme="light"]) .menu-sheet{background:#231C19;}
+:root:not([data-theme="light"]) .real{background:#3A2E24;border-color:#7A5E33;color:var(--char);}
+:root:not([data-theme="light"]) .dur{background:#45372C;color:#E9D9C6;}
+:root:not([data-theme="light"]) .meter{background:#4A3A30;}
+:root:not([data-theme="light"]) .uc{border-bottom-color:#E0A860;}
+:root:not([data-theme="light"]) .uc:hover{background:#4A3A2A;}
+:root:not([data-theme="light"]) .uc.on{background:#5C4524;}
+:root:not([data-theme="light"]) .sq{background:#5C4A1C;color:var(--char);}
+:root:not([data-theme="light"]) .scaled-tag{background:#2E4220;color:#CFEAB0;}
+:root:not([data-theme="light"]) .resume .r-go{background:#FFF3E6;color:#9A3518;}
+:root:not([data-theme="light"]) .hi-sub,
+:root:not([data-theme="light"]) .serv-note,
+:root:not([data-theme="light"]) .tile.soon .t-s,
+:root:not([data-theme="light"]) #ucPop .uc-src,
+:root:not([data-theme="light"]) #ucPop .uc-x{color:var(--muted);}
+:root:not([data-theme="light"]) #ucPop .uc-big{color:#FFB08A;}
+:root:not([data-theme="light"]) .sec{color:#BFD3A0;}
+:root:not([data-theme="light"]) .surprise{color:#2A221E;border-color:#F3E8DC;}
+:root:not([data-theme="light"]) .ib-go{color:var(--accent-text);}
+:root:not([data-theme="light"]) .hi-sub{color:var(--muted);}
+:root:not([data-theme="light"]) .dur{color:#E9D9C6;}
+:root:not([data-theme="light"]) .footer{color:#BFD3A0;}
+:root:not([data-theme="light"]) .rc.rc-lock{background:repeating-linear-gradient(135deg,#3A2E24 0 10px,#33281F 10px 20px);}
+:root:not([data-theme="light"]) .rc.rc-lock .rc-s,
+:root:not([data-theme="light"]) .lk-err,
+:root:not([data-theme="light"]) .wl-kick{color:#FF9F80;}
+:root:not([data-theme="light"]) .wl-go,
+:root:not([data-theme="light"]) .lk-go{box-shadow:0 5px 0 #000;}
+:root:not([data-theme="light"]) .wl-perks li{background:var(--card);}
+:root:not([data-theme="light"]) .toast{background:#F3E8DC;color:#2A221E;}
+:root:not([data-theme="light"]) .tchip.run{background:#B23F1F;}
+:root:not([data-theme="light"]) .tchip.done{background:var(--leaf);}
+/* the painted scenes stay bright on purpose: a lit card on a dark page beats a muddied drawing */
+:root:not([data-theme="light"]) .scene{background:linear-gradient(180deg,#FFFDF6,#FBF1DE);border-color:#F3E8DC;}
+:root:not([data-theme="light"]) .wl-about img,:root:not([data-theme="light"]) .h1-kenny{filter:drop-shadow(0 3px 0 rgba(0,0,0,.5));}
+}
+/* ===== Share + toast ===== */
+.homebtn small{font-size:11px;font-weight:600;}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,20px);z-index:80;background:var(--char);color:#fff;font-weight:700;font-size:15px;padding:10px 16px;border-radius:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:calc(100% - 32px);text-align:center;}
+.toast.on{opacity:1;transform:translate(-50%,0);}
+body.has-tray .toast{bottom:calc(96px + env(safe-area-inset-bottom));}
+/* ===== Timer tray ===== */
+.tray{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;gap:8px;overflow-x:auto;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:var(--card);border-top:3px solid var(--char);box-shadow:0 -4px 0 rgba(62,46,38,.12);-webkit-overflow-scrolling:touch;}
+.tray[hidden]{display:none;}
+body.has-tray{padding-bottom:calc(96px + env(safe-area-inset-bottom));}
+.tchip{flex:0 0 auto;display:flex;align-items:stretch;border:2px solid var(--char);border-radius:14px;background:#fff;overflow:hidden;}
+.tchip.run{background:#B23F1F;border-color:#8A2E14;}
+.tchip.run .tgo,.tchip.run .tx{color:#fff;}
+.tchip.done{background:var(--leaf);border-color:#3E7A26;animation:blink 1s infinite;}
+.tchip.done .tgo,.tchip.done .tx{color:#fff;}
+.tgo{display:flex;align-items:center;gap:6px;background:none;border:0;font:inherit;color:var(--char);padding:7px 4px 7px 10px;cursor:pointer;}
+.tgo .te{font-size:18px;}
+.tgo .tl{font-weight:700;font-size:13px;max-width:7.5em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.tgo .tt{font-family:'Fredoka',sans-serif;font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;}
+.tx{background:none;border:0;border-left:2px solid rgba(62,46,38,.2);font-size:13px;color:var(--char);padding:0 10px;cursor:pointer;}
+@media (prefers-reduced-motion:reduce){.tchip.done{animation:none;}}
 /* ===== Locked family recipes ===== */
 #lockSheet{z-index:70;}
 #lockSheet .menu-sheet{top:auto;padding-bottom:env(safe-area-inset-bottom);}
@@ -376,8 +480,15 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
 .wl-link{display:block;margin:-8px auto 0;background:none;border:0;font:inherit;font-family:'Fredoka',sans-serif;font-weight:600;font-size:14px;color:var(--char);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:8px 12px;}
 @media (max-width:380px){.wl-step{flex-direction:column;align-items:stretch;}.wl-step .scene{max-width:none;}.wl-step-t{padding:2px 6px 6px;}.wl-title{font-size:27px;}}
 @media (prefers-reduced-motion:reduce){.wl-go{transition:none;}}
+
+/* ===== Filled buttons: deeper orange so white text reads in a bright kitchen ===== */
+.chip.active,.timer.running,.btn.next,.pb-go,.rc.on,.resume,.lk-go,.wl-go{background:var(--bbq-deep);}
+.rc.on{border-color:#8A2E14;}
+.wl-go{text-shadow:none;}
 </style>
 <div class="sun"></div>
+<div class="tray" id="tray" hidden aria-label="Running timers"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="wrap">
   <h1><button id="goHomeH" aria-label="Home"><img class="h1-kenny" src="kenny-head.webp" alt="" width="46" height="46">Chef Kenny's Kitchen</button></h1>
   <div class="view" id="welcome">
@@ -412,6 +523,7 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
   <div class="toprow">
     <button class="homebtn" id="homeBtn" aria-label="Back to home">🏠<small>Home</small></button>
     <button class="pickbar" id="picker" aria-haspopup="dialog"></button>
+    <button class="homebtn sharebtn" id="shareBtn" aria-label="Share this recipe">📤<small>Share</small></button>
   </div>
   <button class="ingbtn" id="ingBtn" aria-haspopup="dialog"></button>
   <div class="paws" id="paws"></div>
@@ -1232,7 +1344,7 @@ function lkB(x){var b=atob(x),u=new Uint8Array(b.length);for(var i=0;i<b.length;
 function lkB64(u){var s="";u=new Uint8Array(u);for(var i=0;i<u.length;i++)s+=String.fromCharCode(u[i]);return btoa(s);}
 async function lkDerive(id,pw){var L=LOCKED[id],c=crypto.subtle;var base=await c.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);return c.deriveKey({name:"PBKDF2",salt:lkB(L.s),iterations:L.it,hash:"SHA-256"},base,{name:"AES-GCM",length:256},true,["decrypt"]);}
 async function lkOpen(id,key){var L=LOCKED[id];var pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:lkB(L.v)},key,lkB(L.c));var o=JSON.parse(new TextDecoder().decode(pt));
- var R=(0,eval)("("+o.r+")"),I=(0,eval)("("+o.i+")");
+ var R=(0,eval)("("+o.r+")"),I=(0,eval)("("+o.i+")");R.secret=1;
  var at=RECIPES.length;RECIPES.forEach(function(r,i){if(r.id===L.after)at=i+1;});RECIPES.splice(at,0,R);ING[id]=I;
  var S=SCN[id];if(S)R.steps.forEach(function(s,i){if(S[i])s.scene=build(S[i],s.real);});
  delete LOCKED[id];return at;}
@@ -1262,9 +1374,32 @@ document.getElementById("menuQ").oninput=renderMenu;
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeMenu();});
 
 function fmt(s){s=Math.max(0,s);var m=Math.floor(s/60),ss=s%60;return m+":"+String(ss).padStart(2,"0");}
-function startTimerFor(dur){timer={sec:dur,running:false,endAt:null,done:false,dur:dur};}
-function toggleTimer(){ensureCtx();if(timer.done){timer.done=false;timer.running=false;timer.sec=timer.dur;timer.endAt=null;}else if(timer.running){timer.sec=Math.max(0,Math.round((timer.endAt-Date.now())/1000));timer.running=false;timer.endAt=null;}else{timer.running=true;timer.endAt=Date.now()+timer.sec*1000;}paintTimer();}
-function paintTimer(){var el=document.getElementById("timerBtn");if(!el)return;var rem=timer.sec;if(timer.running){rem=Math.max(0,Math.round((timer.endAt-Date.now())/1000));timer.sec=rem;if(rem<=0&&!timer.done){timer.running=false;timer.done=true;ding();}}el.className="timer"+(timer.running?" running":"")+(timer.done?" done":"");var lbl=el.getAttribute("data-lbl");el.textContent=timer.done?("\u23F0 "+lbl+" done!"):(timer.running?("\u275A\u275A "+fmt(rem)):("\u25B6 "+lbl+" "+fmt(rem)));}
+var TKEY="kk-timers",TIMERS={},curTK=null;
+try{TIMERS=JSON.parse(localStorage.getItem(TKEY)||"{}")||{};}catch(e){TIMERS={};}
+function tSave(){try{localStorage.setItem(TKEY,JSON.stringify(TIMERS));}catch(e){}}
+function tRem(t){return t.endAt?Math.max(0,Math.round((t.endAt-Date.now())/1000)):t.sec;}
+function startTimerFor(dur){var R=RECIPES[ridx],s=R.steps[cur];curTK=R.id+":"+cur;if(!TIMERS[curTK])timer={key:curTK,rid:R.id,step:cur,dur:dur,sec:dur,endAt:null,done:false,lbl:s.timerLbl||"Timer",nm:splitName(R.name).e};else timer=TIMERS[curTK];}
+function toggleTimer(){ensureCtx();var t=TIMERS[curTK]||timer;if(t.done){t.done=false;t.sec=t.dur;t.endAt=null;delete TIMERS[t.key];}else if(t.endAt){t.sec=tRem(t);t.endAt=null;TIMERS[t.key]=t;}else{t.endAt=Date.now()+t.sec*1000;TIMERS[t.key]=t;}timer=t;tSave();paintTimer();}
+function tLabel(t){var r=tRem(t);return t.done?("⏰ "+t.lbl+" done!"):(t.endAt?("❚❚ "+fmt(r)):("▶ "+t.lbl+" "+fmt(r)));}
+function tTick(){var fired=false;Object.keys(TIMERS).forEach(function(k){var t=TIMERS[k];if(t.endAt&&!t.done&&tRem(t)<=0){t.done=true;t.endAt=null;t.sec=0;fired=true;}});if(fired){tSave();ding();setTimeout(ding,500);setTimeout(ding,1000);try{if(navigator.vibrate)navigator.vibrate([300,150,300]);}catch(e){}}}
+function paintTimer(){tTick();var el=document.getElementById("timerBtn");if(el){var t=TIMERS[curTK]||timer;el.className="timer"+(t.endAt?" running":"")+(t.done?" done":"");el.textContent=tLabel(t);}paintTray();}
+function paintTray(){var tr=document.getElementById("tray");if(!tr)return;var ks=Object.keys(TIMERS);var anyDone=false;
+ if(!ks.length){if(!tr.hidden){tr.hidden=true;tr.innerHTML="";document.body.classList.remove("has-tray");}document.title=BASE_TITLE;return;}
+ ks.sort(function(a,b){var A=TIMERS[a],B=TIMERS[b];return (A.done?-1e9:tRem(A)+(A.endAt?0:1e6))-(B.done?-1e9:tRem(B)+(B.endAt?0:1e6));});
+ var h=ks.map(function(k){var t=TIMERS[k];if(t.done)anyDone=true;return "<span class='tchip"+(t.done?" done":t.endAt?" run":"")+"'><button class='tgo' data-k='"+k+"' aria-label='Go to "+t.lbl.replace(/'/g,"&#39;")+" timer'><span class='te'>"+t.nm+"</span><span class='tl'>"+t.lbl+"</span><span class='tt'>"+(t.done?"Done!":fmt(tRem(t)))+"</span></button><button class='tx' data-x='"+k+"' aria-label='Dismiss timer'>✕</button></span>";}).join("");
+ if(tr.getAttribute("data-h")!==h){tr.innerHTML=h;tr.setAttribute("data-h",h);}
+ if(tr.hidden){tr.hidden=false;document.body.classList.add("has-tray");}
+ document.title=anyDone?"⏰ Timer done! · "+BASE_TITLE:BASE_TITLE;}
+var BASE_TITLE=document.title;
+document.addEventListener("click",function(e){var x=e.target.closest&&e.target.closest("#tray .tx");if(x){delete TIMERS[x.getAttribute("data-x")];tSave();paintTimer();if(curTK&&!TIMERS[curTK]&&RECIPES[ridx].steps[cur].timer)startTimerFor(RECIPES[ridx].steps[cur].timer);paintTimer();return;}
+ var g=e.target.closest&&e.target.closest("#tray .tgo");if(g){var t=TIMERS[g.getAttribute("data-k")];if(!t)return;var i=-1;RECIPES.forEach(function(r,j){if(r.id===t.rid)i=j;});if(i<0)return;ridx=i;cur=Math.min(t.step,RECIPES[i].steps.length-1);closeMenu();closeIng();renderPicker();showView("cook");render();}});
+document.addEventListener("visibilitychange",function(){if(!document.hidden)paintTimer();});
+/* screen wake lock while cooking */
+var wakeLk=null;
+async function wakeOn(){if(!("wakeLock" in navigator)||document.hidden||wakeLk)return;try{wakeLk=await navigator.wakeLock.request("screen");wakeLk.addEventListener("release",function(){wakeLk=null;});}catch(e){wakeLk=null;}}
+function wakeOff(){if(wakeLk){try{wakeLk.release();}catch(e){}wakeLk=null;}}
+function wakeSync(){var c=document.getElementById("cook");if(c&&c.classList.contains("on")&&!document.hidden)wakeOn();else wakeOff();}
+document.addEventListener("visibilitychange",wakeSync);
 
 // Ingredient lists. Item: [qty, unit, name, flag]. qty: number, [lo,hi], or null (to taste / no amount).
 // name "lime|limes" = singular|plural. flag "fixed" = does not scale. {h:"..."} = section header.
@@ -1888,13 +2023,21 @@ function renderHome(){
  document.getElementById("homeScene").innerHTML=idleScene();
 }
 var HELLOS=["Hi! I'm Chef Kenny.","Hey there, chef!","Welcome back to the kitchen!","Chef Kenny, reporting for duty!"];
-function showView(v){document.getElementById("welcome").classList.toggle("on",v==="welcome");document.getElementById("home").classList.toggle("on",v==="home");document.getElementById("cook").classList.toggle("on",v==="cook");if(v==="welcome")renderWelcome();else clearWelcome();var want="#"+v;if(location.hash!==want){try{history.pushState(null,"",want);}catch(e){location.hash=want;}}if(v==="welcome"){clearTimeout(window._ct);}if(v==="home"){renderHome();document.getElementById("homeHi").textContent=HELLOS[Math.floor(Math.random()*HELLOS.length)];clearTimeout(window._ct);}window.scrollTo(0,0);}
-window.addEventListener("popstate",function(){if(location.hash==="#cook"){showView("cook");render();}else if(location.hash==="#welcome"){closeMenu();closeIng();showView("welcome");}else{closeMenu();closeIng();showView("home");}});
+function showView(v){document.getElementById("welcome").classList.toggle("on",v==="welcome");document.getElementById("home").classList.toggle("on",v==="home");document.getElementById("cook").classList.toggle("on",v==="cook");if(v==="welcome")renderWelcome();else clearWelcome();var want=v==="cook"?"#r/"+RECIPES[ridx].id:"#"+v;if(location.hash!==want){try{history.pushState(null,"",want);}catch(e){location.hash=want;}}if(v==="welcome"){clearTimeout(window._ct);}if(v==="home"){renderHome();document.getElementById("homeHi").textContent=HELLOS[Math.floor(Math.random()*HELLOS.length)];clearTimeout(window._ct);}window.scrollTo(0,0);wakeSync();}
+window.addEventListener("popstate",function(){var rid=routeHash(location.hash);if(rid&&idx(rid)>-1){var i=idx(rid);if(i!==ridx){ridx=i;cur=0;renderPicker();}closeMenu();closeIng();showView("cook");render();}else if(rid&&LOCKED[rid]){showView("home");openLock(rid);}else if(location.hash==="#cook"){showView("cook");render();}else if(location.hash==="#welcome"){closeMenu();closeIng();showView("welcome");}else{closeMenu();closeIng();showView("home");}});
 document.getElementById("homeBtn").onclick=function(){showView("home");};
 document.getElementById("goHomeH").onclick=function(){showView("home");};
 document.getElementById("resume").onclick=function(){renderPicker();showView("cook");render();};
 document.getElementById("homeScene").onclick=function(){document.getElementById("homeHi").textContent=BOOPS[Math.floor(Math.random()*BOOPS.length)];ding();var sc=document.getElementById("homeScene");sc.classList.remove("boop");void sc.offsetWidth;sc.classList.add("boop");setTimeout(function(){sc.classList.remove("boop");},520);};
 document.getElementById("surprise").onclick=function(){ensureCtx();var pool=[];groupsList().forEach(function(g){if(g[0]==="Mains")pool=pool.concat(g[1]);});if(!pool.length)pool=RECIPES.map(function(r,i){return i;});var i=pool[Math.floor(Math.random()*pool.length)];if(pool.length>1&&i===ridx)i=pool[(pool.indexOf(i)+1)%pool.length];ding();startRecipe(i);};
+function toast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("on");clearTimeout(window._tt);window._tt=setTimeout(function(){t.classList.remove("on");},2400);}
+function recipeURL(id){return location.origin+location.pathname+"#r/"+id;}
+function idx(id){var f=-1;RECIPES.forEach(function(r,i){if(r.id===id)f=i;});return f;}
+document.getElementById("shareBtn").onclick=async function(){var R=RECIPES[ridx],nm=splitName(R.name),url=recipeURL(R.id),locked=!!R.secret;
+ var data={title:nm.t+" with Chef Kenny",text:"Cook "+nm.t+" with Chef Kenny, one step at a time."+(locked?" (Family recipe, you'll need the password.)":""),url:url};
+ if(navigator.share){try{await navigator.share(data);return;}catch(e){if(e&&e.name==="AbortError")return;}}
+ try{await navigator.clipboard.writeText(url);toast("🔗 Link copied! Paste it in a text.");}catch(e){toast(url);}};
+function routeHash(h){var m=/^#r\/([\w-]+)/.exec(h||"");return m?m[1]:null;}
 var WKEY="kk-welcomed";
 function wasWelcomed(){try{return localStorage.getItem(WKEY)==="1";}catch(e){return false;}}
 function markWelcomed(){try{localStorage.setItem(WKEY,"1");}catch(e){}}
@@ -1912,7 +2055,7 @@ document.getElementById("wlGo").onclick=enterKitchen;
 document.getElementById("wlGo2").onclick=enterKitchen;
 document.getElementById("wlAgain").onclick=function(){showView("welcome");};
 document.getElementById("wlScene").onclick=function(){var sc=document.getElementById("wlScene");ding();sc.classList.remove("boop");void sc.offsetWidth;sc.classList.add("boop");setTimeout(function(){sc.classList.remove("boop");},520);};
-(async function(){try{await lkAuto();}catch(e){}await load();renderPicker();if(location.hash==="#cook"){showView("cook");render();}else if(location.hash==="#welcome"||(!wasWelcomed()&&!hasSave)){try{history.replaceState(null,"","#welcome");}catch(e){}showView("welcome");}else{try{history.replaceState(null,"","#home");}catch(e){}showView("home");}setInterval(function(){if(document.getElementById("timerBtn"))paintTimer();},1000);})();
+(async function(){try{await lkAuto();}catch(e){}await load();var drid=routeHash(location.hash);if(drid&&idx(drid)>-1){var di=idx(drid);if(di!==ridx){ridx=di;cur=0;}markWelcomed();}renderPicker();if(drid&&idx(drid)>-1){showView("cook");render();}else if(drid&&LOCKED[drid]){markWelcomed();try{history.replaceState(null,"","#home");}catch(e){}showView("home");openLock(drid);}else if(location.hash==="#cook"){showView("cook");render();}else if(location.hash==="#welcome"||(!wasWelcomed()&&!hasSave)){try{history.replaceState(null,"","#welcome");}catch(e){}showView("welcome");}else{try{history.replaceState(null,"","#home");}catch(e){}showView("home");}setInterval(paintTimer,1000);paintTimer();if("serviceWorker" in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});if(document.readyState==="complete")navigator.serviceWorker.register("sw.js").catch(function(){});}})();
 </script>
 
 
