@@ -724,6 +724,14 @@ var RECIPES=[
   st("The Juicy Trick","A splash of broth keeps it juicy. Sneaky good.","Fold in <b>broth + juices</b>; sauce the Peach pile with BBQ.",88,ACT.stir(CHK),{dur:"5 min"}),
   st("Sandwich or Bowl?","Big sandwich? Comfy bowl? You win either way!","Sandwiches with slaw, or over rice + broccoli for lunches.",100,ACT.serve('bowl',CHK),{dur:"Dig in!"})
  ]},
+ {id:"crockchicken",name:"🍗 Crock Pot BBQ Chicken",meter:"🍗 Crock Meter",steps:[
+  st("Rub-a-Dub Chicken","A little spice massage. Chicken spa day!","Mix <b>1 tsp smoked paprika</b>, <b>1 tsp garlic powder</b>, <b>&#189; tsp onion powder</b>, <b>1 tsp kosher salt</b> and <b>&#189; tsp pepper</b>. Rub it all over <b>4 chicken breasts</b> (about 2 lb). Lay them flat in the crock pot.",8,ACT.season(CHK),{dur:"5 min"}),
+  st("Sauce Pool","Sweet, tangy, saucy. Save a little for later!","Whisk <b>1&#189; cups BBQ sauce</b> with <b>2 tbsp brown sugar</b>, <b>2 tbsp cider vinegar</b> and <b>1 tbsp Worcestershire</b>. Pour it over the chicken. Keep the last <b>&#189; cup</b> of sauce for the end. No water needed, the chicken makes its own juice.",22,ACT.stir(CHK),{dur:"5 min"}),
+  st("The Lazy Afternoon","Lid on, walk away. No peeking! Every peek adds time.","Lid on. <b>LOW about 4 hr</b> or <b>HIGH about 2.5 hr</b>, until the thickest piece reads <b>165&#176;F</b> and pulls apart easily. Breasts dry out past about 5 hr on low, so switch to <b>WARM</b> if you're running late.",60,ACT.braise(CHK),{dur:"~4 hr",timer:14400,timerLbl:"Slow cook"}),
+  st("Fork Party","Two forks, pull pull pull. So shreddy!","Move the chicken to a board and shred it with two forks. Spoon off some of the thin liquid if the pot looks watery, then stir the chicken back into the sauce.",80,ACT.slice(CHK),{dur:"5 min"}),
+  st("Sticky Finish","The secret sauce comes back! Lid off, let it get sticky.","Stir in the saved <b>&#189; cup BBQ sauce</b>. Lid off, <b>HIGH</b>, 15&#8211;20 min so the sauce thickens and clings.",92,ACT.stir(CHK),{dur:"15–20 min",timer:1080,timerLbl:"Thicken"}),
+  st("Bun Time!","Bun, chicken, slaw. Easiest dinner ever. You did great.","Pile on toasted buns with slaw and pickles, or spoon it over rice. Leftovers freeze flat in a bag for up to 3 months.",100,ACT.serve('plate',CHK),{dur:"Dig in!"})
+ ]},
  {id:"mac",name:"🧀 Smoked Mac",meter:"🧀 Mac Meter",steps:[
   st("Noodle Splash","Bubble bubble, noodle party in the pot!","Boil <b>1 lb elbows</b> to 2 min shy of al dente. Drain.",10,ACT.boil(CHEESE),{dur:"~8 min",timer:420,timerLbl:"Boil"}),
   st("Cheese Waterfall","Stir stir stir... hello, cheesy river!","Butter + flour roux, whisk in <b>4 cups milk</b>, then melt in <b>cheddar, jack, cream cheese</b>.",40,ACT.stir(CHEESE),{dur:"~10 min"}),
@@ -1151,6 +1159,13 @@ var SCN={
   {p:'slice',m:['board',110,{on:['shredded:#E3B98A']}]},
   {p:'stir',m:['bowl',118,{c:'bbqchicken'}],x:[['bbq',232],['carton',258,'BROTH','#E3C9A0']]},
   {p:'serve',s:['bowl','#C9864A','#59A23A']}],
+ crockchicken:[
+  {p:'season',m:['board',96,{on:['breasts']}],x:[['shaker',236],['rub',262]],fx:['salt@90']},
+  {p:'stir',m:['bowl',118,{c:'bbqchicken'}],x:[['bbq',232],['shaker',262]]},
+  {p:'lid',m:['dutch',98,{c:'bbqchicken',on:['breasts']}],fx:['steam@98']},
+  {p:'slice',m:['board',110,{on:['shredded:#E3B98A']}],x:[['bun',256]]},
+  {p:'stir',m:['dutch',118,{c:'bbqchicken'}],x:[['bbq',236]],fx:['steam@118']},
+  {p:'serve',s:'sandwich'}],
  mac:[
   {p:'peek',m:['pot',130,{c:'boil'}],x:[['box',254,'#5BA3D9','ELBOWS']],fx:['steam@130']},
   {p:'stir',m:['pot',118,{c:'cheesesauce'}],x:[['carton',220,'MILK'],['cheese',246],['butter',274]],fx:['steam@118']},
@@ -1382,7 +1397,7 @@ var PAW="<svg class='paw' viewBox='0 0 24 24'><ellipse cx='12' cy='15' rx='6' ry
 function renderPaws(){var steps=RECIPES[ridx].steps;document.getElementById("paws").innerHTML=steps.map(function(s,i){return PAW.replace("paw",i<=cur?"paw on":"paw");}).join("");}
 var GEMO={"Mains":"🍽️","Sides & Staples":"🥄","Sauces & Salsas":"🥑","Desserts":"🍪"};
 var SOON=["Desserts"];
-var GROUPS=[["Mains",["asada","barbacoa","quesabirria","carnitas","walkingtacos","breakfasttacos","burgers","filet","ribeye","harissa","cacio","salad","chili","cornbreadchili","pulledpork","shortribs","chicken","meatloaf","potroast","turkey"]],["Sides & Staples",["smokedbeans","sprouts","freshpasta","rice","beans","mac","potatoes","crazybread"]],["Sauces & Salsas",["guac","pico"]]];
+var GROUPS=[["Mains",["asada","barbacoa","quesabirria","carnitas","walkingtacos","breakfasttacos","burgers","filet","ribeye","harissa","cacio","salad","chili","cornbreadchili","pulledpork","shortribs","chicken","crockchicken","meatloaf","potroast","turkey"]],["Sides & Staples",["smokedbeans","sprouts","freshpasta","rice","beans","mac","potatoes","crazybread"]],["Sauces & Salsas",["guac","pico"]]];
 function splitName(n){var m=n.match(/^(\S+)\s+(.*)$/);return m?{e:m[1],t:m[2]}:{e:"🍽️",t:n};}
 function renderPicker(){var nm=splitName(RECIPES[ridx].name);document.getElementById("picker").innerHTML="<span class='pb-emoji'>"+nm.e+"</span><span class='pb-txt'><span class='pb-lbl'>Now cooking</span><span class='pb-name'>"+nm.t+"</span></span><span class='pb-go'>Change ▾</span>";}
 function menuCard(i){var r=RECIPES[i],nm=splitName(r.name);var hit=MHIT[i]&&MHIT[i].length?"<span class='rc-hit'>🧺 "+MHIT[i].slice(0,2).join(", ")+"</span>":"";return "<button class='rc"+(i===ridx?" on":"")+"' data-i='"+i+"'><span class='rc-e'>"+nm.e+"</span><span class='rc-n'>"+nm.t+"</span>"+hit+"<span class='rc-s'>"+r.steps.length+" steps</span></button>";}
@@ -1610,6 +1625,21 @@ chicken:{serves:6,items:[
  {h:"To serve"},
  [6,"","bun|buns"],
  [null,"","Coleslaw, or rice and broccoli for lunches"]
+]},
+crockchicken:{serves:6,items:[
+ [4,"","boneless skinless chicken breasts (about 2 lb)"],
+ [2,"cup","BBQ sauce, divided"],
+ [2,"tbsp","brown sugar"],
+ [2,"tbsp","apple cider vinegar"],
+ [1,"tbsp","Worcestershire sauce"],
+ [1,"tsp","smoked paprika"],
+ [1,"tsp","garlic powder"],
+ [0.5,"tsp","onion powder"],
+ [1,"tsp","kosher salt"],
+ [0.5,"tsp","black pepper"],
+ {h:"To serve"},
+ [6,"","bun|buns"],
+ [null,"","Coleslaw and pickles, or rice"]
 ]},
 mac:{serves:8,items:[
  [1,"lb","elbow macaroni"],
