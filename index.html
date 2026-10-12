@@ -495,24 +495,47 @@ body.has-tray{padding-bottom:calc(96px + env(safe-area-inset-bottom));}
 #printCard{display:none;}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .cnote-t{background:#352B26;}}
 @media print{
- @page{margin:14mm;}
- html,body{background:#fff!important;color:#222!important;animation:none!important;padding:0!important;}
+ @page{margin:12mm 13mm;}
+ html,body{background:#fff!important;color:#2E241F!important;animation:none!important;padding:0!important;}
  body>*:not(#printCard){display:none!important;}
- #printCard{display:block!important;font-family:'Nunito',system-ui,sans-serif;font-size:11.5pt;line-height:1.45;color:#222;}
- #printCard .pc-head{display:flex;align-items:center;gap:12px;border-bottom:2px solid #222;padding-bottom:8px;margin-bottom:10px;}
- #printCard h1{font-family:'Fredoka',sans-serif;font-size:22pt;margin:0;color:#222!important;text-shadow:none!important;text-align:left;line-height:1.1;}
- #printCard b{color:#222;}
- #printCard .pc-head p{margin:2px 0 0;color:#555;}
- #printCard h2{font-family:'Fredoka',sans-serif;font-size:14pt;margin:14px 0 6px;}
- #printCard h3{font-size:10pt;text-transform:uppercase;letter-spacing:.06em;color:#555;margin:8px 0 3px;column-span:all;}
- #printCard .pc-ing{columns:2;column-gap:24px;}
- #printCard .pc-i{break-inside:avoid;display:flex;gap:6px;align-items:baseline;margin:2px 0;}
- #printCard .pc-box{flex:none;width:9px;height:9px;border:1.5px solid #444;border-radius:2px;}
- #printCard .pc-steps{padding-left:20px;margin:0;}
- #printCard .pc-steps li{margin:0 0 8px;break-inside:avoid;}
- #printCard .pc-notes{border:1.5px dashed #888;border-radius:8px;padding:8px 10px;}
- #printCard .pc-foot{margin-top:16px;font-size:9pt;color:#777;text-align:center;}
- #printCard .uc{border:0!important;}
+ #printCard,#printCard *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+ #printCard{display:block!important;font-family:'Nunito',system-ui,sans-serif;font-size:10.5pt;line-height:1.45;color:#2E241F;}
+ #printCard b{color:#2E241F;}
+ #printCard .uc{border:0!important;background:none!important;}
+ #printCard .pc-top{display:flex;align-items:center;gap:14px;background:#FFF4DF;border:2.5px solid #3E2E26;border-radius:16px;padding:12px 14px;box-shadow:0 4px 0 #E8623C;margin-bottom:14px;}
+ #printCard .pc-logo{flex:none;width:78px;height:78px;}
+ #printCard .pc-tt{flex:1;min-width:0;}
+ #printCard .pc-kick{font-family:'Fredoka',sans-serif;font-weight:600;font-size:9pt;letter-spacing:.14em;text-transform:uppercase;color:#C94A28;}
+ #printCard h1{font-family:'Fredoka',sans-serif;font-weight:700;font-size:25pt;line-height:1.05;margin:2px 0 7px;color:#3E2E26!important;text-shadow:none!important;text-align:left;}
+ #printCard .pc-chips{display:flex;flex-wrap:wrap;gap:6px;}
+ #printCard .pc-chips span{background:#fff;border:1.5px solid #3E2E26;border-radius:999px;padding:2px 9px;font-weight:700;font-size:9pt;}
+ #printCard .pc-chips small{font-weight:600;color:#6E5D4F;}
+ #printCard .pc-hero{flex:none;width:52mm;border:2px solid #3E2E26;border-radius:12px;overflow:hidden;background:#FFFDF6;}
+ #printCard .pc-hero svg{display:block;width:100%;height:auto;}
+ #printCard .pc-hero .kin,#printCard .pc-hero .kmove,#printCard .pc-hero .kimg,#printCard .pc-hero *{animation:none!important;opacity:1;}
+ #printCard .pc-hero .fb{display:none;}
+ #printCard .pc-sec{margin:0 0 12px;}
+ #printCard h2{font-family:'Fredoka',sans-serif;font-weight:700;font-size:14pt;color:#3E2E26;margin:0 0 7px;padding-bottom:3px;border-bottom:2.5px solid #E8623C;display:flex;align-items:center;gap:6px;}
+ #printCard .pc-paw{font-size:11pt;}
+ #printCard h3{font-family:'Fredoka',sans-serif;font-weight:600;font-size:9pt;text-transform:uppercase;letter-spacing:.1em;color:#C94A28;margin:8px 0 3px;column-span:all;}
+ #printCard h3:first-child{margin-top:0;}
+ #printCard .pc-ing{columns:2;column-gap:22px;background:#FFFBF2;border:1.5px dashed #E7C778;border-radius:12px;padding:9px 12px;}
+ #printCard .pc-i{break-inside:avoid;display:flex;gap:7px;align-items:baseline;margin:2.5px 0;}
+ #printCard .pc-box{flex:none;width:10px;height:10px;border:1.7px solid #3E2E26;border-radius:3px;transform:translateY(1px);}
+ #printCard .pc-steps{list-style:none;padding:0;margin:0;}
+ #printCard .pc-steps li{display:flex;gap:10px;margin:0 0 9px;break-inside:avoid;}
+ #printCard .pc-n{flex:none;width:22px;height:22px;border-radius:50%;background:#C94A28;color:#fff;font-family:'Fredoka',sans-serif;font-weight:700;font-size:10.5pt;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+ #printCard .pc-sb{flex:1;min-width:0;}
+ #printCard .pc-st{font-family:'Fredoka',sans-serif;font-weight:700;font-size:11.5pt;color:#3E2E26;}
+ #printCard .pc-dur{font-family:'Nunito',sans-serif;font-weight:700;font-size:8.5pt;background:#F1E7D2;border-radius:999px;padding:1px 7px;margin-left:4px;vertical-align:1px;color:#5A4A3D;}
+ #printCard .pc-sr{margin-top:1px;}
+ #printCard .pc-nsec{break-inside:avoid;}
+ #printCard .pc-notes{margin:0 0 4px;font-weight:600;}
+ #printCard .pc-lines i{display:block;height:22px;border-bottom:1.3px solid #CBB79A;}
+ #printCard .pc-foot{break-inside:avoid;margin-top:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:2.5px solid #3E2E26;padding-top:8px;}
+ #printCard .pc-quote{font-family:'Fredoka',sans-serif;font-weight:500;font-size:11pt;color:#3E2E26;}
+ #printCard .pc-quote span{display:block;font-size:8.5pt;font-weight:600;color:#C94A28;letter-spacing:.08em;text-transform:uppercase;margin-top:1px;}
+ #printCard .pc-url{flex:none;font-weight:800;font-size:9pt;color:#5A4A3D;}
 }
 /* ===== Filled buttons: deeper orange so white text reads in a bright kitchen ===== */
 .chip.active,.timer.running,.btn.next,.pb-go,.rc.on,.resume,.lk-go,.wl-go{background:var(--bbq-deep);}
@@ -2088,14 +2111,21 @@ function routeHash(h){var m=/^#r\/([\w-]+)/.exec(h||"");return m?m[1]:null;}
 var NKEY="kk-notes",NOTES={};try{NOTES=JSON.parse(localStorage.getItem(NKEY)||"{}")||{};}catch(e){NOTES={};}
 function saveNotes(){try{localStorage.setItem(NKEY,JSON.stringify(NOTES));}catch(e){}}
 function escH(t){return String(t).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-function printCard(){var R=RECIPES[ridx],id=R.id,I=ING[id],f=factor(),nm=splitName(R.name);
- var h="<div class='pc-head'><img src='kenny-head.webp' alt='' width='56' height='56'><div><h1>"+nm.t+"</h1><p>Serves "+servesOf(id)+(I&&servesOf(id)!==I.serves?" (scaled from "+I.serves+")":"")+" · "+R.steps.length+" steps</p></div></div>";
- if(I){h+="<h2>Ingredients</h2><div class='pc-ing'>";I.items.forEach(function(it){if(!Array.isArray(it)){h+="<h3>"+it.h+"</h3>";return;}var t=itemText(it,f);h+="<div class='pc-i'><span class='pc-box'></span><b>"+(t.q||"")+"</b> "+t.t+"</div>";});h+="</div>";}
- h+="<h2>Steps</h2><ol class='pc-steps'>";R.steps.forEach(function(s){h+="<li><b>"+s.title+"</b><br>"+scaleHTML(s.real,f)+(s.dur?" <i>("+s.dur+")</i>":"")+"</li>";});h+="</ol>";
- if(NOTES[id])h+="<h2>Cook's notes</h2><p class='pc-notes'>"+escH(NOTES[id]).replace(/\n/g,"<br>")+"</p>";
- h+="<p class='pc-foot'>Chef Kenny's Kitchen · "+(R.secret?"cookwithkenny.com":"cookwithkenny.com/#r/"+id)+"</p>";
+function printCard(){var R=RECIPES[ridx],id=R.id,I=ING[id],f=factor(),nm=splitName(R.name),sv=servesOf(id);
+ var last=R.steps[R.steps.length-1],hero=last&&last.scene?last.scene.replace(/cfront/g,"cfrontP"):"";
+ var nIng=I?I.items.filter(Array.isArray).length:0;
+ var h="<header class='pc-top'><img class='pc-logo' src='kenny-head.webp' alt='' width='78' height='78'><div class='pc-tt'><div class='pc-kick'>Chef Kenny's Kitchen</div><h1>"+nm.t+"</h1>"
+  +"<div class='pc-chips'><span>🍽️ Serves "+sv+(I&&sv!==I.serves?" <small>(scaled from "+I.serves+")</small>":"")+"</span><span>👣 "+R.steps.length+" steps</span>"+(nIng?"<span>🛒 "+nIng+" ingredients</span>":"")+(R.secret?"<span>💛 Family recipe</span>":"")+"</div></div>"
+  +(hero?"<div class='pc-hero'>"+hero+"</div>":"")+"</header>";
+ if(I){h+="<section class='pc-sec'><h2><span class='pc-paw'>🐾</span>Shopping list</h2><div class='pc-ing'>";I.items.forEach(function(it){if(!Array.isArray(it)){h+="<h3>"+it.h+"</h3>";return;}var t=itemText(it,f);h+="<div class='pc-i'><span class='pc-box'></span><span><b>"+(t.q||"")+"</b> "+t.t+"</span></div>";});h+="</div></section>";}
+ h+="<section class='pc-sec'><h2><span class='pc-paw'>🐾</span>Let's cook</h2><ol class='pc-steps'>";
+ R.steps.forEach(function(s,i){h+="<li><span class='pc-n'>"+(i+1)+"</span><div class='pc-sb'><div class='pc-st'>"+s.title+(s.dur?" <span class='pc-dur'>⏱ "+s.dur+"</span>":"")+"</div><div class='pc-sr'>"+scaleHTML(s.real,f)+"</div></div></li>";});
+ h+="</ol></section>";
+ h+="<section class='pc-sec pc-nsec'><h2><span class='pc-paw'>🐾</span>Cook's notes</h2>"+(NOTES[id]?"<p class='pc-notes'>"+escH(NOTES[id]).replace(/\n/g,"<br>")+"</p>":"")+"<div class='pc-lines'><i></i><i></i><i></i>"+(NOTES[id]?"":"<i></i>")+"</div></section>";
+ h+="<footer class='pc-foot'><div class='pc-quote'>“"+escH(last?last.kenny:"Happy cooking!")+"”<span>Chef Kenny</span></div><div class='pc-url'>🐾 "+(R.secret?"cookwithkenny.com":"cookwithkenny.com/#r/"+id)+"</div></footer>";
  var pc=document.getElementById("printCard");pc.innerHTML=h;
- var go=function(){try{window.print();}catch(e){}};var im=pc.querySelector("img");if(im&&!im.complete){im.onload=go;im.onerror=go;setTimeout(go,800);}else go();}
+ var imgs=[].slice.call(pc.querySelectorAll("img,image"));var left=imgs.length,done=false;var go=function(){if(done)return;done=true;try{window.print();}catch(e){}};
+ if(!left)go();imgs.forEach(function(im){if(im.tagName.toLowerCase()==="img"&&im.complete){if(--left<=0)go();return;}im.addEventListener("load",function(){if(--left<=0)go();});im.addEventListener("error",function(){if(--left<=0)go();});});setTimeout(go,1500);}
 var WKEY="kk-welcomed";
 function wasWelcomed(){try{return localStorage.getItem(WKEY)==="1";}catch(e){return false;}}
 function markWelcomed(){try{localStorage.setItem(WKEY,"1");}catch(e){}}
