@@ -1072,45 +1072,46 @@ function serveBowl(x,c,top){return "<path d='M"+(x-15)+" 64 Q"+(x-14)+" 74 "+x+"
 function tempOf(real){var m=(real||"").match(/(\d{3})\s*(?:&#176;|°)F?/g)||[];var best=0;m.forEach(function(s){var n=parseInt(s,10);if(n>=180&&n<=600&&n>best)best=n;});return best?String(best):null;}
 var HASB={stir:1,chop:1,whisk:1,season:1,slice:1,tongs:1,lid:1,blend:1,serve:1,cheer:1,peek:1,dial:1};
 Object.keys(HASB).forEach(function(p){var i=new Image();i.src=KP+p+"-b.webp";});
-function kGroup(pose){var A="<image class='kimg' data-pose='"+pose+"' href='"+KP+pose+".webp' x='50' y='4' width='200' height='200'/>";if(!HASB[pose])return "<g class='kin'><g class='kmove m-"+pose+"'>"+A+"</g></g>";return "<g class='kin'><g class='kmove m-"+pose+"'><g class='fa'>"+A+"</g><g class='fb'><image class='kimg' href='"+KP+pose+"-b.webp' x='50' y='4' width='200' height='200'/></g></g></g>";}
+function kGroup(pose,mv){mv=mv||pose;var A="<image class='kimg' data-pose='"+pose+"' href='"+KP+pose+".webp' x='50' y='4' width='200' height='200'/>";if(!HASB[pose])return "<g class='kin'><g class='kmove m-"+mv+"'>"+A+"</g></g>";return "<g class='kin'><g class='kmove m-"+pose+"'><g class='fa'>"+A+"</g><g class='fb'><image class='kimg' href='"+KP+pose+"-b.webp' x='50' y='4' width='200' height='200'/></g></g></g>";}
 function build(sp,real){
- var p=sp.p,svg="<svg viewBox='0 0 300 210' class='sc p-"+p+"'>",body="",d=0.06;
+ var p=sp.p,kp=sp.k?'k-'+sp.k:p,svg="<svg viewBox='0 0 300 210' class='sc p-"+p+"'>",body="",d=0.06;
  function pin(inner){d+=0.07;return "<g class='pin' style='animation-delay:"+d.toFixed(2)+"s'>"+inner+"</g>";}
  if(p==='serve'){var s=sp.s,f="";var xs=[96,206];xs.forEach(function(x){f+=(typeof s==='string'?SERVE[s](x):serveBowl(x,s[1],s[2]))+STEAM(x,60);});
+  if(sp.k){var kk=kGroup('k-'+sp.k,'serve');if(sp.k==='bite'||sp.k==='carry')return svg+WALL+kk+COUNTER+"</svg>";return svg+WALL+kk+COUNTER+"<g class='react' transform='translate(0 84)'>"+f+"</g></svg>";}
   return svg+WALL+kGroup('serve')+"<g class='react'>"+f+"</g>"+COUNTER+"</svg>";}
  var front="";
  var ex=(sp.x||[]).filter(function(e){return F[e[0]];}),n=ex.length,LAY={1:[250],2:[224,264],3:[212,243,274],4:[206,230,254,278]},sc=n>=4?1.3:1.5;
  ex.forEach(function(e,i){var xx=(LAY[n]||LAY[4])[i]||250;front+=pin("<g style='transform-box:view-box;transform-origin:0 0' transform='translate("+xx+" 178) scale("+sc+") translate("+(-xx)+" -178)'>"+F[e[0]](xx,178,e[2],e[3])+"</g>");});
  if(sp.m){var o=sp.m[2]||{};if(sp.m[0]==='traeger'||sp.m[0]==='oven')o.t=o.t||tempOf(real)||(sp.m[0]==='oven'?'425':'225');front=pin(W[sp.m[0]](sp.m[1],o))+front;}
  var fx="";(sp.fx||[]).forEach(function(k){var a=k.split("@"),x=+a[1]||(sp.m?sp.m[1]:110);if(a[0]==='smoke')fx+=SMOKE(x,150);if(a[0]==='steam')fx+=STEAM(x,142);if(a[0]==='sparks')fx+=SPARKS(x,156);if(a[0]==='salt')fx+=SALT(x,100);if(a[0]==='bits')fx+=BITS(x,160,a[2]||'#F6EFE6');});
- if(sp.m&&OUTDOOR[sp.m[0]])return svg+DECK+kGroup(p)+front+fx+"</svg>";
- return svg+WALL+kGroup(p)+COUNTER+front+fx+"</svg>";}
+ if(sp.m&&OUTDOOR[sp.m[0]])return svg+DECK+kGroup(kp,p)+front+fx+"</svg>";
+ return svg+WALL+kGroup(kp,p)+COUNTER+front+fx+"</svg>";}
 var OUTDOOR={traeger:1,grill:1},DECK="<image href='p-scene-deck.webp' x='0' y='0' width='300' height='210' preserveAspectRatio='none'/>";
 
 /* ===== Per-step scenes. m:[ware,x,opts]  x:[[food,x,arg]] ===== */
 var SCN={
  smokedbeans:[
   {p:'stir',m:['skillet',118,{c:'tacomeat'}],x:[['bacon',250]],fx:['steam@118']},
-  {p:'stir',m:['skillet',118,{c:'onionbroth'}],x:[['onion',250]],fx:['steam@118']},
-  {p:'stir',m:['skillet',118,{c:'blackbeans'}],x:[['can',212],['bbq',243],['mustard',274]]},
+  {p:'stir',k:'pour',m:['skillet',118,{c:'onionbroth'}],x:[['onion',250]],fx:['steam@118']},
+  {p:'stir',k:'taste',m:['skillet',118,{c:'blackbeans'}],x:[['can',212],['bbq',243],['mustard',274]]},
   {p:'wait',m:['grill',108,{on:['chilipan'],smoke:1}]},
   {p:'serve',s:['bowl','#6B4A2E','#7A3A2C']}],
  sprouts:[
   {p:'chop',m:['board',108,{on:['greenbeans']}],x:[['bowlsm',250]]},
   {p:'season',m:['bowl',92,{c:'salad'}],x:[['oilbottle',224],['shaker',264]]},
-  {p:'wait',m:['oven',130,{on:['greenbeans'],t:'425'}]},
-  {p:'serve',s:['bowl','#8FA84A','#7A3A2C']}],
+  {p:'wait',k:'wipe',m:['oven',130,{on:['greenbeans'],t:'425'}]},
+  {p:'serve',k:'thumbs',s:['bowl','#8FA84A','#7A3A2C']}],
   cacio:[
   {p:'chop',m:['board',108,{on:['parm']}],x:[['bowlsm',250]]},
   {p:'stir',m:['skillet',118],x:[['shaker',250]],fx:['bits@118@#3A3A3A']},
-  {p:'wait',m:['pot',110,{c:'boil'}],x:[['shaker',250]],fx:['steam@110']},
+  {p:'wait',k:'wink',m:['pot',110,{c:'boil'}],x:[['shaker',250]],fx:['steam@110']},
   {p:'whisk',m:['bowl',92,{c:'cheesesauce'}],x:[['parm',230],['cup',262]]},
-  {p:'stir',m:['skillet',118,{c:'broth'}],x:[['cup',230],['shaker',262]],fx:['steam@118']},
+  {p:'stir',k:'taste',m:['skillet',118,{c:'broth'}],x:[['cup',230],['shaker',262]],fx:['steam@118']},
   {p:'stir',m:['skillet',118,{c:'cheesesauce'}],x:[['bowlsm',230],['parm',262]],fx:['steam@118']},
-  {p:'serve',s:['bowl','#F0E8D2','#3A3A3A']}],
+  {p:'serve',k:'wave',s:['bowl','#F0E8D2','#3A3A3A']}],
  freshpasta:[
   {p:'whisk',m:['bowl',92,{c:'dough'}],x:[['eggs',224],['oilbottle',264]]},
-  {p:'stir',m:['bowl',92,{c:'dough'}],x:[['bowlsm',250]]},
+  {p:'stir',k:'pour',m:['bowl',92,{c:'dough'}],x:[['bowlsm',250]]},
   {p:'wait',m:['board',108,{on:['dough']}],x:[['foil',250]]},
   {p:'slice',m:['board',108,{on:['dough']}],x:[['bowlsm',250]]},
   {p:'slice',m:['board',108,{on:['dough']}],x:[['shaker',250]]},
@@ -1121,22 +1122,22 @@ var SCN={
   {p:'whisk',m:['bowl',92,{c:'marinade'}],x:[['limes',212],['orange',238],['garlic',262],['cilantro',284]]},
   {p:'peek',m:['sheet',130,{on:['skirt']}],x:[['towels',262]]},
   {p:'dial',m:['traeger',69],x:[['pellets',262]]},
-  {p:'wait',m:['grill',108,{on:['skirt'],smoke:1}]},
+  {p:'wait',k:'wipe',m:['grill',108,{on:['skirt'],smoke:1}]},
   {p:'chop',m:['board',108,{on:['dice']}],x:[['cilantro',214],['wedges',240],['tortillas',270]],fx:['bits@104@#F6EFE6']},
   {p:'dial',m:['traeger',69]},
   {p:'tongs',m:['grill',80,{on:['skirt:m'],sparks:1}],x:[['probe',262]]},
   {p:'slice',m:['board',110,{on:['slices']}]},
-  {p:'serve',s:'taco'}],
+  {p:'serve',k:'thumbs',s:'taco'}],
  barbacoa:[
-  {p:'season',m:['board',96,{on:['chuck']}],x:[['rub',232],['garlic',258]],fx:['salt@90']},
-  {p:'wait',m:['grill',108,{on:['chuck'],smoke:1}]},
+  {p:'season',k:'sprinkle',m:['board',96,{on:['chuck']}],x:[['rub',232],['garlic',258]],fx:['salt@90']},
+  {p:'wait',k:'wink',m:['grill',108,{on:['chuck'],smoke:1}]},
   {p:'blend',m:['blender',69,{c:'chipotle'}],x:[['garlic',214],['limes',240],['can',268,'CHIPOTLE']]},
   {p:'lid',m:['dutch',98,{c:'chipotle',on:['chuck']}],fx:['steam@98']},
   {p:'slice',m:['board',110,{on:['shredded']}],x:[['cup',258,'#8A2E1E']]},
-  {p:'serve',s:'taco'}],
+  {p:'serve',k:'wave',s:'taco'}],
  guac:[
   {p:'chop',m:['board',108,{on:['dice']}],x:[['jalapeno',220],['cilantro',248],['onion',274]],fx:['bits@104@#3F8A2E']},
-  {p:'stir',m:['bowl',118,{c:'guacmash'}],x:[['avocado',224],['avocado',252]]},
+  {p:'stir',k:'taste',m:['bowl',118,{c:'guacmash'}],x:[['avocado',224],['avocado',252]]},
   {p:'stir',m:['bowl',118,{c:'guac'}],x:[['limes',226],['oilbottle',258]]},
   {p:'serve',s:['bowl','#8FA84A','#F6EFE6']}],
  quesabirria:[
@@ -1146,26 +1147,26 @@ var SCN={
   {p:'lid',m:['dutch',98,{c:'birria',on:['chuck']}],fx:['steam@98']},
   {p:'slice',m:['board',110,{on:['shredded']}],x:[['cup',258,'#B5432A']]},
   {p:'tongs',m:['skillet',80,{on:['quesataco']}],x:[['cheese',224],['tortillas',254]],fx:['sparks@80']},
-  {p:'serve',s:'taco'}],
+  {p:'serve',k:'thumbs',s:'taco'}],
  carnitas:[
-  {p:'season',m:['board',96,{on:['porkbutt']}],x:[['rub',236]],fx:['salt@90']},
-  {p:'wait',m:['grill',108,{on:['porkbutt'],smoke:1}]},
+  {p:'season',k:'sprinkle',m:['board',96,{on:['porkbutt']}],x:[['rub',236]],fx:['salt@90']},
+  {p:'wait',k:'wipe',m:['grill',108,{on:['porkbutt'],smoke:1}]},
   {p:'lid',m:['dutch',98,{c:'broth',on:['porkbutt']}],x:[['orange',230],['onion',256]],fx:['steam@98']},
   {p:'tongs',m:['skillet',80,{on:['shredded']}],fx:['sparks@80']},
-  {p:'serve',s:'taco'}],
+  {p:'serve',k:'wink',s:'taco'}],
  chicken:[
   {p:'season',m:['board',96,{on:['breasts']}],x:[['rub',228,'#E8A83A'],['rub',252,'#8A1F18']],fx:['salt@90']},
-  {p:'wait',m:['grill',108,{on:['breasts'],smoke:1}],x:[['probe',264]]},
+  {p:'wait',k:'wave',m:['grill',108,{on:['breasts'],smoke:1}],x:[['probe',264]]},
   {p:'slice',m:['board',110,{on:['shredded:#E3B98A']}]},
-  {p:'stir',m:['bowl',118,{c:'bbqchicken'}],x:[['bbq',232],['carton',258,'BROTH','#E3C9A0']]},
-  {p:'serve',s:['bowl','#C9864A','#59A23A']}],
+  {p:'stir',k:'pour',m:['bowl',118,{c:'bbqchicken'}],x:[['bbq',232],['carton',258,'BROTH','#E3C9A0']]},
+  {p:'serve',k:'carry',s:['bowl','#C9864A','#59A23A']}],
  crockchicken:[
-  {p:'season',m:['board',96,{on:['breasts']}],x:[['shaker',236],['rub',262]],fx:['salt@90']},
-  {p:'stir',m:['bowl',118,{c:'bbqchicken'}],x:[['bbq',232],['shaker',262]]},
+  {p:'season',k:'sprinkle',m:['board',96,{on:['breasts']}],x:[['shaker',236],['rub',262]],fx:['salt@90']},
+  {p:'stir',k:'pour',m:['bowl',118,{c:'bbqchicken'}],x:[['bbq',232],['shaker',262]]},
   {p:'lid',m:['dutch',98,{c:'bbqchicken',on:['breasts']}],fx:['steam@98']},
   {p:'slice',m:['board',110,{on:['shredded:#E3B98A']}],x:[['bun',256]]},
-  {p:'stir',m:['dutch',118,{c:'bbqchicken'}],x:[['bbq',236]],fx:['steam@118']},
-  {p:'serve',s:'sandwich'}],
+  {p:'stir',k:'taste',m:['dutch',118,{c:'bbqchicken'}],x:[['bbq',236]],fx:['steam@118']},
+  {p:'serve',k:'bite',s:'sandwich'}],
  mac:[
   {p:'peek',m:['pot',130,{c:'boil'}],x:[['box',254,'#5BA3D9','ELBOWS']],fx:['steam@130']},
   {p:'stir',m:['pot',118,{c:'cheesesauce'}],x:[['carton',220,'MILK'],['cheese',246],['butter',274]],fx:['steam@118']},
@@ -1173,130 +1174,130 @@ var SCN={
   {p:'wait',m:['grill',108,{on:['macdish'],smoke:1}]},
   {p:'serve',s:['bowl','#F2B33C','#D99A3A']}],
  shortribs:[
-  {p:'season',m:['board',96,{on:['shortribs']}],x:[['shaker',232]],fx:['salt@90']},
+  {p:'season',k:'sprinkle',m:['board',96,{on:['shortribs']}],x:[['shaker',232]],fx:['salt@90']},
   {p:'tongs',m:['dutch',80,{on:['shortribs']}],fx:['sparks@80']},
-  {p:'stir',m:['dutch',118,{c:'wine'}],x:[['wine',230],['carrots',258]],fx:['steam@118']},
+  {p:'stir',k:'pour',m:['dutch',118,{c:'wine'}],x:[['wine',230],['carrots',258]],fx:['steam@118']},
   {p:'lid',m:['dutch',98,{c:'sauce',on:['shortribs']}],x:[['thyme',236],['carton',264,'STOCK','#E3C9A0']],fx:['steam@98']},
   {p:'peek',m:['pot',130,{c:'boil',on:['russets']}],x:[['butter',236],['carton',264,'MILK']],fx:['steam@130']},
-  {p:'stir',m:['pot',118,{c:'sauce'}],fx:['steam@118']},
-  {p:'serve',s:'rib'}],
+  {p:'stir',k:'taste',m:['pot',118,{c:'sauce'}],fx:['steam@118']},
+  {p:'serve',k:'thumbs',s:'rib'}],
  potatoes:[
   {p:'season',m:['board',96,{on:['russets']}],x:[['oilbottle',236]],fx:['salt@90']},
   {p:'dial',m:['traeger',69],x:[['russets',248]]},
-  {p:'wait',m:['grill',108,{on:['russets'],smoke:1}],x:[['probe',264]]},
-  {p:'serve',s:'potato'}],
+  {p:'wait',k:'wipe',m:['grill',108,{on:['russets'],smoke:1}],x:[['probe',264]]},
+  {p:'serve',k:'wink',s:'potato'}],
  rice:[
   {p:'stir',m:['bowl',118,{c:'ricewater'}],x:[['box',248,'#F5EEDC','RICE']]},
   {p:'peek',m:['pot',130,{c:'boil'}],fx:['steam@130']},
-  {p:'stir',m:['pot',118,{c:'rice'}],x:[['limes',228],['cilantro',256]],fx:['steam@118']},
-  {p:'serve',s:['bowl','#F5EEDC','#59A23A']}],
+  {p:'stir',k:'pour',m:['pot',118,{c:'rice'}],x:[['limes',228],['cilantro',256]],fx:['steam@118']},
+  {p:'serve',k:'wave',s:['bowl','#F5EEDC','#59A23A']}],
  beans:[
   {p:'stir',m:['pot',118,{c:'refried'}],x:[['can',226,'BEANS'],['butter',254]],fx:['steam@118']},
-  {p:'stir',m:['pot',118,{c:'refried'}],x:[['carton',240,'MILK']],fx:['steam@118']},
-  {p:'stir',m:['pot',118,{c:'refriedcheese'}],x:[['cheese',240]],fx:['steam@118']},
-  {p:'serve',s:['bowl','#7A5236','#F2C14E']}],
+  {p:'stir',k:'taste',m:['pot',118,{c:'refried'}],x:[['carton',240,'MILK']],fx:['steam@118']},
+  {p:'stir',k:'pour',m:['pot',118,{c:'refriedcheese'}],x:[['cheese',240]],fx:['steam@118']},
+  {p:'serve',k:'carry',s:['bowl','#7A5236','#F2C14E']}],
  pico:[
   {p:'chop',m:['board',108,{on:['dice:#D9432F']}],x:[['tomato',218],['onion',244],['jalapeno',270]],fx:['bits@104@#D9432F']},
-  {p:'stir',m:['bowl',118,{c:'pico'}],x:[['limes',236]]},
+  {p:'stir',k:'taste',m:['bowl',118,{c:'pico'}],x:[['limes',236]]},
   {p:'wait',m:['bowl',108,{c:'pico'}],x:[['cilantro',248]]},
   {p:'serve',s:['bowl','#D9432F','#F6EFE6']}],
  salad:[
-  {p:'wait',m:['board',108,{on:['shredded:#E3B98A']}]},
+  {p:'wait',k:'wipe',m:['board',108,{on:['shredded:#E3B98A']}]},
   {p:'whisk',m:['bowl',92,{c:'dressing'}],x:[['honey',214],['mustard',238],['oilbottle',262]]},
   {p:'chop',m:['board',108,{on:['dice:#E3B98A']}],x:[['bowlsm',250,'#E3B98A']],fx:['bits@104@#E3B98A']},
   {p:'chop',m:['board',108,{on:['romaine']}],x:[['celery',218],['redonion',246],['chickpeas',272]],fx:['bits@104@#7FBF4A']},
   {p:'stir',m:['bowl',118,{c:'saladmix'}]},
-  {p:'stir',m:['bowl',118,{c:'salad'}],x:[['romaine',244]]},
-  {p:'serve',s:['bowl','#7FBF4A','#FBF7EE']}],
+  {p:'stir',k:'taste',m:['bowl',118,{c:'salad'}],x:[['romaine',244]]},
+  {p:'serve',k:'thumbs',s:['bowl','#7FBF4A','#FBF7EE']}],
  burgers:[
-  {p:'season',m:['board',96,{on:['patties']}],x:[['shaker',236]],fx:['salt@90']},
+  {p:'season',k:'sprinkle',m:['board',96,{on:['patties']}],x:[['shaker',236]],fx:['salt@90']},
   {p:'dial',m:['traeger',69],x:[['pellets',262]]},
-  {p:'wait',m:['grill',108,{on:['patties'],smoke:1}]},
+  {p:'wait',k:'wink',m:['grill',108,{on:['patties'],smoke:1}]},
   {p:'dial',m:['traeger',69],x:[['patties',250]]},
   {p:'tongs',m:['grill',80,{on:['patties:ch'],sparks:1}],x:[['probe',262]]},
-  {p:'serve',s:'burger'}],
+  {p:'serve',k:'present',s:'burger'}],
  chili:[
   {p:'blend',m:['blender',69,{c:'chilepuree'}],x:[['chiles',214],['carton',242,'STOCK','#E3C9A0']]},
   {p:'season',m:['board',96,{on:['cubes']}],x:[['bacon',230],['ground',264]],fx:['salt@90']},
-  {p:'wait',m:['grill',108,{on:['cubes'],smoke:1}],x:[['foil',262]]},
+  {p:'wait',k:'wave',m:['grill',108,{on:['cubes'],smoke:1}],x:[['foil',262]]},
   {p:'tongs',m:['dutch',80,{on:['cubes','bacon']}],fx:['sparks@80']},
   {p:'stir',m:['dutch',118,{c:'chili'}],x:[['beer',224],['garlic',248],['jalapeno',272]],fx:['steam@118']},
-  {p:'stir',m:['dutch',118,{c:'chilihab'}],x:[['habanero',244],['probe',270]],fx:['smoke@118']},
+  {p:'stir',k:'taste',m:['dutch',118,{c:'chilihab'}],x:[['habanero',244],['probe',270]],fx:['smoke@118']},
   {p:'stir',m:['dutch',118,{c:'chili'}],x:[['box',236,'#E3C27A','MASA'],['bottle',262,'#E8C34A']],fx:['steam@118']},
-  {p:'serve',s:['bowl','#7C2E24','#F2C14E']}],
+  {p:'serve',k:'carry',s:['bowl','#7C2E24','#F2C14E']}],
  cornbreadchili:[
   {p:'stir',m:['skillet',118,{c:'tacomeat'}],fx:['steam@118']},
-  {p:'stir',m:['skillet',118,{c:'chili'}],x:[['jalapeno',220],['onion',246],['can',272,'BEANS']],fx:['steam@118']},
+  {p:'stir',k:'pour',m:['skillet',118,{c:'chili'}],x:[['jalapeno',220],['onion',246],['can',272,'BEANS']],fx:['steam@118']},
   {p:'wait',m:['grill',108,{on:['chilipan'],smoke:1}]},
   {p:'whisk',m:['bowl',92,{c:'batter'}],x:[['box',214,'#5BA3D9','CORN MIX'],['eggs',244],['corn',274]]},
   {p:'dial',m:['traeger',69],x:[]},
-  {p:'stir',m:['skillet',118,{c:'chili',on:['dough:4']}]},
-  {p:'wait',m:['grill',108,{on:['cornpan'],smoke:1}]},
-  {p:'serve',s:['bowl','#7C2E24','#F2C14E']}],
+  {p:'stir',k:'taste',m:['skillet',118,{c:'chili',on:['dough:4']}]},
+  {p:'wait',k:'wipe',m:['grill',108,{on:['cornpan'],smoke:1}]},
+  {p:'serve',k:'carry',s:['bowl','#7C2E24','#F2C14E']}],
  filet:[
-  {p:'season',m:['board',96,{on:['filet']}],x:[['shaker',236]],fx:['salt@90']},
+  {p:'season',k:'sprinkle',m:['board',96,{on:['filet']}],x:[['shaker',236]],fx:['salt@90']},
   {p:'dial',m:['traeger',69],x:[['garlic',232],['butter',260]]},
-  {p:'wait',m:['grill',108,{on:['filet','packet'],smoke:1}],x:[['probe',264]]},
+  {p:'wait',k:'wink',m:['grill',108,{on:['filet','packet'],smoke:1}],x:[['probe',264]]},
   {p:'dial',m:['traeger',69],x:[['restplate',250]]},
-  {p:'stir',m:['pot',118,{c:'garlicbeans'}],x:[['can',224,'BEANS'],['butter',250],['thyme',278]],fx:['steam@118']},
+  {p:'stir',k:'pour',m:['pot',118,{c:'garlicbeans'}],x:[['can',224,'BEANS'],['butter',250],['thyme',278]],fx:['steam@118']},
   {p:'tongs',m:['grill',80,{on:['filet:m','greenbeans'],sparks:1}]},
   {p:'season',m:['board',96,{on:['filet:m','butter']}]},
   {p:'serve',s:'filet'}],
  harissa:[
-  {p:'season',m:['board',96,{on:['thighs']}],x:[['towels',236]],fx:['salt@90']},
+  {p:'season',k:'sprinkle',m:['board',96,{on:['thighs']}],x:[['towels',236]],fx:['salt@90']},
   {p:'whisk',m:['bowl',92,{c:'yogurt'}],x:[['yogurt',214],['lemon',240],['cilantro',266]]},
   {p:'chop',m:['board',108,{on:['redonion','redonion']}],x:[['chickpeas',222],['can',250,'BEANS'],['oilbottle',276]],fx:['bits@104@#9C3E6E']},
   {p:'season',m:['sheet',96,{on:['chickpeas','thighs:red']}],x:[['jar',236,'#B8452E','HARISSA']]},
-  {p:'wait',m:['oven',112,{on:['thighs:red']}]},
-  {p:'serve',s:'chicken'}],
+  {p:'wait',k:'thumbs',m:['oven',112,{on:['thighs:red']}]},
+  {p:'serve',k:'wave',s:'chicken'}],
  walkingtacos:[
   {p:'stir',m:['skillet',118,{c:'ground'}],fx:['steam@118']},
-  {p:'stir',m:['skillet',118,{c:'tacomeat'}],x:[['seasoning',238]],fx:['steam@118']},
+  {p:'stir',k:'pour',m:['skillet',118,{c:'tacomeat'}],x:[['seasoning',238]],fx:['steam@118']},
   {p:'chop',m:['board',108,{on:['dice:#9C3E6E']}],x:[['cheese',214],['salsa',240],['sourcream',266]],fx:['bits@104@#9C3E6E']},
   {p:'serve',s:'chipbag'}],
  ribeye:[
-  {p:'season',m:['board',96,{on:['ribeye']}],x:[['corn',232],['rub',264]],fx:['salt@90']},
+  {p:'season',k:'sprinkle',m:['board',96,{on:['ribeye']}],x:[['corn',232],['rub',264]],fx:['salt@90']},
   {p:'dial',m:['traeger',69],x:[['pellets',262]]},
   {p:'wait',m:['grill',108,{on:['ribeye','corn'],smoke:1}],x:[['probe',264]]},
   {p:'peek',m:['pot',130,{c:'boil',on:['russets']}],x:[['butter',236],['carton',264,'MILK']],fx:['steam@130']},
   {p:'dial',m:['traeger',69],x:[['restplate',250]]},
   {p:'tongs',m:['grill',80,{on:['ribeye:m','corn'],sparks:1}]},
   {p:'slice',m:['board',110,{on:['slices']}]},
-  {p:'serve',s:'steak'}],
+  {p:'serve',k:'thumbs',s:'steak'}],
  pulledpork:[
   {p:'season',m:['board',96,{on:['porkbutt']}],x:[['mustard',230],['rub',256]],fx:['salt@90']},
   {p:'dial',m:['traeger',69],x:[['pellets',262]]},
-  {p:'wait',m:['grill',108,{on:['porkbutt'],smoke:1}],x:[['probe',264]]},
+  {p:'wait',k:'wipe',m:['grill',108,{on:['porkbutt'],smoke:1}],x:[['probe',264]]},
   {p:'peek',m:['board',130,{on:['foil']}],x:[['bottle',248,'#F2C14E','l','#C0392B']]},
-  {p:'wait',m:['grill',108,{on:['foil'],smoke:1}],x:[['probe',264]]},
-  {p:'wait',m:['cooler',108],x:[['towels',254]]},
+  {p:'wait',k:'wink',m:['grill',108,{on:['foil'],smoke:1}],x:[['probe',264]]},
+  {p:'wait',k:'wave',m:['cooler',108],x:[['towels',254]]},
   {p:'slice',m:['board',110,{on:['shredded:#B5643F']}],x:[['bun',256]]},
-  {p:'serve',s:'sandwich'}],
+  {p:'serve',k:'bite',s:'sandwich'}],
  meatloaf:[
-  {p:'stir',m:['bowl',118,{c:'panko'}],x:[['box',226,'#F2C14E','PANKO'],['carton',252,'MILK']]},
+  {p:'stir',k:'pour',m:['bowl',118,{c:'panko'}],x:[['box',226,'#F2C14E','PANKO'],['carton',252,'MILK']]},
   {p:'stir',m:['bowl',118,{c:'meatmix'}],x:[['eggs',222],['onion',250],['garlic',274]]},
-  {p:'season',m:['sheet',96,{on:['meatloaf']}],x:[['rub',236]],fx:['salt@90']},
+  {p:'season',k:'sprinkle',m:['sheet',96,{on:['meatloaf']}],x:[['rub',236]],fx:['salt@90']},
   {p:'wait',m:['grill',108,{on:['meatloaf'],smoke:1}],x:[['probe',264]]},
   {p:'dial',m:['traeger',69],x:[]},
-  {p:'stir',m:['grill',118,{on:['meatloaf:g']}],x:[['bbq',232],['honey',258]]},
+  {p:'stir',k:'taste',m:['grill',118,{on:['meatloaf:g']}],x:[['bbq',232],['honey',258]]},
   {p:'serve',s:'loaf'}],
  turkey:[
   {p:'chop',m:['board',108,{on:['turkey']}],x:[['shears',248]]},
   {p:'season',m:['sheet',96,{on:['turkey']}],x:[['shaker',236]],fx:['salt@90']},
-  {p:'season',m:['sheet',96,{on:['turkey','butter']}],x:[['butter',232],['rub',260]]},
+  {p:'season',k:'sprinkle',m:['sheet',96,{on:['turkey','butter']}],x:[['butter',232],['rub',260]]},
   {p:'dial',m:['traeger',69],x:[['pellets',262]]},
-  {p:'wait',m:['grill',108,{on:['turkey'],smoke:1}],x:[['probe',264]]},
-  {p:'wait',m:['board',108,{on:['foil']}]},
+  {p:'wait',k:'wipe',m:['grill',108,{on:['turkey'],smoke:1}],x:[['probe',264]]},
+  {p:'wait',k:'wink',m:['board',108,{on:['foil']}]},
   {p:'slice',m:['board',110,{on:['slices:#E3B98A']}]},
-  {p:'serve',s:'turkey'}],
+  {p:'serve',k:'thumbs',s:'turkey'}],
  breakfasttacos:[
-  {p:'stir',m:['pot',118,{c:'blackbeans'}],x:[['can',240,'BLACK']],fx:['steam@118']},
+  {p:'stir',k:'pour',m:['pot',118,{c:'blackbeans'}],x:[['can',240,'BLACK']],fx:['steam@118']},
   {p:'chop',m:['board',108,{on:['dice:#3F8A2E']}],x:[['feta',228],['hotsauce',256]],fx:['bits@104@#3F8A2E']},
   {p:'whisk',m:['bowl',92,{c:'eggs'}],x:[['eggs',222],['butter',252]]},
   {p:'tongs',m:['skillet',80,{on:['tortillas']}]},
-  {p:'serve',s:'eggtaco'}],
+  {p:'serve',k:'wave',s:'eggtaco'}],
  crazybread:[
-  {p:'stir',m:['bowl',118,{c:'dough'}],x:[['box',224,'#E8623C','ROLL MIX'],['eggs',254]]},
+  {p:'stir',k:'taste',m:['bowl',118,{c:'dough'}],x:[['box',224,'#E8623C','ROLL MIX'],['eggs',254]]},
   {p:'wait',m:['bowl',108,{c:'dough',towel:1}]},
   {p:'peek',m:['fryer',130],x:[['oilbottle',250]]},
   {p:'tongs',m:['fryer',80,{on:['dough:3']}],x:[['bowlsm',240,'#F2D7A0']]},
@@ -1304,13 +1305,13 @@ var SCN={
   {p:'dial',m:['microwave',69],x:[['jar',246,'#C0392B','PIZZA']]},
   {p:'serve',s:'bread'}],
  potroast:[
-  {p:'season',m:['board',96,{on:['roast']}],x:[['shaker',236]],fx:['salt@90']},
+  {p:'season',k:'sprinkle',m:['board',96,{on:['roast']}],x:[['shaker',236]],fx:['salt@90']},
   {p:'tongs',m:['dutch',80,{on:['roast']}],fx:['sparks@80']},
-  {p:'stir',m:['dutch',118,{c:'onionbroth'}],x:[['carton',224,'BROTH','#E3C9A0'],['garlic',250],['thyme',276]],fx:['steam@118']},
+  {p:'stir',k:'pour',m:['dutch',118,{c:'onionbroth'}],x:[['carton',224,'BROTH','#E3C9A0'],['garlic',250],['thyme',276]],fx:['steam@118']},
   {p:'lid',m:['dutch',98,{c:'gravy',on:['roast']}],fx:['steam@98']},
   {p:'lid',m:['dutch',98,{c:'gravy',on:['yukons','roast','carrots']}],x:[['yukons',232],['carrots',262]],fx:['steam@98']},
-  {p:'stir',m:['pot',118,{c:'gravy'}],fx:['steam@118']},
-  {p:'serve',s:'roast'}]
+  {p:'stir',k:'taste',m:['pot',118,{c:'gravy'}],fx:['steam@118']},
+  {p:'serve',k:'thumbs',s:'roast'}]
 };
 (function(){var P="p-";
 function IM(n,x,y,w,h,cls){return "<image"+(cls?" class='"+cls+"'":"")+" href='"+P+n+".webp' x='"+x.toFixed(1)+"' y='"+y.toFixed(1)+"' width='"+w+"' height='"+h+"' preserveAspectRatio='xMidYMax meet'/>";}
