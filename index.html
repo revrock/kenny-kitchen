@@ -820,12 +820,12 @@ var RECIPES=[
   st("Crispy Finish","Lemon squeeze, big yogurt spoon. Dinner! Is there a corgi portion?","Skin went soft? <b>2&#8211;3 min under the broiler</b>. Squeeze the other lemon half over the pan. Chickpeas down, chicken on top, yogurt, parsley, <b>feta</b> if you have it.",100,ACT.serve('plate',CHK),{dur:"Dig in!"})
  ]},
  {id:"cacio",name:"🍝 Cacio e Pepe",meter:"🍝 Pasta Meter",steps:[
-  st("Snow, Not Shreds","Tiny tiny tiny! If it looks like shredded cheese, grate it smaller.","Grate <b>6 oz Pecorino Romano</b> on the <b>finest holes</b> you have, a microplane if you've got one. You want fluffy snow, not shreds. <b>Buy the block.</b> Pre-grated cheese is coated in anti-caking powder and it will never melt smooth.",10,ACT.chop(CHEESE),{dur:"5 min"}),
-  st("Wake Up the Pepper","Sniff sniff. SNIFF. Okay, that's the good part.","Toast <b>2 tbsp whole peppercorns</b> in a <b>dry 12-in skillet</b> over medium, <b>1&#8211;2 min</b>, shaking the pan, until you can smell them across the kitchen. Tip them onto a board, crack them <b>coarse</b> under a heavy pan, and put them back in the dry skillet off the heat.",24,ACT.stir(BEANS),{dur:"5 min"}),
-  st("A Skimpy Pot","Less water! I know. Trust the short dog.","Boil <b>4 quarts</b> of water, not the usual 6. Less water means starchier water, and that starch is what turns cheese into sauce. Salt it with only <b>1 tbsp</b>, the pecorino brings plenty. <b>Don't add the pasta yet.</b> Fresh tonnarelli cooks in about 3 min, so everything else gets ready first.",38,ACT.boil(POTATO),{dur:"~8 min"}),
-  st("Make the Crema","Warm, not hot! Hot cheese gets angry and clumpy.","Ladle <b>about &#189; cup</b> of the hot water into a bowl and whisk the grated pecorino into it a splash at a time, until it's a <b>smooth, loose paste</b> about the texture of thin yogurt. <b>Leave it off the heat.</b> This paste is the whole insurance policy. Cheese that goes in dry is cheese that clumps.",52,ACT.whisk(CHEESE),{dur:"3 min"}),
-  st("Pasta In, Water Out","Two jobs at once. I'd help but I have no thumbs.","Drop in <b>1 lb fresh tonnarelli</b> and set a timer for <b>2 min</b>. Right away, ladle <b>1 cup</b> of that starchy water into the pepper skillet and bubble it over medium about <b>1 min</b> so the pepper blooms. Using dried spaghetti instead? Same move, you just have 10 min instead of 2.",70,ACT.stir(BEANS),{dur:"2&#8211;3 min",timer:120,timerLbl:"Fresh pasta"}),
-  st("Off the Heat, Then Cheese","Hands off the knob! We wait for the hiss to quit.","Tongs the pasta straight into the skillet <b>30 sec before it's done</b>, dripping is good. Toss hard for <b>30 sec</b> so it drinks the peppery water. Now <b>kill the heat and wait 30 sec</b>, until the pan stops hissing. Then in goes the crema and you toss like crazy. Too thick, splash in more pasta water. <b>No butter, no oil, no cream.</b>",90,ACT.stir(CHEESE),{dur:"~3 min",timer:30,timerLbl:"Let the pan cool"}),
+  st("Snow, Not Shreds","Tiny tiny tiny! If it looks like shredded cheese, grate it smaller.","Grate <b>8 oz Pecorino Romano</b> on the <b>finest holes</b> you have, a microplane if you've got one. You want fluffy snow, not shreds. <b>Buy the block.</b> Pre-grated cheese is coated in anti-caking powder and it will never melt smooth.",10,ACT.chop(CHEESE),{dur:"5 min"}),
+  st("Wake Up the Pepper","Sniff sniff. SNIFF. Okay, that's the good part.","Toast <b>2 tbsp whole peppercorns</b> in a <b>dry 12-in skillet</b> over medium, <b>1&#8211;2 min</b>, shaking the pan, until you can smell them across the kitchen. Crack them <b>coarse</b> under a heavy pan and put them back in the skillet off the heat. <b>Only have pre-ground pepper?</b> Use <b>1 tbsp</b> and toast it on low for just 20 sec. Fine pepper burns fast.",24,ACT.stir(BEANS),{dur:"5 min"}),
+  st("A Skimpy Pot","Less water! I know. Trust the short dog.","Boil <b>3 quarts</b> of water in your <b>widest pot</b>. Less water means starchier water, and that starch is what turns cheese into sauce. Salt it lightly, about <b>2 tsp</b> kosher, because the pecorino brings plenty. <b>Don't add the pasta yet.</b> Get the cheese paste ready first.",38,ACT.boil(POTATO),{dur:"~8 min"}),
+  st("Make the Crema","Warm, not hot! Hot cheese gets angry and clumpy.","Ladle <b>&#8531; cup</b> of the hot water into a bowl and let it sit about 1 minute so it's warm, not boiling. Whisk in the pecorino a handful at a time until it's a <b>thick, smooth paste</b>, like soft hummus. Too stiff to whisk? Add water <b>a spoonful at a time</b>, never more. <b>Leave it off the heat.</b> Cheese that goes in dry clumps, and cheese that goes in watery makes soup.",52,ACT.whisk(CHEESE),{dur:"3 min"}),
+  st("Pasta In, Save the Water","Two jobs at once. I'd help but I have no thumbs.","Drop in <b>1 lb pasta</b>. Fresh tonnarelli takes about 2 min. Dried pasta, cook it 2 min short of the box time. <b>When it has 2 min left</b>, ladle <b>&#189; cup</b> of the starchy water into the pepper skillet and simmer over medium until it's <b>cooked down by half</b>. That's all the water the skillet gets. Then scoop a mug of pasta water and set it by the stove, just in case.",70,ACT.stir(BEANS),{dur:"2&#8211;10 min",timer:120,timerLbl:"Last 2 minutes"}),
+  st("Off the Heat, Then Cheese","Hands off the knob! We wait for the hiss to quit.","Tongs the pasta straight into the skillet, dripping is fine. Toss <b>30 sec</b> so it drinks up the peppery water. Now <b>kill the heat and wait 30 sec</b>, until the pan stops hissing. Add the crema and toss hard for a <b>full minute</b>. It looks loose at first and tightens as you toss. <b>Only if it looks dry or sticky</b>, add pasta water <b>one spoonful at a time</b>. Never pour it in by the cup. Soupy? Keep tossing off the heat and add a little more cheese. <b>No butter, no oil, no cream.</b>",90,ACT.stir(CHEESE),{dur:"~3 min",timer:30,timerLbl:"Let the pan cool"}),
   st("Eat It Standing Up","Right now! This one waits for nobody. Especially not a corgi.","Into warm bowls immediately. More pecorino, more cracked pepper. Cacio e pepe tightens up the second it cools, so it does not wait and it does not reheat.",100,ACT.serve('bowl',CHEESE),{dur:"Go go go!"})
  ]},
  {id:"freshpasta",name:"🍜 Fresh Pasta",meter:"🍜 Dough Meter",steps:[
@@ -1506,11 +1506,11 @@ sprouts:{serves:6,items:[
 ]},
 cacio:{serves:4,items:[
  {h:"Pasta"},
- [1,"lb","fresh tonnarelli (see Fresh Pasta) or dried spaghetti"],
- [1,"tbsp","kosher salt, for the water"],
+ [1,"lb","fresh tonnarelli (see Fresh Pasta), bucatini or dried spaghetti"],
+ [2,"tsp","kosher salt, for the water"],
  {h:"Sauce"},
- [6,"oz","Pecorino Romano, in a block"],
- [2,"tbsp","whole black peppercorns"],
+ [8,"oz","Pecorino Romano, in a block"],
+ [2,"tbsp","whole black peppercorns (or 1 tbsp pre-ground)"],
  [null,"","Extra pecorino and cracked pepper to finish"],
  [null,"","No butter, no oil, no cream. That's the dish."]
 ]},
