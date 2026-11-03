@@ -336,6 +336,13 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
   .sv-b:active{transform:translateY(2px);}
   .sv-n{font-family:'Fredoka',sans-serif;font-weight:700;font-size:26px;min-width:34px;text-align:center;}
   .sv-reset{margin-left:auto;background:none;border:0;color:var(--bbq-deep);font-weight:800;font-size:13px;text-decoration:underline;cursor:pointer;font-family:inherit;}
+  .dn{margin:10px 0 2px;}
+  .dn-h{font-family:'Fredoka',sans-serif;font-weight:600;font-size:15px;margin-bottom:6px;}
+  .dn-row{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;}
+  .dn-b{min-height:48px;padding:4px 2px;border:2px solid var(--char);border-radius:12px;background:#fff;color:var(--char);font-family:'Fredoka',sans-serif;font-weight:600;font-size:13px;line-height:1.1;cursor:pointer;}
+  .dn-b:active{transform:translateY(2px);}
+  .dn-b.on{background:var(--bbq-deep);border-color:var(--bbq-deep);color:#fff;}
+  .dn-n{font-size:13px;color:#6b5a4c;margin:7px 2px 0;font-weight:600;line-height:1.35;}
   .serv-note{font-size:13px;color:#6b5a4c;margin:0 2px 8px;font-weight:600;line-height:1.35;}
   .ing-h{font-family:'Fredoka',sans-serif;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8a7a6a;margin:14px 2px 6px;}
   .ing{display:flex;align-items:flex-start;gap:10px;padding:10px 4px;border-bottom:1px dashed var(--line);cursor:pointer;font-size:16px;line-height:1.3;}
@@ -381,6 +388,7 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
 :root:not([data-theme="light"]) .tile.allx,
 :root:not([data-theme="light"]) .ingbtn,
 :root:not([data-theme="light"]) .serv,
+:root:not([data-theme="light"]) .dn-b:not(.on),
 :root:not([data-theme="light"]) .ing-box,
 :root:not([data-theme="light"]) .ing-copy,
 :root:not([data-theme="light"]) .tchip,
@@ -398,6 +406,7 @@ if(!window.storage){window.storage={get:async function(k){try{var v=localStorage
 :root:not([data-theme="light"]) .resume .r-go{background:#FFF3E6;color:#9A3518;}
 :root:not([data-theme="light"]) .hi-sub,
 :root:not([data-theme="light"]) .serv-note,
+:root:not([data-theme="light"]) .dn-n,
 :root:not([data-theme="light"]) .tile.soon .t-s,
 :root:not([data-theme="light"]) #ucPop .uc-src,
 :root:not([data-theme="light"]) #ucPop .uc-x{color:var(--muted);}
@@ -595,6 +604,7 @@ body.has-tray{padding-bottom:calc(96px + env(safe-area-inset-bottom));}
     <span class="stage-tag" id="stageTag"></span>
     <div class="stage-title" id="stageTitle"></div>
     <div class="real" id="realBox"></div>
+    <div id="doneBox"></div>
     <div id="extras"></div>
     <div class="meter-wrap">
       <div class="meter-lbl"><span id="meterName">🍳 Cook Meter</span><span id="meterPct">Raw</span></div>
@@ -804,11 +814,11 @@ var RECIPES=[
  {id:"filet",name:"🥩 Reverse Sear Filet",meter:"🥩 Filet Meter",steps:[
   st("Salt the Fancy Steak","Salt on every side. Even the edges. I checked.","Salt <b>one <span class='ns'>7&#8211;8 oz</span> filet</b> (at least 1.5 in thick) all over, sides too. Uncovered on a plate in the fridge, about <b>2.5 hr</b>. Dry surface, fast crust.",5,ACT.season(MEAT),{dur:"~2.5 hr"}),
   st("Wake Up, Grill!","Low and gentle tonight, grill. Indoor voice.","Traeger to <b>225&#176;F</b>. Steak out on the counter. Cut the top off <b><span class='ns'>1 head</span> garlic</b>, drizzle oil, wrap in foil. Set a stick of <b>butter</b> out to soften.",15,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
-  st("Smoky Snooze","Probe in, alarm set, paws up. The grill's got this.","Steak and garlic packet on at 225. Probe alarm at <b>112&#176;F</b>. About 50 min, but go by the probe.",40,ACT.smokewait(MEAT),{dur:"~50 min",timer:3000,timerLbl:"Smoke"}),
-  st("Off at 112, Crank It","Beep beep! Steak takes a little break. Grill goes BIG.","At <b>112&#176;F</b> pull the steak to a plate, garlic off. Dial to <b>500&#176;F</b>. A thick filet waits happily on the counter while it climbs.",55,ACT.fireup(),{dur:"12–15 min",timer:780,timerLbl:"Heat climb"}),
+  st("Smoky Snooze","Probe in, alarm set, paws up. The grill's got this.","Steak and garlic packet on at 225. Probe alarm at <b>{{pull}}&#176;F</b>. About {{time}}, but go by the probe.",40,ACT.smokewait(MEAT),{dur:"~{{time}}",timer:3000,timerLbl:"Smoke"}),
+  st("Off at {{pull}}, Crank It","Beep beep! Steak takes a little break. Grill goes BIG.","At <b>{{pull}}&#176;F</b> pull the steak to a plate, garlic off. Dial to <b>500&#176;F</b>. A thick filet waits happily on the counter while it climbs.",55,ACT.fireup(),{dur:"12–15 min",timer:780,timerLbl:"Heat climb"}),
   st("Butter & Beans","Smoky garlic squish! Half for butter, half for beans. Fair is fair.","Squeeze the smoked garlic out. Half into the butter with chopped <b>thyme</b> and a pinch of salt. Half into a pan with <b>1 can cannellini</b>, olive oil and a splash of can liquid. Warm, mash about half, add <b>lemon</b> and salt.",70,ACT.stir(ONION),{dur:"~10 min"}),
-  st("The Big Sear","Ssss! Both sides AND the edges. Restaurant style, baby.","At 500: <b>90 sec a side</b>, then stand it on its edges <b>30 sec each</b>. <b>Green beans</b>, oiled and salted, go on beside it for 4&#8211;5 min. Steak <b>off at 125&#176;F</b>.",88,ACT.flip(MEAT),{dur:"~5 min",timer:90,timerLbl:"Sear side",sizzle:true}),
-  st("Butter Blanket","Garlic butter on top. Now we wait 8 minutes. *stares*","Spoon of garlic butter on the steak right away. Rest <b>8 min</b>. It settles around 132&#176;F, medium rare.",95,ACT.season(MEAT),{dur:"8 min",timer:480,timerLbl:"Rest"}),
+  st("The Big Sear","Ssss! Both sides AND the edges. Restaurant style, baby.","At 500: <b>90 sec a side</b>, then stand it on its edges <b>30 sec each</b>. <b>Green beans</b>, oiled and salted, go on beside it for 4&#8211;5 min. Steak <b>off at {{sear}}&#176;F</b>.",88,ACT.flip(MEAT),{dur:"~5 min",timer:90,timerLbl:"Sear side",sizzle:true}),
+  st("Butter Blanket","Garlic butter on top. Now we wait 8 minutes. *stares*","Spoon of garlic butter on the steak right away. Rest <b>8 min</b>. It settles around {{final}}&#176;F, {{lbl}}.",95,ACT.season(MEAT),{dur:"8 min",timer:480,timerLbl:"Rest"}),
   st("Fancy Plate Time","Beans, steak, beans on the side. Very fancy. Very me.","Beans down first, steak on top, green beans alongside. Any butter left goes over everything.",100,ACT.serve('plate',MEAT),{dur:"Impress!"})
  ]},
  {id:"harissa",name:"🌶️ Harissa Chicken",meter:"🍗 Harissa Meter",steps:[
@@ -860,10 +870,10 @@ var RECIPES=[
  {id:"ribeye",name:"🥩 Ribeye Cookout",meter:"🥩 Steak-o-Meter",steps:[
   st("Rub-a-Dub Steak","Gospel on the steak, Honey Hog on the corn. Everybody gets dressed!","Salt a thick <b>ribeye</b> and hit it with <b>Meat Church Gospel</b> (or Holy Cow). Brush husked <b>corn</b> with a little oil and dust with <b>Honey Hog</b>.",5,ACT.season(MEAT),{dur:"5 min"}),
   st("Wake Up, Grill!","Low and smoky tonight. Shhh, the cherry wood is thinking.","Traeger to <b>225&#176;F</b>, cherry pellets. Give it a full 15 min. It runs cooler than the dial.",12,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
-  st("Smoke Nap","Steak and corn, side by side. Best nap buddies.","Steak and corn on at 225. Probe the steak. <b>Pull at 120&#176;F</b> for medium rare, <b>130&#176;F</b> for medium. About 45&#8211;60 min, but go by the probe.",40,ACT.smokewait(MEAT),{dur:"45–60 min",timer:3000,timerLbl:"Smoke"}),
+  st("Smoke Nap","Steak and corn, side by side. Best nap buddies.","Steak and corn on at 225. Probe the steak. <b>Pull at {{pull}}&#176;F</b> for {{lbl}}. About {{time}}, but go by the probe.",40,ACT.smokewait(MEAT),{dur:"{{time}}",timer:3000,timerLbl:"Smoke"}),
   st("Cloud Potatoes","Fluffy little clouds. Not too much butter this time. I'm watching.","While it smokes: boil peeled <b>russets</b> for two, rice them, fold in warm milk and <b>half the butter</b> you think. Keep it loose. Hold warm over a pot of simmering water.",60,ACT.boil(POTATO),{dur:"~25 min",timer:1080,timerLbl:"Boil"}),
-  st("Crank It Way Up","Steak takes a break. Grill goes BIG. Ears back!","Steak off to a plate at your pull temp. Corn stays on. Dial to <b>500&#176;F</b> and wait for it.",72,ACT.fireup(),{dur:"12–15 min",timer:780,timerLbl:"Heat climb"}),
-  st("The Big Sizzle","Ssss! Crust on the steak, char on the corn. Fancy!","At 500: steak <b>1&#8211;2 min a side</b>. Turn the corn for a little char at the same time. It'll climb about 10&#176;F while it rests.",88,ACT.flip(MEAT),{dur:"~4 min",timer:90,timerLbl:"Sear side",sizzle:true}),
+  st("Crank It Way Up","Steak takes a break. Grill goes BIG. Ears back!","Steak off to a plate at <b>{{pull}}&#176;F</b>. Corn stays on. Dial to <b>500&#176;F</b> and wait for it.",72,ACT.fireup(),{dur:"12–15 min",timer:780,timerLbl:"Heat climb"}),
+  st("The Big Sizzle","Ssss! Crust on the steak, char on the corn. Fancy!","At 500: steak <b>1&#8211;2 min a side</b>. Turn the corn for a little char at the same time. It'll climb about 10&#176;F while it rests, to around {{final}}&#176;F.",88,ACT.flip(MEAT),{dur:"~4 min",timer:90,timerLbl:"Sear side",sizzle:true}),
   st("Slice It Right","Rest, then slice across the lines. Hi-YA!","Rest <b>5&#8211;10 min</b>. Find the grain and slice <b>across</b> it to split the steak.",95,ACT.slice(MEAT),{dur:"rest + slice",timer:420,timerLbl:"Rest"}),
   st("Cookout Feast!","Steak, corn, potato clouds. I'll take the corn cob. Kidding. Mostly.","Potatoes down, sliced steak on top, corn on the side.",100,ACT.serve('plate',MEAT),{dur:"Feast!"})
  ]},
@@ -1887,6 +1897,30 @@ var SERV={},GOT={},IKEY=KEY+"-ing";
 try{var _iv=JSON.parse(localStorage.getItem(IKEY)||"{}");SERV=_iv.s||{};GOT=_iv.g||{};}catch(e){}
 function saveIng(){try{localStorage.setItem(IKEY,JSON.stringify({s:SERV,g:GOT}));}catch(e){}}
 function curId(){return RECIPES[ridx].id;}
+/* Steak doneness. Steps in these recipes hold {{tokens}}; doneApply writes the real numbers
+   into each step, so the cook view, timers and print card all stay right on their own.
+   One saved pick per recipe in kk-done. Medium rare is the default. */
+var DONE_KEY="kk-done",DONE={};try{DONE=JSON.parse(localStorage.getItem(DONE_KEY)||"{}")||{};}catch(e){DONE={};}
+var DONE_OPTS=[["r","Rare","rare","cool red center"],["mr","Med Rare","medium rare","warm red center"],["m","Medium","medium","warm pink center"],["mw","Med Well","medium well","just a little pink"],["w","Well Done","well done","no pink left"]];
+var DONE_TBL={
+ filet:{smokeStep:2,pull:[102,112,122,132,142],sear:[115,125,135,145,155],final:[122,132,142,152,162],time:["40 min","50 min","60 min","70 min","85 min"],timer:[2400,3000,3600,4200,5100],lean:"Filet is lean, so this one eats firmer. Extra garlic butter helps."},
+ ribeye:{smokeStep:2,pull:[110,120,130,140,150],final:[120,130,140,150,160],time:["35&#8211;50 min","45&#8211;60 min","55&#8211;70 min","65&#8211;80 min","75&#8211;95 min"],timer:[2400,3000,3600,4200,5100]}
+};
+function doneIdx(id){var k=DONE[id],i=0;for(;i<DONE_OPTS.length;i++)if(DONE_OPTS[i][0]===k)return i;return 1;}
+function doneApply(id){var T=DONE_TBL[id],R=RECIPES.filter(function(r){return r.id===id;})[0];if(!T||!R)return;var i=doneIdx(id);
+ var fill=function(t){return t==null?t:String(t).replace(/\{\{(\w+)\}\}/g,function(m,k){return k==="lbl"?DONE_OPTS[i][2]:T[k][i];});};
+ R.steps.forEach(function(s,n){if(!s._t)s._t={title:s.title,real:s.real,dur:s.dur};s.title=fill(s._t.title);s.real=fill(s._t.real);s.dur=fill(s._t.dur);if(n===T.smokeStep)s.timer=T.timer[i];s.usesDone=/\{\{/.test(s._t.real);});}
+Object.keys(DONE_TBL).forEach(doneApply);
+function doneHTML(id){var T=DONE_TBL[id];if(!T)return "";var i=doneIdx(id),o=DONE_OPTS[i];
+ return "<div class='dn'><div class='dn-h' id='dnH'>🥩 How do you like it?</div><div class='dn-row' role='group' aria-labelledby='dnH'>"+DONE_OPTS.map(function(d,n){return "<button type='button' class='dn-b"+(n===i?" on":"")+"' data-dn='"+d[0]+"' aria-pressed='"+(n===i)+"'>"+d[1]+"</button>";}).join("")+"</div><p class='dn-n'>"+o[1]+": "+o[3]+", finishes around "+T.final[i]+"&#176;F."+(i>=3&&T.lean?" "+T.lean:"")+"</p></div>";}
+function doneRefresh(){var R=RECIPES[ridx],s=R.steps[cur],f=factor();
+ document.getElementById("stageTitle").innerHTML=s.title;
+ document.getElementById("realBox").innerHTML=scaleHTML(s.real,f)+(s.dur?("<br><span class='dur'>\u23F1 "+s.dur+"</span>"):"");
+ uClose();wireUnits(document.getElementById("realBox"));
+ document.getElementById("doneBox").innerHTML=s.usesDone?doneHTML(R.id):"";
+ if(s.timer){startTimerFor(s.timer);paintTimer();}
+ renderIngBtn();}
+document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".dn-b");if(!b)return;var id=curId();DONE[id]=b.getAttribute("data-dn");try{localStorage.setItem(DONE_KEY,JSON.stringify(DONE));}catch(x){}doneApply(id);doneRefresh();if(document.getElementById("ingSheet").classList.contains("open")){var bd=document.getElementById("ingBody"),y=bd.scrollTop;renderIng();bd.scrollTop=y;}});
 function servesOf(id){var I=ING[id];return I?(SERV[id]||I.serves):0;}
 function factor(){var I=ING[curId()];return I?servesOf(curId())/I.serves:1;}
 function unitFor(u,hi){if(u==="cup")return hi>1?"cups":"cup";return u;}
@@ -1897,10 +1931,11 @@ function itemText(it,f){var q=it[0],u=it[1],nm=it[2],fixed=it[3]==="fixed";var k
 function ingCount(){var I=ING[curId()];if(!I)return 0;return I.items.filter(function(x){return Array.isArray(x);}).length;}
 var _noteMark=function(){var b=document.getElementById("ingBtn");if(!b||b.hidden)return;var has=!!NOTES[curId()];var m=b.querySelector(".ib-note");if(has&&!m){var sp=document.createElement("span");sp.className="ib-note";sp.textContent="📝";sp.title="You have notes on this one";var go=b.querySelector(".ib-go");b.insertBefore(sp,go||null);}else if(!has&&m)m.remove();};
 function renderIngBtn(){setTimeout(_noteMark,0);var b=document.getElementById("ingBtn");var I=ING[curId()];if(!I){b.hidden=true;return;}b.hidden=false;var got=GOT[curId()]||{},n=ingCount(),have=Object.keys(got).filter(function(k){return got[k];}).length;
- b.innerHTML="<span class='ib-e'>🛒</span><span class='ib-t'>Ingredients</span><span class='ib-s'>Serves "+servesOf(curId())+(have?" · "+have+"/"+n+" ready":"")+"</span><span class='ib-go'>View ▸</span>";}
+ b.innerHTML="<span class='ib-e'>🛒</span><span class='ib-t'>Ingredients</span><span class='ib-s'>Serves "+servesOf(curId())+(DONE_TBL[curId()]?" · "+DONE_OPTS[doneIdx(curId())][1]:"")+(have?" · "+have+"/"+n+" ready":"")+"</span><span class='ib-go'>View ▸</span>";}
 function renderIng(){var id=curId(),I=ING[id];if(!I)return;var f=factor(),sv=servesOf(id),got=GOT[id]||{};var nm=splitName(RECIPES[ridx].name);
  document.getElementById("ingTitle").textContent=nm.e+" "+nm.t;
  var h="<div class='serv'><span class='serv-l'>Serves</span><button class='sv-b' id='svMinus' aria-label='Fewer servings'>−</button><span class='sv-n'>"+sv+"</span><button class='sv-b' id='svPlus' aria-label='More servings'>+</button>"+(sv!==I.serves?"<button class='sv-reset' id='svReset'>Reset to "+I.serves+"</button>":"")+"</div>";
+ h+=doneHTML(id);
  h+=sv!==I.serves?"<p class='serv-note'>🐾 Kenny scaled everything for "+sv+", in this list and in the steps. Cook times stay about the same, but a bigger cut can take longer, so go by the probe.</p>":"<p class='serv-note'>Tap an item when you've got it out. Change the servings and Kenny does the math.</p>";
  h+="<div class='ing-list'>";var idx=0;
  I.items.forEach(function(it){if(!Array.isArray(it)){h+="<div class='ing-h'>"+it.h+"</div>";return;}var i=idx++;var t=itemText(it,f);
@@ -2091,6 +2126,7 @@ function render(){
  document.getElementById("stageTitle").innerHTML=s.title;
  document.getElementById("realBox").innerHTML=scaleHTML(s.real,_f)+(s.dur?("<br><span class='dur'>\u23F1 "+s.dur+"</span>"):"");
  uClose();wireUnits(document.getElementById("realBox"));
+ document.getElementById("doneBox").innerHTML=s.usesDone?doneHTML(R.id):"";
  document.getElementById("bubble").textContent=s.kenny;
  document.getElementById("scene").innerHTML=s.scene;
  var ex=document.getElementById("extras");ex.innerHTML="";
@@ -2148,7 +2184,7 @@ function printCard(){var R=RECIPES[ridx],id=R.id,I=ING[id],f=factor(),nm=splitNa
  var last=R.steps[R.steps.length-1],hero=last&&last.scene?last.scene.replace(/cfront/g,"cfrontP"):"";
  var nIng=I?I.items.filter(Array.isArray).length:0;
  var h="<header class='pc-top'><img class='pc-logo' src='kenny-head.webp' alt='' width='78' height='78'><div class='pc-tt'><div class='pc-kick'>Chef Kenny's Kitchen</div><h1>"+nm.t+"</h1>"
-  +"<div class='pc-chips'><span>🍽️ Serves "+sv+(I&&sv!==I.serves?" <small>(scaled from "+I.serves+")</small>":"")+"</span><span>👣 "+R.steps.length+" steps</span>"+(nIng?"<span>🛒 "+nIng+" ingredients</span>":"")+(R.secret?"<span>💛 Family recipe</span>":"")+"</div></div>"
+  +"<div class='pc-chips'><span>🍽️ Serves "+sv+(I&&sv!==I.serves?" <small>(scaled from "+I.serves+")</small>":"")+"</span><span>👣 "+R.steps.length+" steps</span>"+(nIng?"<span>🛒 "+nIng+" ingredients</span>":"")+(DONE_TBL[id]?"<span>🥩 "+DONE_OPTS[doneIdx(id)][1]+"</span>":"")+(R.secret?"<span>💛 Family recipe</span>":"")+"</div></div>"
   +(hero?"<div class='pc-hero'>"+hero+"</div>":"")+"</header>";
  if(I){h+="<section class='pc-sec'><h2><span class='pc-paw'>🐾</span>Shopping list</h2><div class='pc-ing'>";I.items.forEach(function(it){if(!Array.isArray(it)){h+="<h3>"+it.h+"</h3>";return;}var t=itemText(it,f);h+="<div class='pc-i'><span class='pc-box'></span><span><b>"+(t.q||"")+"</b> "+t.t+"</span></div>";});h+="</div></section>";}
  h+="<section class='pc-sec'><h2><span class='pc-paw'>🐾</span>Let's cook</h2><ol class='pc-steps'>";
