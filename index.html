@@ -797,8 +797,8 @@ var RECIPES=[
   st("Half Pounders, Not Quarters","Big patties! Little ones can't survive out here. I would know, I'm little.","Divide <b>2 lb 80/20 ground beef</b> into <b>4 patties, <span class='ns'>8 oz each</span></b>, about <b>&#190; in thick</b> and wider than your bun. Thumb a dimple in the middle. Salt and pepper the <b>outside only</b>. Back in the fridge till the grill is ready. <b>Quarter pounders are what kept coming out raw</b>, they're too small to hold heat through a smoke.",0,ACT.season(MEAT),{dur:"10 min"}),
   st("Two Twenty Five","Not 180! That's a two hour nap. We want 225.","Traeger to <b>225&#176;F</b>, cherry pellets, lid closed, <b>15 min</b> to settle. Don't use the 180 setting, a burger at 180 takes up to two hours and that's how you end up eating at nine.",12,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
   st("The Full Hour","A whole hour. Go hold the baby, I'll watch the grill.","Patties on, lid closed, <b>60 min at 225&#176;F</b>, no flipping and no oil. Then <b>probe the thickest one from the side</b> and look for <b>140&#8211;145&#176;F</b>. <b>Not there? Give it another 10 min and probe again.</b> Do not move on from a number you haven't seen. This is the step that gets skipped and it's why burgers come out raw.",55,ACT.smokewait(MEAT),{dur:"60 min",timer:3600,timerLbl:"Smoke to 140"}),
-  st("Pull, Then Crank","Off they come. Now we make it loud in here.","Patties to a plate, <b>loosely tented with foil</b>, counter not fridge. Dial the Traeger to <b>500&#176;F</b> and give it the <b>full 20 min</b>. Yours reads hot, so if anything wait longer. At 145 with 8 oz of beef they can easily sit this out. <b>Want it surer?</b> Put a cast iron skillet on the grates while it climbs and sear in that instead.",72,ACT.fireup(),{dur:"~20 min",timer:1200,timerLbl:"Heat climb"}),
-  st("The Big Sizzle","Ssss-SSSS! Cheese on, lid down. Almost dinner!","Patties back on at 500. <b>2 to 3 min a side</b>, not 60 seconds. Cheese right after the flip, lid down to melt. Then <b>probe again and pull at 160&#176;F</b>, in from the side, never down through the top. Don't press them, that squeal is the juice leaving.",92,ACT.flip(MEAT),{dur:"~6 min",timer:180,timerLbl:"Sear side",sizzle:true}),
+  st("Pull, Then Crank","Off they come. Now we make it loud in here.","Patties to a plate, <b>loosely tented with foil</b>, counter not fridge. Dial the Traeger to <b>500&#176;F</b> and give it the <b>full 20 min</b>. Yours runs cooler than the dial, so if anything wait longer. <b>Want it surer?</b> Put a cast iron skillet on the grates while it climbs and sear in that instead.",72,ACT.fireup(),{dur:"~20 min",timer:1200,timerLbl:"Heat climb"}),
+  st("The Big Sizzle","Ssss-SSSS! Cheese on, lid down. Almost dinner!","Patties back on at 500. <b>3 min a side</b>, not 60 seconds. Then <b>probe from the side</b>, never down through the top, and <b>pull at 160&#176;F</b>. <b>Not there yet? One more minute a side, then probe again.</b> Cheese goes on when it reads about 155, lid down to melt. Don't press them, that squeal is the juice leaving.",92,ACT.flip(MEAT),{dur:"6+ min",timer:180,timerLbl:"Sear side",sizzle:true}),
   st("Toast & Stack","Buns toasted, burgers stacked. I'm gonna sit right here and stare at you.","Buns cut side down on the grate for the <b>last 45 sec</b>. Rest the patties <b>3 min</b>, then build. Smoking renders out more fat than grilling, which is why 80/20 was not optional.",100,ACT.serve('plate',MEAT),{dur:"Chow time!"})
  ]},
  {id:"cornbreadchili",name:"🍞 Chili Cornbread Skillet",meter:"🍞 Skillet Meter",steps:[
@@ -813,13 +813,12 @@ var RECIPES=[
  ]},
  {id:"filet",name:"🥩 Reverse Sear Filet",meter:"🥩 Filet Meter",steps:[
   st("Salt the Fancy Steak","Salt on every side. Even the edges. I checked.","Salt <b>one <span class='ns'>7&#8211;8 oz</span> filet</b> (at least 1.5 in thick) all over, sides too. Uncovered on a plate in the fridge, about <b>2.5 hr</b>. Dry surface, fast crust.",5,ACT.season(MEAT),{dur:"~2.5 hr"}),
-  st("Wake Up, Grill!","Low and gentle tonight, grill. Indoor voice.","Traeger to <b>225&#176;F</b>. Steak out on the counter. Cut the top off <b><span class='ns'>1 head</span> garlic</b>, drizzle oil, wrap in foil. Set a stick of <b>butter</b> out to soften.",15,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
-  st("Smoky Snooze","Probe in, alarm set, paws up. The grill's got this.","Steak and garlic packet on at 225. Probe alarm at <b>{{pull}}&#176;F</b>. About {{time}}, but go by the probe.",40,ACT.smokewait(MEAT),{dur:"~{{time}}",timer:3000,timerLbl:"Smoke"}),
-  st("Off at {{pull}}, Crank It","Beep beep! Steak takes a little break. Grill goes BIG.","At <b>{{pull}}&#176;F</b> pull the steak to a plate, garlic off. Dial to <b>500&#176;F</b>. A thick filet waits happily on the counter while it climbs.",55,ACT.fireup(),{dur:"12–15 min",timer:780,timerLbl:"Heat climb"}),
-  st("Butter & Beans","Smoky garlic squish! Half for butter, half for beans. Fair is fair.","Squeeze the smoked garlic out. Half into the butter with chopped <b>thyme</b> and a pinch of salt. Half into a pan with <b>1 can cannellini</b>, olive oil and a splash of can liquid. Warm, mash about half, add <b>lemon</b> and salt.",70,ACT.stir(ONION),{dur:"~10 min"}),
-  st("The Big Sear","Ssss! Both sides AND the edges. Restaurant style, baby.","At 500: <b>90 sec a side</b>, then stand it on its edges <b>30 sec each</b>. <b>Green beans</b>, oiled and salted, go on beside it for 4&#8211;5 min. Steak <b>off at {{sear}}&#176;F</b>.",88,ACT.flip(MEAT),{dur:"~5 min",timer:90,timerLbl:"Sear side",sizzle:true}),
-  st("Butter Blanket","Garlic butter on top. Now we wait 8 minutes. *stares*","Spoon of garlic butter on the steak right away. Rest <b>8 min</b>. It settles around {{final}}&#176;F, {{lbl}}.",95,ACT.season(MEAT),{dur:"8 min",timer:480,timerLbl:"Rest"}),
-  st("Fancy Plate Time","Beans, steak, beans on the side. Very fancy. Very me.","Beans down first, steak on top, green beans alongside. Any butter left goes over everything.",100,ACT.serve('plate',MEAT),{dur:"Impress!"})
+  st("Wake Up, Grill!","Low and gentle tonight, grill. Indoor voice.","Traeger to <b>225&#176;F</b>. Steak out on the counter while it heats.",15,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
+  st("Smoky Snooze","Probe in, alarm set, paws up. The grill's got this.","Steak on at 225. Probe alarm at <b>{{pull}}&#176;F</b>. About {{time}}, but go by the probe.",40,ACT.smokewait(MEAT),{dur:"~{{time}}",timer:3000,timerLbl:"Smoke"}),
+  st("Off at {{pull}}, Crank It","Beep beep! Steak takes a little break. Grill goes BIG.","At <b>{{pull}}&#176;F</b> pull the steak to a plate. Tent it loosely with foil. Dial to <b>500&#176;F</b>, lid closed, and wait the <b>full 15 min</b>. Dial under 475? Keep waiting.",55,ACT.fireup(),{dur:"15+ min",timer:900,timerLbl:"Heat climb"}),
+  st("The Big Sear","Ssss! Both sides AND the edges. Restaurant style, baby.","At 500: <b>3 min a side</b>, then stand it on its edges <b>30 sec each</b>. Probe it. Steak comes <b>off at {{final}}&#176;F</b>. <b>Not there yet? One more minute a side, then probe again.</b> Don't go by the clock, go by the number.",88,ACT.flip(MEAT),{dur:"8+ min",timer:180,timerLbl:"Sear side",sizzle:true}),
+  st("Butter Blanket","A little butter on top. Now we wait 8 minutes. *stares*","Pat of <b>butter</b> on the steak right away, if you like. Rest <b>8 min</b>. It stays right around {{final}}&#176;F, {{lbl}}.",95,ACT.season(MEAT),{dur:"8 min",timer:480,timerLbl:"Rest"}),
+  st("Fancy Plate Time","Steak on the plate. Very fancy. Very me.","Plate it with whatever sides you're in the mood for. Want ideas? <b>Sides &amp; Staples</b> has green beans, white beans and smoked garlic butter.",100,ACT.serve('plate',MEAT),{dur:"Impress!"})
  ]},
  {id:"harissa",name:"🌶️ Harissa Chicken",meter:"🍗 Harissa Meter",steps:[
   st("Dry Brine Dance","Pat pat pat, salt salt salt. Crispy skin starts NOW.","Pat <b>4 bone-in, skin-on thighs</b> (about 2 lb) bone dry. Salt both sides. Skin up, <b>uncovered</b>, in the fridge at least 1 hr.",5,ACT.season(CHK),{dur:"1 hr+"}),
@@ -861,6 +860,22 @@ var RECIPES=[
   st("Cut Side Down","Every single one face down. This is the whole recipe right here.","Spread them on a sheet pan in <b>one layer</b>, <b>every cut side flat against the metal</b>. Crowd them and they steam. <b>25 min, no stirring.</b> That uninterrupted contact with hot metal is what makes them crispy instead of sad.",85,ACT.smokewait(GUAC),{dur:"25 min",timer:1500,timerLbl:"Roast"}),
   st("Splash and Serve","Deep brown is flavor, not burnt. Trust the dark ones.","Out of the oven, hit them with <b>1 tbsp balsamic vinegar</b> and toss right on the hot pan. Serve them now, they lose their crunch sitting around.",100,ACT.serve('bowl',GUAC),{dur:"Eat up!"})
  ]},
+ {id:"greenbeans",name:"🫛 Grilled Green Beans",meter:"🫛 Bean Meter",steps:[
+  st("Oil and Salt","Shiny and salty. That's the whole dressing code.","Trim <b>8 oz green beans</b>. Toss with <b>1 tbsp olive oil</b> and a good pinch of salt.",25,ACT.season(GUAC),{dur:"3 min"}),
+  st("Crank It Up","Hot grill, happy beans. Ears back!","Traeger to <b>500&#176;F</b> and give it the full <b>12&#8211;15 min</b>. Already searing a steak? Just use that heat.",55,ACT.fireup(),{dur:"12–15 min",timer:780,timerLbl:"Heat climb"}),
+  st("Quick Char","Roll them around. A little black is good!","Beans on the grate. <b>4&#8211;5 min</b>, turning once, until bright with a few charred spots.",88,ACT.flip(GUAC),{dur:"4–5 min",timer:270,timerLbl:"Char",sizzle:true}),
+  st("Crunch Time","Still got a snap? Perfect. Pass the plate!","Pile them on a plate and serve hot.",100,ACT.serve('plate',GUAC),{dur:"Eat up!"})
+ ]},
+ {id:"whitebeans",name:"🫘 Garlicky White Beans",meter:"🫘 Bean Meter",steps:[
+  st("Warm It Up","Beans in the pan. Low and easy, nobody's in a hurry.","Add <b>1 can cannellini</b> to a pan with <b>1 tbsp olive oil</b>, a splash of the can liquid and your <b>garlic</b>. Smoked garlic is best. One minced fresh clove works too. Warm over medium.",40,ACT.stir(ONION),{dur:"~5 min"}),
+  st("Mash and Brighten","Smoosh half, leave half. Fair is fair.","Mash about <b>half</b> the beans right in the pan. Squeeze in the <b>lemon</b> and salt to taste.",80,ACT.stir(ONION),{dur:"~3 min"}),
+  st("Creamy Bed","Soft, garlicky, and ready for a steak to sit on.","Spoon it onto plates. It's great under a steak or a piece of chicken.",100,ACT.serve('bowl',GUAC),{dur:"Eat up!"})
+ ]},
+ {id:"garlicbutter",name:"🧈 Smoked Garlic Butter",meter:"🧈 Butter Meter",steps:[
+  st("Wrap the Garlic","A little foil jacket. Cozy!","Traeger to <b>225&#176;F</b>. Cut the top off <b>1 head of garlic</b>, drizzle with oil and wrap it in foil. Set <b>1 stick of butter</b> out to soften.",15,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
+  st("Smoky Snooze","Garlic naps in the smoke. Goes great beside a steak.","Foil packet on the grate at 225 for <b>about 50 min</b>, until the cloves are soft. Smoking something else? Put it right beside it.",70,ACT.smokewait(ONION),{dur:"~50 min",timer:3000,timerLbl:"Smoke"}),
+  st("Squish and Mix","Smoky garlic squish! This is the fun part.","Squeeze the soft garlic out of its skins. Mash half into the butter with chopped <b>thyme</b> and a pinch of salt. Save the other half for white beans or toast. Keep the butter in the fridge up to a week.",100,ACT.season(ONION),{dur:"~5 min"})
+ ]},
  {id:"walkingtacos",name:"🌮 Walking Tacos",meter:"🌮 Taco Meter",steps:[
   st("Beef Crumble","Break it up, brown it good. Little beefy pebbles!","Brown <b>1 lb 80/20 ground beef</b> in a skillet, breaking it up. Drain the fat.",25,ACT.stir(MEAT),{dur:"~8 min",sizzle:true}),
   st("Taco Magic","Sprinkle, splash, simmer. The kitchen smells like Tuesday!","Stir in <b>1 packet taco seasoning</b> and about <b>&#8532; cup water</b>. Simmer <b>5 min</b> until it tightens up.",55,ACT.stir(MEAT),{dur:"5 min",timer:300,timerLbl:"Simmer"}),
@@ -872,8 +887,8 @@ var RECIPES=[
   st("Wake Up, Grill!","Low and smoky tonight. Shhh, the cherry wood is thinking.","Traeger to <b>225&#176;F</b>, cherry pellets. Give it a full 15 min. It runs cooler than the dial.",12,ACT.fireup(),{dur:"~15 min",timer:900,timerLbl:"Preheat"}),
   st("Smoke Nap","Steak and corn, side by side. Best nap buddies.","Steak and corn on at 225. Probe the steak. <b>Pull at {{pull}}&#176;F</b> for {{lbl}}. About {{time}}, but go by the probe.",40,ACT.smokewait(MEAT),{dur:"{{time}}",timer:3000,timerLbl:"Smoke"}),
   st("Cloud Potatoes","Fluffy little clouds. Not too much butter this time. I'm watching.","While it smokes: boil peeled <b>russets</b> for two, rice them, fold in warm milk and <b>half the butter</b> you think. Keep it loose. Hold warm over a pot of simmering water.",60,ACT.boil(POTATO),{dur:"~25 min",timer:1080,timerLbl:"Boil"}),
-  st("Crank It Way Up","Steak takes a break. Grill goes BIG. Ears back!","Steak off to a plate at <b>{{pull}}&#176;F</b>. Corn stays on. Dial to <b>500&#176;F</b> and wait for it.",72,ACT.fireup(),{dur:"12–15 min",timer:780,timerLbl:"Heat climb"}),
-  st("The Big Sizzle","Ssss! Crust on the steak, char on the corn. Fancy!","At 500: steak <b>1&#8211;2 min a side</b>. Turn the corn for a little char at the same time. It'll climb about 10&#176;F while it rests, to around {{final}}&#176;F.",88,ACT.flip(MEAT),{dur:"~4 min",timer:90,timerLbl:"Sear side",sizzle:true}),
+  st("Crank It Way Up","Steak takes a break. Grill goes BIG. Ears back!","Steak off to a plate at <b>{{pull}}&#176;F</b>. Corn stays on. Tent the steak loosely with foil. Dial to <b>500&#176;F</b>, lid closed, and wait the <b>full 15 min</b>. Dial under 475? Keep waiting.",72,ACT.fireup(),{dur:"15+ min",timer:900,timerLbl:"Heat climb"}),
+  st("The Big Sizzle","Ssss! Crust on the steak, char on the corn. Fancy!","At 500: steak <b>3 min a side</b>. Turn the corn for a little char at the same time. Probe it. Steak comes <b>off at {{final}}&#176;F</b>. <b>Not there yet? One more minute a side, then probe again.</b> Don't go by the clock, go by the number.",88,ACT.flip(MEAT),{dur:"6+ min",timer:180,timerLbl:"Sear side",sizzle:true}),
   st("Slice It Right","Rest, then slice across the lines. Hi-YA!","Rest <b>5&#8211;10 min</b>. Find the grain and slice <b>across</b> it to split the steak.",95,ACT.slice(MEAT),{dur:"rest + slice",timer:420,timerLbl:"Rest"}),
   st("Cookout Feast!","Steak, corn, potato clouds. I'll take the corn cob. Kidding. Mostly.","Potatoes down, sliced steak on top, corn on the side.",100,ACT.serve('plate',MEAT),{dur:"Feast!"})
  ]},
@@ -1113,6 +1128,19 @@ var SCN={
   {p:'season',m:['bowl',92,{c:'salad'}],x:[['oilbottle',224],['shaker',264]]},
   {p:'wait',k:'wipe',m:['oven',130,{on:['greenbeans'],t:'425'}]},
   {p:'serve',k:'thumbs',s:['bowl','#8FA84A','#7A3A2C']}],
+  greenbeans:[
+  {p:'season',m:['sheet',96,{on:['greenbeans']}],x:[['oilbottle',236],['shaker',264]],fx:['salt@90']},
+  {p:'dial',m:['traeger',69]},
+  {p:'tongs',m:['grill',80,{on:['greenbeans'],sparks:1}]},
+  {p:'season',k:'thumbs',m:['plate',96,{on:['greenbeans']}]}],
+  whitebeans:[
+  {p:'stir',k:'drizzle',m:['pot',118,{c:'garlicbeans'}],x:[['can',224,'BEANS'],['garlic',258]],fx:['steam@118']},
+  {p:'stir',m:['pot',118,{c:'garlicbeans'}],x:[['lemon',244]],fx:['steam@118']},
+  {p:'serve',k:'thumbs',s:['bowl','#E8DCC0','#8FA84A']}],
+  garlicbutter:[
+  {p:'dial',m:['traeger',69],x:[['garlic',232],['butter',260]]},
+  {p:'wait',k:'wipe',m:['grill',108,{on:['packet'],smoke:1}]},
+  {p:'season',k:'sprinkle',m:['board',96,{on:['butter']}],x:[['garlic',236],['thyme',268]]}],
   cacio:[
   {p:'chop',m:['board',108,{on:['parm']}],x:[['bowlsm',250]]},
   {p:'stir',m:['skillet',118],x:[['shaker',250]],fx:['bits@118@#3A3A3A']},
@@ -1248,13 +1276,12 @@ var SCN={
   {p:'serve',k:'carry',s:['bowl','#7C2E24','#F2C14E']}],
  filet:[
   {p:'season',m:['board',96,{on:['filet']}],x:[['shaker',236]],fx:['salt@90']},
-  {p:'dial',m:['traeger',69],x:[['garlic',232],['butter',260]]},
-  {p:'wait',k:'wipe',m:['grill',108,{on:['filet','packet'],smoke:1}],x:[['probe',264]]},
+  {p:'dial',m:['traeger',69]},
+  {p:'wait',k:'wipe',m:['grill',108,{on:['filet'],smoke:1}],x:[['probe',264]]},
   {p:'dial',k:'timer',m:['traeger',69],x:[['restplate',250]]},
-  {p:'stir',k:'drizzle',m:['pot',118,{c:'garlicbeans'}],x:[['can',224,'BEANS'],['butter',250],['thyme',278]],fx:['steam@118']},
-  {p:'tongs',m:['grill',80,{on:['filet:m','greenbeans'],sparks:1}]},
+  {p:'tongs',m:['grill',80,{on:['filet:m'],sparks:1}]},
   {p:'season',k:'sprinkle',m:['board',96,{on:['filet:m','butter']}]},
-  {p:'serve',k:'thumbs',s:'filet'}],
+  {p:'season',k:'thumbs',m:['plate',96,{on:['filet:m']}]}],
  harissa:[
   {p:'season',k:'rub',m:['board',96,{on:['thighs']}],x:[['towels',236]],fx:['salt@90']},
   {p:'whisk',m:['bowl',92,{c:'yogurt'}],x:[['yogurt',214],['lemon',240],['cilantro',266]]},
@@ -1410,7 +1437,7 @@ var PAW="<svg class='paw' viewBox='0 0 24 24'><ellipse cx='12' cy='15' rx='6' ry
 function renderPaws(){var steps=RECIPES[ridx].steps;document.getElementById("paws").innerHTML=steps.map(function(s,i){return PAW.replace("paw",i<=cur?"paw on":"paw");}).join("");}
 var GEMO={"Mains":"🍽️","Sides & Staples":"🥄","Sauces & Salsas":"🥑","Desserts":"🍪"};
 var SOON=["Desserts"];
-var GROUPS=[["Mains",["asada","barbacoa","quesabirria","carnitas","walkingtacos","breakfasttacos","burgers","filet","ribeye","harissa","cacio","salad","chili","cornbreadchili","pulledpork","shortribs","chicken","crockchicken","meatloaf","potroast","turkey"]],["Sides & Staples",["smokedbeans","sprouts","freshpasta","rice","beans","mac","potatoes","crazybread"]],["Sauces & Salsas",["guac","pico"]]];
+var GROUPS=[["Mains",["asada","barbacoa","quesabirria","carnitas","walkingtacos","breakfasttacos","burgers","filet","ribeye","harissa","cacio","salad","chili","cornbreadchili","pulledpork","shortribs","chicken","crockchicken","meatloaf","potroast","turkey"]],["Sides & Staples",["smokedbeans","sprouts","greenbeans","whitebeans","garlicbutter","freshpasta","rice","beans","mac","potatoes","crazybread"]],["Sauces & Salsas",["guac","pico"]]];
 function splitName(n){var m=n.match(/^(\S+)\s+(.*)$/);return m?{e:m[1],t:m[2]}:{e:"🍽️",t:n};}
 function renderPicker(){var nm=splitName(RECIPES[ridx].name);document.getElementById("picker").innerHTML="<span class='pb-emoji'>"+nm.e+"</span><span class='pb-txt'><span class='pb-lbl'>Now cooking</span><span class='pb-name'>"+nm.t+"</span></span><span class='pb-go'>Change ▾</span>";}
 function menuCard(i){var r=RECIPES[i],nm=splitName(r.name);var hit=MHIT[i]&&MHIT[i].length?"<span class='rc-hit'>🧺 "+MHIT[i].slice(0,2).join(", ")+"</span>":"";return "<button class='rc"+(i===ridx?" on":"")+"' data-i='"+i+"'><span class='rc-e'>"+nm.e+"</span><span class='rc-n'>"+nm.t+"</span>"+hit+"<span class='rc-s'>"+r.steps.length+" steps</span></button>";}
@@ -1778,15 +1805,26 @@ cornbreadchili:{serves:6,items:[
 filet:{serves:1,items:[
  [1,"","filet, 7–8 oz and 1.5 in thick|filets, 7–8 oz and 1.5 in thick"],
  [null,"","Kosher salt"],
- {h:"Garlic butter"},
- [1,"","head of garlic|heads of garlic","fixed"],
- [1,"","stick of butter, softened|sticks of butter, softened","fixed"],
- [null,"","Fresh thyme, chopped"],
- {h:"Sides"},
+ [1,"tbsp","butter, for the rest (optional)"]
+]},
+greenbeans:{serves:2,items:[
+ [8,"oz","green beans"],
+ [1,"tbsp","olive oil"],
+ [null,"","Salt"]
+]},
+whitebeans:{serves:2,items:[
  [1,"","can cannellini beans|cans cannellini beans"],
  [1,"tbsp","olive oil"],
  [0.5,"","lemon|lemons"],
- [4,"oz","green beans"]
+ [null,"","Smoked garlic (see Smoked Garlic Butter) or 1 fresh clove, minced"],
+ [null,"","Salt"]
+]},
+garlicbutter:{serves:8,items:[
+ [1,"","head of garlic|heads of garlic"],
+ [1,"","stick of butter, softened|sticks of butter, softened"],
+ [null,"","Olive oil, for the garlic"],
+ [null,"","Fresh thyme, chopped"],
+ [null,"","Salt"]
 ]},
 harissa:{serves:4,items:[
  [4,"","bone-in, skin-on chicken thigh (about 2 lb)|bone-in, skin-on chicken thighs (about 2 lb)"],
@@ -1897,14 +1935,15 @@ var SERV={},GOT={},IKEY=KEY+"-ing";
 try{var _iv=JSON.parse(localStorage.getItem(IKEY)||"{}");SERV=_iv.s||{};GOT=_iv.g||{};}catch(e){}
 function saveIng(){try{localStorage.setItem(IKEY,JSON.stringify({s:SERV,g:GOT}));}catch(e){}}
 function curId(){return RECIPES[ridx].id;}
-/* Steak doneness. Steps in these recipes hold {{tokens}}; doneApply writes the real numbers
+/* Steak doneness. Published Traeger method: sear 3 min a side at 500, then probe and stay on until final.
+   Pull = final minus 10. Never assume the sear adds a set number of degrees. Steps in these recipes hold {{tokens}}; doneApply writes the real numbers
    into each step, so the cook view, timers and print card all stay right on their own.
    One saved pick per recipe in kk-done. Medium rare is the default. */
 var DONE_KEY="kk-done",DONE={};try{DONE=JSON.parse(localStorage.getItem(DONE_KEY)||"{}")||{};}catch(e){DONE={};}
 var DONE_OPTS=[["r","Rare","rare","cool red center"],["mr","Med Rare","medium rare","warm red center"],["m","Medium","medium","warm pink center"],["mw","Med Well","medium well","just a little pink"],["w","Well Done","well done","no pink left"]];
 var DONE_TBL={
- filet:{smokeStep:2,pull:[102,112,122,132,142],sear:[115,125,135,145,155],final:[122,132,142,152,162],time:["40 min","50 min","60 min","70 min","85 min"],timer:[2400,3000,3600,4200,5100],lean:"Filet is lean, so this one eats firmer. Extra garlic butter helps."},
- ribeye:{smokeStep:2,pull:[110,120,130,140,150],final:[120,130,140,150,160],time:["35&#8211;50 min","45&#8211;60 min","55&#8211;70 min","65&#8211;80 min","75&#8211;95 min"],timer:[2400,3000,3600,4200,5100]}
+ filet:{smokeStep:2,pull:[115,120,130,140,150],final:[125,130,140,150,160],time:["55 min","60 min","70 min","80 min","95 min"],timer:[3300,3600,4200,4800,5700],lean:"Filet is lean, so this one eats firmer. A pat of butter helps."},
+ ribeye:{smokeStep:2,pull:[115,120,130,140,150],final:[125,130,140,150,160],time:["40&#8211;55 min","45&#8211;60 min","55&#8211;70 min","65&#8211;80 min","75&#8211;95 min"],timer:[2700,3000,3600,4200,5100]}
 };
 function doneIdx(id){var k=DONE[id],i=0;for(;i<DONE_OPTS.length;i++)if(DONE_OPTS[i][0]===k)return i;return 1;}
 function doneApply(id){var T=DONE_TBL[id],R=RECIPES.filter(function(r){return r.id===id;})[0];if(!T||!R)return;var i=doneIdx(id);
