@@ -1395,7 +1395,7 @@ var b=ware("board",104,18.5),bw=ware("bowl",76,48),du=ware("dutch",84,50),sk=war
 W.board=function(x,o){return b(x)+G("react",o.on?onTop(o.on,x-2,175,o.sp):"");};
 W.bowl=function(x,o){return bw(x)+G("react",CONT(o.c,x,142,31,4.4)+(o.on?onTop(o.on,x,146):""));};
 W.dutch=function(x,o){if(o.lid)return du(x)+G("react",o.on?onTop(o.on,x,140):"");var w=84,h=34.6,y0=186-h,id="dclip"+Math.round(x);return SH(x,w)+IM("dutchopen",x-w/2,y0,w,h)+G("react",(o.c?CONT(o.c,x,y0+6,33,4):"")+(o.on?"<clipPath id='"+id+"'><rect x='"+(x-60)+"' y='60' width='120' height='"+(y0+10-60)+"'/></clipPath><g clip-path='url(#"+id+")'>"+onTop(o.on,x,y0+12)+"</g>":""));};
-W.skillet=function(x,o){return sk(x)+G("react",(o.c?CONT(o.c,x,166,27,3):"")+(o.on?onTop(o.on,x,168):""));};
+W.skillet=function(x,o){return sk(x)+G("react",(o.c?CONT(o.c,x-1,171.6,22,3.7):"")+(o.on?onTop(o.on,x-1,174):""));};
 W.pot=function(x,o){return po(x)+G("react",CONT(o.c,x,138,27,4.6)+(o.on?onTop(o.on,x,140):""));};
 W.sheet=function(x,o){return sh(x)+G("react",o.on?onTop(o.on,x,174,o.sp):"");};
 W.plate=function(x,o){return pl(x)+G("react",o.on?onTop(o.on,x,171,o.sp):"");};
